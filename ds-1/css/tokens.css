@@ -1,0 +1,68 @@
+/* =============================================================================
+ * tokens.css —— 设计变量（色彩 / 字体 / 间距 / 缓动 / 层级）
+ * 所有视觉常量集中于此：改这里即可整体换肤。
+ * ========================================================================== */
+:root {
+  /* ---- 深空色阶 ---- */
+  --void:      #03060f;
+  --abyss:     #050b18;
+  --deep:      #0a1730;
+  --surface:   rgba(12, 22, 44, 0.62);
+  --surface-2: rgba(16, 30, 58, 0.78);
+  --line:      rgba(120, 170, 255, 0.14);
+  --line-2:    rgba(120, 170, 255, 0.26);
+
+  /* ---- 能量色（理性 / 演化） ---- */
+  --blue:      #1d4ed8;
+  --cyan:      #22d3ee;
+  --ice:       #a5e8ff;
+  --violet:    #8b5cf6;
+  --magenta:   #e879f9;
+  --gold:      #f0c060;
+
+  /* ---- 文本 ---- */
+  --paper:     #e8eefc;
+  --text:      #dbe6fb;
+  --text-2:    #9fb3d4;
+  --text-3:    #6d7f9e;
+
+  /* ---- 排版 ---- */
+  --sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif-cn: "Songti SC", "STSong", "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+  --math: "Latin Modern Math", "Cambria Math", "Times New Roman", Times, "Songti SC", serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  /* 流式字号 */
+  --fs-display: clamp(4.2rem, 15vw, 11rem);
+  --fs-h2:      clamp(1.65rem, 3.6vw, 2.9rem);
+  --fs-h3:      clamp(1.12rem, 1.9vw, 1.5rem);
+  --fs-body:    clamp(0.95rem, 1.05vw, 1.06rem);
+  --fs-small:   0.82rem;
+  --fs-micro:   0.72rem;
+
+  /* ---- 度量 ---- */
+  --radius:    16px;
+  --radius-lg: 22px;
+  --radius-sm: 10px;
+  --gutter:    clamp(1.1rem, 4vw, 4.5rem);
+  --section-y: clamp(5rem, 12vh, 10rem);
+  --measure:   68ch;
+
+  /* ---- 缓动（克制的长时间曲线） ---- */
+  --ease-out:  cubic-bezier(.19, 1, .22, 1);
+  --ease-soft: cubic-bezier(.4, 0, .2, 1);
+  --ease-in:   cubic-bezier(.7, 0, .84, 0);
+
+  /* ---- 光效 ---- */
+  --glow-cyan:   0 0 24px rgba(34, 211, 238, 0.35);
+  --glow-violet: 0 0 28px rgba(139, 92, 246, 0.32);
+  --shadow-card: 0 24px 60px -30px rgba(0, 8, 30, 0.95), 0 0 0 1px var(--line) inset;
+
+  /* ---- 层级 ---- */
+  --z-bg: 0;
+  --z-grid: 1;
+  --z-content: 3;
+  --z-nav: 20;
+  --z-intro: 40;
+  --z-cursor: 60;
+}
