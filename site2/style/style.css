@@ -1,0 +1,138 @@
+:root{ 
+	--bodyWidth:70vw;
+	--varBarHeight:6vh;
+}
+/*colors*/
+:root{
+  /* ===== 纸 —— 背景层 ===== */
+  --paper:        #FAF7F0;   /* 宣纸米白，主背景 */
+  --paper-deep:   #F1ECE0;   /* 稍深纸色，卡片底 */
+  --paper-warm:   #EDE6D6;   /* 暖纸色，hover 底 */
+
+  /* ===== 墨 —— 文字层 ===== */
+  --ink:          #3A3A35;   /* 浓墨，主文字 */
+  --ink-soft:     #6B6B63;   /* 淡墨，次要文字 */
+  --ink-faint:    #9A9A90;   /* 极淡，占位/说明 */
+
+  /* ===== 青绿 —— 点缀色 ===== */
+  --moss:         #7C9070;   /* 苔绿，主点缀 */
+  --moss-deep:    #5F7355;   /* 深苔绿，hover */
+  --moss-light:   #A8B89E;   /* 浅苔绿，淡背景 */
+  --pine:         #4A5D4E;   /* 松绿，强调 */
+
+  /* ===== 线 —— 分隔 ===== */
+  --line:         #E0D9C8;   /* 极淡线，替代硬边框 */
+  --line-soft:    #EBE5D8;   /* 更淡的线 */
+
+  /* ===== 点缀暖色（可选）===== */
+  --clay:         #B08968;   /* 陶土色，少量点缀 */
+  --sunset:       #C9A27E;   /* 暮色，极少用 */
+}
+/*字体*/
+:root {
+  /* 标题：中文衬线 + 英文衬线 */
+  --font-title: "Noto Serif SC", "Source Han Serif SC", "Songti SC",
+                "STSong", "SimSun",
+                Georgia, "Times New Roman", serif;
+
+  /* 正文：中文衬线 + 英文衬线 */
+  --font-body:  "Noto Serif SC", "Source Han Serif SC", "Songti SC",
+                "STSong", "SimSun",
+                Georgia, "Times New Roman", serif;
+
+  /* 英文专用（可选，英文用更精致的衬线） */
+  --font-en:    "EB Garamond", "Cormorant Garamond",
+                Georgia, "Times New Roman", serif;
+
+  /* 等宽（代码/数字） */
+  --font-mono:  "JetBrains Mono", "SF Mono", Consolas, monospace;
+}
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.9;          /* 山水风要松，1.8~2.0 */
+  color: var(--ink);
+  letter-spacing: 0.02em;    /* 中文微字距，更透气 */
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-title);
+  font-weight: 500;          /* 别用 700，衬线粗体显笨 */
+  letter-spacing: 0.05em;    /* 标题字距拉开 = 高级 */
+  line-height: 1.4;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
+
+
+/*格式*/
+a {
+  color: inherit;              /* 跟随父元素文字色 */
+  text-decoration: none;       /* 去掉下划线 */
+}
+body{
+	display: grid;
+	grid-template-columns: auto var(--bodyWidth) auto;
+	grid-template-rows:auto auto;
+	background-image:url(../image/bkgH.png);
+	background-size:cover;
+	background-position: center;
+	background-attachment: fixed;
+}
+body *{
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+	padding-left: 1vw;
+	padding-right: 1vw;
+	margin: 0;
+}
+body > *{
+	grid-column: 2;
+	border: thin solid var(--line);
+}
+.navItem:hover, .contentBox:hover , .contentBox  > *:hover{
+	background-color: var(--paper-warm);
+}
+.content{
+	background-color: transparent;
+	display: grid;
+	grid-column: 2;
+	grid-template-columns: auto 60vw auto;
+	min-height:190vh;
+	align-content: start;
+}
+.content > *{
+	grid-column: 2;
+}
+.contentBox , .contentBox * {
+	border-radius:2px;
+	background-color:var(--paper-deep);
+	height:max-content;
+	margin-top: 0.5vh;
+}
+.contentBox *{
+	border: none;
+}
+
+.navBar{
+	border: none;
+	display: flex;
+	grid-row: 1;
+	margin: 0;
+	padding: 0;
+	min-height: var(--varBarHeight);
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
+.navItem{
+	background-color: var(--paper-deep);
+	border-radius: 2px;
+	height: calc(var(--varBarHeight) - 1);
+	width:calc(var(--bodyWidth) / 2) ;
+	margin: auto;
+	text-align: center;
+}
+

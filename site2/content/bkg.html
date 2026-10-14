@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>相册 - My Second Site</title>
+
+  <!-- 引用你已有的 CSS -->
+  <link href="../style/style.css" rel="stylesheet"/>
+
+  <!-- 只写相册专属样式，其余全部复用 style.css -->
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 豁免 body * / .content * 的干扰 */
+  .gallery,
+  .gallery * {
+    grid-column: auto;
+    box-sizing: border-box;
+  }
+
+  .gallery img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;      /* ★ 留白，完整显示图片 */
+    padding: 0;
+    border: thin solid var(--line);
+    border-radius: 2px;
+    background: var(--paper-deep);   /* ★ 留白处用纸色，和整体统一 */
+    box-shadow: 0 4px 16px rgba(58, 58, 53, 0.05);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    cursor: pointer;
+  }
+
+  .gallery img:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(58, 58, 53, 0.12);
+  }
+
+  .gallery:empty::after {
+    content: "还没有图片";
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--ink-faint, #9A9A90);
+    padding: 3rem 0;
+  }
+</style>
+</head>
+<body>
+
+  <div class="navBar" id="nav-bar"></div>
+
+  <div class="content">
+    <div class="contentBox">
+      <h2>deepseek 制作的壁纸</h2>
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </div>
+
+  <script src="../script/var.js"></script>
+
+  <script>
+    // ★ 唯一要改的地方：列出图片文件名
+    const IMAGES = [
+      "bkg1.png",
+      "bkg2.1.png",
+      "bkg2.2.png",
+      "bkg3.png",
+      "bkg4.png",
+      "bkg4.png",
+      "bkg4.2.png",
+      "bkg5.png",
+      "bkg6.png",
+      "bkg7.png",
+      "bkg7.2.png",
+    ];
+
+    const FOLDER = "../image/";   // 和你背景图同一个文件夹
+
+    const gallery = document.getElementById("gallery");
+    if (gallery && IMAGES.length) {
+      gallery.innerHTML = IMAGES
+        .map(name => {
+          const alt = name.replace(/\.[^.]+$/, "");
+          return `<img src="${FOLDER}${name}" alt="${alt}" loading="lazy"/>`;
+        })
+        .join("");
+    }
+  </script>
+
+</body>
+</html>

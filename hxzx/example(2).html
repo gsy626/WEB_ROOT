@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校团委社团部招新 | 社聚青春</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blue: #2b5fd9;
+    --blue-light: #dce8ff;
+    --blue-dark: #1a3fa0;
+    --bg: #eef2f7;
+    --card: #ffffff;
+    --border: #e3ebf5;
+    --text: #333;
+    --text-sub: #8a97a8;
+    --yellow: #fdf6e3;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.9;
+    padding: 16px 12px 40px;
+    overflow-x: hidden;
+  }
+
+  /* ===== 背景流动光斑 ===== */
+  .bg-orbs {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+    animation: orbFloat 18s ease-in-out infinite alternate;
+  }
+  .orb:nth-child(1) { width: 300px; height: 300px; background: #9db8ff; top: -80px; left: -80px; }
+  .orb:nth-child(2) { width: 240px; height: 240px; background: #ffe9a8; bottom: 10%; right: -60px; animation-delay: -6s; }
+  .orb:nth-child(3) { width: 200px; height: 200px; background: #b7d4ff; top: 40%; left: -40px; animation-delay: -12s; }
+
+  @keyframes orbFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, 60px) scale(1.15); }
+    100% { transform: translate(-30px, 30px) scale(0.95); }
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* ===== 顶部横幅 ===== */
+  .banner {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #3a6fe0 0%, #2b5fd9 50%, #1a3fa0 100%);
+    background-size: 200% 200%;
+    animation: bannerGradient 8s ease infinite;
+    padding: 48px 24px 56px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(43,95,217,0.35);
+    margin-bottom: 24px;
+  }
+  @keyframes bannerGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* 横幅几何装饰 */
+  .geo {
+    position: absolute;
+    opacity: 0.25;
+  }
+  .geo-1 {
+    width: 80px; height: 80px;
+    border: 3px solid #fff;
+    top: 20px; left: 20px;
+    animation: spin 12s linear infinite;
+  }
+  .geo-2 {
+    width: 0; height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 52px solid #ffe9a8;
+    bottom: 30px; right: 30px;
+    animation: spin 10s linear infinite reverse;
+  }
+  .geo-3 {
+    width: 40px; height: 40px;
+    background: #ffe9a8;
+    border-radius: 50%;
+    top: 40px; right: 50px;
+    animation: pulse 3s ease-in-out infinite;
+  }
+  .geo-4 {
+    width: 60px; height: 3px;
+    background: #fff;
+    bottom: 60px; left: 40px;
+    animation: slideLine 4s ease-in-out infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.25; } 50% { transform: scale(1.4); opacity: 0.5; } }
+  @keyframes slideLine { 0%,100% { transform: translateX(0); } 50% { transform: translateX(30px); } }
+
+  /* 标题光扫 */
+  .banner h1 {
+    position: relative;
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    display: inline-block;
+    overflow: hidden;
+  }
+  .banner h1::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+    animation: shine 3s ease-in-out infinite;
+  }
+  @keyframes shine { 0% { left: -100%; } 60%,100% { left: 100%; } }
+
+  .banner p {
+    font-size: 14px;
+    opacity: 0.92;
+    letter-spacing: 2px;
+  }
+
+  /* 标题逐字浮现 */
+  .banner h1 span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px) rotate(8deg);
+    animation: charIn 0.6s ease forwards;
+  }
+  @keyframes charIn {
+    to { opacity: 1; transform: translateY(0) rotate(0); }
+  }
+
+  /* ===== 卡片 ===== */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 14px rgba(43,95,217,0.07);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    transform: translateX(-100%);
+  }
+  .card.visible::before {
+    animation: topLine 1.2s ease forwards;
+  }
+  @keyframes topLine { to { transform: translateX(100%); } }
+
+  /* 滚动入场 */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+    transition: opacity 0.8s cubic-bezier(.2,.8,.2,1), transform 0.8s cubic-bezier(.2,.8,.2,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* ===== 小标题（蓝底白字） ===== */
+  .section-title {
+    display: inline-block;
+    background: linear-gradient(135deg, #3a6fe0, #2b5fd9);
+    color: #fff;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 8px 24px;
+    border-radius: 8px;
+    margin: 0 auto 20px;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 14px rgba(43,95,217,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  .section-title::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    animation: shine 3.5s ease-in-out infinite;
+  }
+  .title-wrap {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  p { margin-bottom: 14px; font-size: 15px; color: #444; }
+
+  /* 高亮文字底色扫过 */
+  .highlight {
+    color: var(--blue);
+    font-weight: 600;
+    background: linear-gradient(90deg, var(--blue-light), var(--blue-light));
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-position: left center;
+    transition: background-size 0.6s ease;
+    padding: 1px 3px;
+    border-radius: 3px;
+  }
+  .card.visible .highlight,
+  .visible .highlight {
+    background-size: 100% 100%;
+  }
+
+  /* ===== JOIN US ===== */
+  .join-us {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 26px 0;
+    color: var(--blue);
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 4px;
+  }
+  .join-us::before,
+  .join-us::after {
+    content: "";
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue));
+    flex: 0 1 60px;
+    animation: lineGrow 2.5s ease-in-out infinite alternate;
+  }
+  .join-us::after {
+    background: linear-gradient(90deg, var(--blue), transparent);
+  }
+  @keyframes lineGrow { 0% { flex-basis: 30px; opacity: 0.5; } 100% { flex-basis: 70px; opacity: 1; } }
+
+  .join-us span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    animation: breathe 2.5s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%,100% { transform: scale(0.97); opacity: 0.75; }
+    50% { transform: scale(1.06); opacity: 1; }
+  }
+  .join-us .dot {
+    width: 10px; height: 10px;
+    background: var(--blue);
+    border-radius: 50%;
+    animation: dotSpin 2s linear infinite;
+  }
+  @keyframes dotSpin {
+    0% { transform: rotate(0) scale(1); }
+    50% { transform: rotate(180deg) scale(1.3); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+
+  /* ===== 蓝色列表块 ===== */
+  .blue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .blue-item {
+    background: linear-gradient(135deg, #3a6fe0, #2b5fd9);
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.7;
+    box-shadow: 0 4px 14px rgba(43,95,217,0.25);
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .blue-item::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transition: left 0.6s ease;
+  }
+  .blue-item:hover::after { left: 100%; }
+  .visible .blue-item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .visible .blue-item:nth-child(1) { transition-delay: 0.1s; }
+  .visible .blue-item:nth-child(2) { transition-delay: 0.2s; }
+  .visible .blue-item:nth-child(3) { transition-delay: 0.3s; }
+  .visible .blue-item:nth-child(4) { transition-delay: 0.4s; }
+  .visible .blue-item:nth-child(5) { transition-delay: 0.5s; }
+
+  /* ===== 普通列表 ===== */
+  .list-item {
+    padding: 8px 0 8px 22px;
+    position: relative;
+    font-size: 15px;
+    color: #444;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .list-item::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 16px;
+    width: 8px; height: 8px;
+    background: var(--blue);
+    border-radius: 50%;
+  }
+  .visible .list-item { opacity: 1; transform: translateX(0); }
+  .visible .list-item:nth-child(1) { transition-delay: 0.05s; }
+  .visible .list-item:nth-child(2) { transition-delay: 0.1s; }
+  .visible .list-item:nth-child(3) { transition-delay: 0.15s; }
+  .visible .list-item:nth-child(4) { transition-delay: 0.2s; }
+  .visible .list-item:nth-child(5) { transition-delay: 0.25s; }
+  .visible .list-item:nth-child(6) { transition-delay: 0.3s; }
+
+  /* ===== 标签 ===== */
+  .tag {
+    display: inline-block;
+    background: var(--blue-light);
+    color: var(--blue);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin: 3px 3px;
+    border: 1px solid #c5d8ff;
+    opacity: 0;
+    transform: scale(0.6) translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .visible .tag { opacity: 1; transform: scale(1) translateY(0); }
+  .visible .tag:nth-child(1) { transition-delay: 0.05s; }
+  .visible .tag:nth-child(2) { transition-delay: 0.15s; }
+  .visible .tag:nth-child(3) { transition-delay: 0.25s; }
+  .visible .tag:nth-child(4) { transition-delay: 0.35s; }
+  .visible .tag:nth-child(5) { transition-delay: 0.45s; }
+
+  /* ===== 图片 ===== */
+  .figure {
+    margin: 18px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(43,95,217,0.12);
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    position: relative;
+  }
+  .visible .figure { opacity: 1; transform: scale(1); }
+  .figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease;
+  }
+  .figure:hover img { transform: scale(1.05); }
+  .figure::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+    transition: left 0.7s ease;
+  }
+  .figure:hover::after { left: 140%; }
+  .figure-caption {
+    font-size: 12px;
+    color: var(--text-sub);
+    text-align: center;
+    padding: 8px;
+    background: #f8fafd;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== 结语黄卡 ===== */
+  .outro {
+    background: var(--yellow);
+    border: 2px solid var(--blue);
+    border-radius: 12px;
+    padding: 22px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .outro::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 12px;
+    padding: 2px;
+    background: linear-gradient(90deg, var(--blue), #ffe9a8, var(--blue));
+    background-size: 200% 100%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: borderFlow 4s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes borderFlow { to { background-position: 200% 0; } }
+  .outro p { color: #2b4a8a; font-size: 15px; margin-bottom: 10px; }
+
+  /* ===== 底部 ===== */
+  .footer {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-sub);
+    padding: 24px 0 10px;
+    opacity: 0;
+    transition: opacity 1s ease 0.3s;
+  }
+  .footer.visible { opacity: 1; }
+
+  /* ===== 通用延迟 ===== */
+  .d1 { transition-delay: 0.1s !important; }
+  .d2 { transition-delay: 0.2s !important; }
+  .d3 { transition-delay: 0.3s !important; }
+
+  /* 图片占位底色 */
+  .figure img[src*="picsum"] { background: #dde6f5; }
+</style>
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+</div>
+
+<div class="page">
+
+  <!-- 顶部横幅 -->
+  <div class="banner">
+    <div class="geo geo-1"></div>
+    <div class="geo geo-2"></div>
+    <div class="geo geo-3"></div>
+    <div class="geo geo-4"></div>
+    <h1 id="bannerTitle">校团委社团部招新</h1>
+    <p>社聚青春 · 以行践知，共筑百团风华</p>
+  </div>
+
+  <!-- 开场白 -->
+  <div class="card reveal">
+    <div class="title-wrap">
+      <div class="section-title">秋风启新序，青春赴新程</div>
+    </div>
+    <p>丰富多彩的校园社团，见证着无数北理工青年的热爱与成长。我们搭建起学校与广大学生社团之间的桥梁，是社团制度的建设者、社团发展的领航员、校园文化的筑造者。</p>
+    <p>如果你也热爱校园文化，渴望在学生工作中收获成长，那么，欢迎加入 <span class="highlight">校团委社团部！</span></p>
+  </div>
+
+  <div class="join-us reveal"><span><i class="dot"></i>JOIN US<i class="dot"></i></span></div>
+
+  <!-- 我们是谁 -->
+  <div class="card reveal">
+    <div class="title-wrap">
+      <div class="section-title">我们是谁</div>
+    </div>
+    <p><span class="highlight">共青团北京理工大学委员会社团部</span>（以下简称“社团部”）是负责统筹全校学生社团建设管理、牵头指导学生社团发展服务中心开展各项工作，服务学校“五育融合”育人格局，协助校团委各项社团事务性工作的核心职能部门。</p>
+    <div class="figure">
+      <img src="https://picsum.photos/680/400?random=20" alt="社团大会">
+      <div class="figure-caption">社团大会</div>
+    </div>
+    <div class="figure">
+      <img src="https://picsum.photos/680/400?random=21" alt="社团进社区">
+      <div class="figure-caption">社团进社区</div>
+    </div>
+    <p>社团部致力于夯实五育并举校园育人阵地、引导广大学生传承 <span class="highlight">“延安根、军工魂、领军人”红色基因</span>、以培养 <span class="highlight">“胸怀壮志、明德精工、创新包容、时代担当”</span> 领军领导人才为己任的先锋学生力量。</p>
+  </div>
+
+  <div class="join-us reveal"><span><i class="dot"></i>JOIN US<i class="dot"></i></span></div>
+
+  <!-- 社团活动 -->
+  <div class="card reveal">
+    <div class="title-wrap">
+      <div class="section-title">丰富多彩的社团活动</div>
+    </div>
+    <div>
+      <span class="tag">社团巡礼</span>
+      <span class="tag">社团文化周</span>
+      <span class="tag">北湖音乐节</span>
+      <span class="tag">精品社团活动招标</span>
+      <span class="tag">高校社团工作交流会</span>
+    </div>
+    <div class="figure">
+      <img src="https://picsum.photos/680/380?random=22" alt="社团巡礼">
+      <div class="figure-caption">社团巡礼</div>
+    </div>
+    <div class="figure">
+      <img src="https://picsum.photos/680/380?random=23" alt="大学道晚会">
+      <div class="figure-caption">大学道晚会</div>
+    </div>
+    <div class="figure">
+      <img src="https://picsum.photos/680/380?random=24" alt="社团文化周暨北湖音乐节">
+      <div class="figure-caption">社团文化周暨北湖音乐节</div>
+    </div>
+    <p>我们统筹开展社团巡礼、社团文化周、北湖音乐节、精品社团活动招标、高校社团工作交流会等品牌项目，为校园文化建设贡献社团力量。</p>
+  </div>
+
+  <div class="join-us reveal"><span><i class="dot"></i>JOIN US<i class="dot"></i></span></div>
+
+  <!-- 你将收获 -->
+  <div class="card reveal">
+    <div class="title-wrap">
+      <div class="section-title">在这里，你将收获</div>
+    </div>
+    <div class="blue-list">
+      <div class="blue-item">深度参与全校社团的统筹管理，近距离接触各类精彩校园社团活动</div>
+      <div class="blue-item">掌握公文撰写、制度梳理、项目统筹、沟通协调的硬核实务能力</div>
+      <div class="blue-item">熟悉第二课堂、五育并举、书院社区共建等学校育人工作体系</div>
+      <div class="blue-item">参与北湖音乐节、社团巡礼等大型校园品牌活动从策划到落地的全过程</div>
+      <div class="blue-item">结识有理想、有担当的优秀伙伴，拓展视野，积累学生工作宝贵经历</div>
+    </div>
+  </div>
+
+  <div class="join-us reveal"><span><i class="dot"></i>JOIN US<i class="dot"></i></span></div>
+
+  <!-- 期待的你 -->
+  <div class="card reveal">
+    <div class="title-wrap">
+      <div class="section-title">我们期待这样的你</div>
+    </div>
+    <div class="list-item">思想积极向上，有较强的责任意识、服务意识，做事细致严谨</div>
+    <div class="list-item">善于沟通协作，能够平衡学业与学生工作，有较好执行力</div>
+    <div class="list-item">具备基础文档处理能力，会 Word/Excel，有公文写作、活动策划经验优先</div>
+    <div class="list-item">热爱校园文化，对学生社团工作抱有热情，愿意主动学习新工作内容</div>
+    <div class="list-item">不限专业，有无学生工作经验都可以，我们会手把手带你成长</div>
+    <div class="list-item">不必身怀绝技，只需满怀热忱；不必经验满点，贵在踏实肯干</div>
+  </div>
+
+  <div class="join-us reveal"><span><i class="dot"></i>JOIN US<i class="dot"></i></span></div>
+
+  <!-- 报名方式 -->
+  <div class="card reveal">
+    <div class="title-wrap">
+      <div class="section-title">报名方式</div>
+    </div>
+    <div class="figure">
+      <img src="https://picsum.photos/400/400?random=30" alt="报名问卷">
+      <div class="figure-caption">报名问卷</div>
+    </div>
+    <div class="figure">
+      <img src="https://picsum.photos/400/400?random=31" alt="招新咨询群">
+      <div class="figure-caption">招新咨询群</div>
+    </div>
+  </div>
+
+  <div class="join-us reveal"><span><i class="dot"></i>JOIN US<i class="dot"></i></span></div>
+
+  <!-- 结语 -->
+  <div class="card reveal">
+    <div class="title-wrap">
+      <div class="section-title">结语</div>
+    </div>
+    <div class="outro">
+      <p><strong>百团繁花，源于点滴耕耘；青春华章，期待你来执笔。</strong></p>
+      <p>从社团建设到校园活动，从思想引领到五育融通，校团委社团部期待与你并肩，一同守护北理工社团的蓬勃生机，共同书写属于北理工青年的校园文化篇章！</p>
+    </div>
+  </div>
+
+  <div class="footer reveal">
+    出品 | 校团委社团部 &nbsp;·&nbsp; 审核 | 周迨琛
+  </div>
+
+</div>
+
+<script>
+  // 标题逐字
+  (function(){
+    const el = document.getElementById('bannerTitle');
+    const text = el.textContent;
+    el.textContent = '';
+    [...text].forEach((ch, i) => {
+      const s = document.createElement('span');
+      s.textContent = ch;
+      s.style.animationDelay = (0.3 + i * 0.08) + 's';
+      el.appendChild(s);
+    });
+  })();
+
+  // 滚动入场
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

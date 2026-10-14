@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<title>合成清苑一中 · ds制作</title>
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: none;
+    font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    user-select: none; -webkit-user-select: none;
+  }
+
+  body {
+    background-color: #0d0d10;
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(28,28,34,0.75) 0%, rgba(13,13,16,0.9) 60%, rgba(0,0,0,1) 100%),
+      var(--page-bg, linear-gradient(180deg, #1c1c22, #000));
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+  }
+
+  #game {
+    position: fixed;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    height: 640px;
+    border-radius: clamp(0px, 2vmin, 14px);
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(255, 255, 255, 0.07);
+    container-type: inline-size;
+    background: #e6e6fa;
+  }
+
+  canvas {
+    display: block;
+    width: 100%; height: 100%;
+    touch-action: none;
+  }
+
+  #ui {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1cqw;
+    padding: 2.2cqw 3cqw;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .score-box {
+    flex: 0 0 auto;
+    font-weight: 800;
+    font-size: clamp(11px, 3.4cqw, 18px);
+    color: #2b2b2b;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    padding-top: 0.6cqw;
+  }
+
+  .header {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5cqw;
+    line-height: 1;
+    min-width: 0;
+  }
+
+  #title {
+    margin: 0;
+    font-size: clamp(16px, 5.2cqw, 30px);
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-indent: 0.06em;
+    white-space: nowrap;
+    background: linear-gradient(180deg, #fff6c2 0%, #ffd93d 40%, #ffae00 70%, #d98a00 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 1px 0 rgba(120, 70, 0, 0.6))
+            drop-shadow(0 4px 10px rgba(255, 190, 0, 0.35));
+    animation: titleFloat 3.2s ease-in-out infinite;
+  }
+
+  @keyframes titleFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-2px); }
+  }
+
+  .subtitle {
+    font-size: clamp(8px, 2.1cqw, 11px);
+    color: rgba(255, 220, 120, 0.85);
+    letter-spacing: 0.28em;
+    text-indent: 0.28em;
+    font-weight: 700;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #title { animation: none; }
+  }
+
+  #restart {
+    flex: 0 0 auto;
+    pointer-events: auto;
+    border: none;
+    background: rgba(255, 255, 255, 0.92);
+    color: #2b2b2b;
+    padding: 1.2cqw 2.8cqw;
+    border-radius: 1.8cqw;
+    font-weight: 800;
+    font-size: clamp(11px, 3.4cqw, 18px);
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+    transition: transform 0.1s ease, background 0.15s ease;
+  }
+  #restart:active { transform: scale(0.94); background: #fff; }
+
+  .notice {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1cqw 3cqw 1.6cqw;
+    text-align: center;
+    font-size: clamp(9px, 2.3cqw, 12px);
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+    letter-spacing: 0.04em;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .notice b { color: #ffd93d; font-weight: 800; }
+</style>
+</head>
+<body>
+
+<div id="game">
+  <canvas id="cv"></canvas>
+
+  <div id="ui">
+    <div class="score-box">分数：<span id="score">0</span></div>
+    <header class="header">
+      <h1 id="title">合成清苑一中</h1>
+      <div class="subtitle">ds 制作</div>
+    </header>
+    <button id="restart">重开</button>
+  </div>
+
+  <div class="notice">同类碰撞合成 · <b>球顶越过红线即失败</b></div>
+</div>
+
+<script>
+(() => {
+'use strict';
+
+/* ============================================================
+   ★★★ 自定义区 ★★★
+   ============================================================ */
+
+// 【1】17 张球图片，按从小到大顺序
+//      文件名可以改成你自己的，比如 '1.jpg' ~ '17.jpg'
+const IMAGE_LIST = [
+  '1.jpg',  '2.jpg',  '3.jpg',  '4.jpg',  '5.jpg',
+  '6.jpg',  '7.jpg',  '8.jpg',  '9.jpg',  '10.jpg',
+  '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg',
+  '16.jpg', '17.jpg'
+];
+
+// 【2】游戏区背景图
+const BG_SRC = 'bg.jpg';
+
+// 【3】页面背景图（游戏框外面、铺满整个屏幕）
+const PAGE_BG_SRC = 'page-bg.jpg';
+
+// 【4】尺寸参数
+let GAME_W     = 420;   // 游戏区宽度
+let GAME_H     = 640;   // 游戏区高度
+let BALL_R     = 16;    // 第 1 级球的半径
+let BALL_R_MAX = 130;   // 最后一级球的半径（中间自动等比）
+let LINE_H     = 108;   // 警戒线距顶部距离
+
+// 【5】出生球的最大等级（0 起）
+//      17 级比较多，这里给 4，开局出前 5 种最小的球
+let SPAWN_MAX_LEVEL = 4;
+
+// 【6】球上的图片是否裁成圆形
+const USE_CIRCLE_CLIP = true;
+
+// 【7】游戏区背景压暗程度（0 不压暗）
+const BG_DIM = 0.18;
+
+/* ============================================================
+   以下自动生成，不用改
+   ============================================================ */
+
+if (PAGE_BG_SRC) {
+  document.body.style.setProperty('--page-bg', `url("${PAGE_BG_SRC}")`);
+}
+
+if (BG_SRC) {
+  const g = document.getElementById('game');
+  g.style.backgroundImage = `url("${BG_SRC}")`;
+  g.style.backgroundSize = 'cover';
+  g.style.backgroundPosition = 'center';
+  g.style.backgroundRepeat = 'no-repeat';
+}
+
+const SRC_LIST = IMAGE_LIST.length >= 2
+  ? IMAGE_LIST
+  : [IMAGE_LIST[0] || '1.jpg', IMAGE_LIST[0] || '2.jpg'];
+
+const N = SRC_LIST.length;
+
+function lerpRadius(i, n) {
+  if (n <= 1) return BALL_R;
+  if (BALL_R_MAX <= BALL_R) return BALL_R;
+  const t = i / (n - 1);
+  return Math.round(BALL_R * Math.pow(BALL_R_MAX / BALL_R, t));
+}
+
+function hueOf(i, n) {
+  return Math.round((i / Math.max(1, n)) * 330);
+}
+
+const LEVELS = SRC_LIST.map((src, i) => ({
+  r: lerpRadius(i, N),
+  hue: hueOf(i, N),
+  src: src,
+  image: null
+}));
+
+const MAX_LEVEL = LEVELS.length - 1;
+const W = GAME_W;
+const H = GAME_H;
+
+const DEATH_LINE = Math.max(LINE_H, LEVELS[0].r + 8);
+
+const GRAVITY = 0.45;
+const FIXED_DT = 1 / 60;
+const WIN_FREEZE = 0.6;
+
+const MIN_AGE    = 0.8;
+const OVER_GRACE = 0.6;
+
+const SPAWN_MAX = Math.max(1, Math.min(SPAWN_MAX_LEVEL, MAX_LEVEL - 1));
+
+const gameEl = document.getElementById('game');
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+const scoreEl = document.getElementById('score');
+const restartBtn = document.getElementById('restart');
+
+gameEl.style.width  = W + 'px';
+gameEl.style.height = H + 'px';
+
+let bgImage = null;
+let viewScale = 1;
+
+let bodies = [];
+let score = 0;
+let currentLevel = 0, nextLevel = 0;
+let dropX = W / 2;
+let canDrop = true, dropCooldown = 0;
+let gameOver = false;
+let win = false;
+let winTimer = 0;
+let winShown = false;
+let winPulse = 0;
+let overTimer = 0;
+let accumulator = 0;
+let lastTime = performance.now();
+let pressing = false;
+
+/* ---------------- 布局 ---------------- */
+
+function layout() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const scale = Math.min(vw / W, vh / H);
+  gameEl.style.width  = Math.floor(W * scale) + 'px';
+  gameEl.style.height = Math.floor(H * scale) + 'px';
+}
+
+function resizeCanvas() {
+  const rect = gameEl.getBoundingClientRect();
+  if (!rect.width || !rect.height) return;
+  const dpr = Math.min(window.devicePixelRatio || 1, 3);
+  cv.width  = Math.max(1, Math.round(rect.width * dpr));
+  cv.height = Math.max(1, Math.round(rect.height * dpr));
+  viewScale = Math.min(cv.width / W, cv.height / H);
+}
+
+function relayout() { layout(); resizeCanvas(); }
+
+if (window.ResizeObserver) {
+  new ResizeObserver(resizeCanvas).observe(gameEl);
+}
+window.addEventListener('resize', relayout);
+window.addEventListener('orientationchange', () => setTimeout(relayout, 120));
+window.addEventListener('load', relayout);
+
+/* ---------------- 图片加载 ---------------- */
+
+function loadImage(src) {
+  if (!src) return null;
+  const im = new Image();
+  im.decoding = 'async';
+  im.onload = () => { im.ready = true; };
+  im.src = src;
+  return im;
+}
+
+function loadAssets() {
+  if (BG_SRC) bgImage = loadImage(BG_SRC);
+  LEVELS.forEach(l => { l.image = loadImage(l.src); });
+}
+
+/* ---------------- 游戏逻辑 ---------------- */
+
+function randLevel() {
+  return Math.floor(Math.random() * (SPAWN_MAX + 1));
+}
+
+function createBody(x, y, level) {
+  return {
+    x, y, vx: 0, vy: 0,
+    r: LEVELS[level].r,
+    level,
+    merged: false,
+    overTime: 0,
+    spawn: 0,
+    age: 0
+  };
+}
+
+function reset() {
+  bodies = [];
+  score = 0;
+  gameOver = false;
+  win = false;
+  winTimer = 0;
+  winShown = false;
+  winPulse = 0;
+  overTimer = 0;
+  canDrop = true;
+  dropCooldown = 0;
+  currentLevel = randLevel();
+  nextLevel = randLevel();
+  dropX = W / 2;
+  accumulator = 0;
+  lastTime = performance.now();
+  scoreEl.textContent = '0';
+}
+
+function drop() {
+  if (gameOver || win) { reset(); return; }
+  if (!canDrop || dropCooldown > 0) return;
+
+  const level = currentLevel;
+  const r = LEVELS[level].r;
+  const x = Math.min(Math.max(dropX, r + 2), W - r - 2);
+  const y = r + 5;
+
+  bodies.push(createBody(x, y, level));
+  currentLevel = nextLevel;
+  nextLevel = randLevel();
+  canDrop = false;
+  dropCooldown = 0.45;
+}
+
+function update(dt) {
+  if (win) {
+    winPulse += dt;
+    if (!winShown) {
+      winTimer -= dt;
+      if (winTimer <= 0) winShown = true;
+    }
+    return;
+  }
+  if (gameOver) return;
+
+  if (dropCooldown > 0) {
+    dropCooldown -= dt;
+    if (dropCooldown <= 0) canDrop = true;
+  }
+
+  accumulator += dt;
+  let guard = 0;
+  while (accumulator >= FIXED_DT && guard++ < 8) {
+    physics();
+    accumulator -= FIXED_DT;
+  }
+
+  let anyOverLine = false;
+  let maxDepth = 0;
+
+  for (const b of bodies) {
+    if (b.spawn > 0) b.spawn = Math.max(0, b.spawn - dt * 4);
+    b.age += dt;
+
+    if (b.age < MIN_AGE) { b.overTime = 0; continue; }
+
+    const top = b.y - b.r;
+
+    if (top < DEATH_LINE) {
+      anyOverLine = true;
+      const depth = DEATH_LINE - top;
+      if (depth > maxDepth) maxDepth = depth;
+      b.overTime += dt;
+    } else {
+      b.overTime = Math.max(0, b.overTime - dt * 2);
+    }
+  }
+
+  if (anyOverLine) {
+    overTimer += dt * (1 + maxDepth / 30);
+    if (overTimer > OVER_GRACE) gameOver = true;
+  } else {
+    overTimer = Math.max(0, overTimer - dt * 2);
+  }
+}
+
+function physics() {
+  for (const b of bodies) {
+    b.vy += GRAVITY;
+    b.vx *= 0.995;
+    b.vy *= 0.995;
+    b.x += b.vx;
+    b.y += b.vy;
+
+    if (b.x - b.r < 0) { b.x = b.r; b.vx = Math.abs(b.vx) * 0.5; }
+    if (b.x + b.r > W) { b.x = W - b.r; b.vx = -Math.abs(b.vx) * 0.5; }
+    if (b.y + b.r > H) { b.y = H - b.r; b.vy = -Math.abs(b.vy) * 0.2; b.vx *= 0.9; }
+  }
+
+  for (let iter = 0; iter < 4; iter++) {
+    for (let i = 0; i < bodies.length; i++) {
+      for (let j = i + 1; j < bodies.length; j++) {
+        const a = bodies[i], b = bodies[j];
+        if (a.merged || b.merged) continue;
+
+        let dx = b.x - a.x, dy = b.y - a.y;
+        let dist = Math.hypot(dx, dy);
+        const minDist = a.r + b.r;
+
+        if (dist === 0) { dist = 0.01; dx = 0.01; dy = 0; }
+
+        if (dist < minDist) {
+          if (a.level === b.level && a.level < MAX_LEVEL) {
+            a.merged = true;
+            b.merged = true;
+            const nl = a.level + 1;
+            const nb = createBody((a.x + b.x) / 2, (a.y + b.y) / 2, nl);
+            nb.vx = (a.vx + b.vx) * 0.25;
+            nb.vy = (a.vy + b.vy) * 0.25;
+            nb.spawn = 1;
+            bodies.push(nb);
+            score += (nl + 1) * 10;
+            scoreEl.textContent = score;
+
+            if (nl === MAX_LEVEL) {
+              win = true;
+              winTimer = WIN_FREEZE;
+              winShown = false;
+              winPulse = 0;
+            }
+            continue;
+          }
+
+          const overlap = minDist - dist;
+          const nx = dx / dist, ny = dy / dist;
+          const massA = a.r * a.r, massB = b.r * b.r;
+          const total = massA + massB;
+          const ratioA = massB / total, ratioB = massA / total;
+
+          a.x -= nx * overlap * ratioA; a.y -= ny * overlap * ratioA;
+          b.x += nx * overlap * ratioB; b.y += ny * overlap * ratioB;
+
+          const rvx = b.vx - a.vx, rvy = b.vy - a.vy;
+          const vn = rvx * nx + rvy * ny;
+          if (vn < 0) {
+            const e = 0.1;
+            const imp = -(1 + e) * vn / (1 / massA + 1 / massB);
+            a.vx -= imp * nx / massA; a.vy -= imp * ny / massA;
+            b.vx += imp * nx / massB; b.vy += imp * ny / massB;
+          }
+        }
+      }
+    }
+  }
+  bodies = bodies.filter(b => !b.merged);
+}
+
+/* ---------------- 渲染 ---------------- */
+
+function drawCover(img, cx, cy, w, h) {
+  const iw = img.naturalWidth || img.width;
+  const ih = img.naturalHeight || img.height;
+  if (!iw || !ih) return;
+  const s = Math.max(w / iw, h / ih);
+  const dw = iw * s, dh = ih * s;
+  ctx.drawImage(img, cx - dw / 2, cy - dh / 2, dw, dh);
+}
+
+function drawBackground() {
+  if (bgImage && bgImage.ready) {
+    drawCover(bgImage, W / 2, H / 2, W, H);
+    if (BG_DIM > 0) {
+      ctx.fillStyle = `rgba(255,255,255,${BG_DIM})`;
+      ctx.fillRect(0, 0, W, H);
+    }
+  } else {
+    const bg = ctx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#f0f8ff');
+    bg.addColorStop(1, '#e6e6fa');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+  }
+}
+
+function drawBall(x, y, r, level, alpha = 1) {
+  const data = LEVELS[level];
+  const img = data.image;
+  const hue = data.hue;
+
+  ctx.save();
+  ctx.globalAlpha = alpha;
+
+  if (img && img.ready) {
+    if (USE_CIRCLE_CLIP) {
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.clip();
+      drawCover(img, x, y, r * 2, r * 2);
+      ctx.restore();
+
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+      ctx.lineWidth = Math.max(1, r * 0.06);
+      ctx.stroke();
+    } else {
+      drawCover(img, x, y, r * 2, r * 2);
+    }
+  } else {
+    const grad = ctx.createRadialGradient(x - r * 0.35, y - r * 0.35, r * 0.1, x, y, r);
+    grad.addColorStop(0, '#ffffff');
+    grad.addColorStop(0.35, `hsl(${hue}, 78%, 74%)`);
+    grad.addColorStop(1, `hsl(${hue}, 72%, 46%)`);
+
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+function drawWin() {
+  const t = winPulse;
+
+  const glow = 0.5 + Math.sin(t * 3) * 0.08;
+  ctx.fillStyle = `rgba(0, 0, 0, 0.62)`;
+  ctx.fillRect(0, 0, W, H);
+
+  const cx = W / 2, cy = H / 2;
+  const rad = ctx.createRadialGradient(cx, cy, 10, cx, cy, W * 0.75);
+  rad.addColorStop(0, `rgba(255, 215, 0, ${glow})`);
+  rad.addColorStop(0.55, 'rgba(255, 180, 0, 0.18)');
+  rad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = rad;
+  ctx.fillRect(0, 0, W, H);
+
+  for (let i = 0; i < 22; i++) {
+    const seed = i * 97.13;
+    const a = (seed % 360) * Math.PI / 180;
+    const dist = 90 + ((seed * 7) % 190) + Math.sin(t * 2 + i) * 8;
+    const sx = cx + Math.cos(a) * dist;
+    const sy = cy + Math.sin(a) * dist * 0.85;
+    const size = 1.5 + (i % 3);
+    ctx.globalAlpha = 0.35 + 0.5 * Math.abs(Math.sin(t * 3 + i));
+    ctx.fillStyle = i % 2 ? '#fff6b0' : '#ffd700';
+    ctx.beginPath();
+    ctx.arc(sx, sy, size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+
+  const pulse = 1 + Math.sin(t * 4) * 0.03;
+  const R = 88 * pulse;
+  const cyBall = cy - 100;
+
+  ctx.save();
+  ctx.shadowColor = 'rgba(255, 200, 0, 0.9)';
+  ctx.shadowBlur = 26;
+  const g2 = ctx.createRadialGradient(cx - R * 0.3, cyBall - R * 0.3, R * 0.15, cx, cyBall, R);
+  g2.addColorStop(0, '#fffbe6');
+  g2.addColorStop(0.6, '#ffd700');
+  g2.addColorStop(1, '#e6a800');
+  ctx.beginPath();
+  ctx.arc(cx, cyBall, R, 0, Math.PI * 2);
+  ctx.fillStyle = g2;
+  ctx.fill();
+  ctx.restore();
+
+  ctx.beginPath();
+  ctx.arc(cx, cyBall, R - 6, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  const top = LEVELS[MAX_LEVEL];
+  if (top.image && top.image.ready) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cyBall, R - 10, 0, Math.PI * 2);
+    ctx.clip();
+    drawCover(top.image, cx, cyBall, (R - 10) * 2, (R - 10) * 2);
+    ctx.restore();
+  }
+
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  ctx.save();
+  ctx.shadowColor = 'rgba(0,0,0,0.6)';
+  ctx.shadowBlur = 12;
+  ctx.fillStyle = '#ffd700';
+  ctx.font = 'bold 46px system-ui, sans-serif';
+  ctx.fillText('你赢了！', cx, cy + 40);
+  ctx.restore();
+
+  ctx.fillStyle = '#ffe680';
+  ctx.font = 'bold 26px system-ui, sans-serif';
+  ctx.fillText('分数：' + score, cx, cy + 100);
+
+  ctx.fillStyle = 'rgba(255,255,255,' + (0.55 + 0.45 * Math.abs(Math.sin(t * 2.5))) + ')';
+  ctx.font = '17px system-ui, sans-serif';
+  ctx.fillText('点击屏幕再来一局', cx, cy + 160);
+}
+
+function draw() {
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, cv.width, cv.height);
+
+  const ox = (cv.width - W * viewScale) / 2;
+  const oy = (cv.height - H * viewScale) / 2;
+  ctx.setTransform(viewScale, 0, 0, viewScale, ox, oy);
+
+  drawBackground();
+
+  const warnP = Math.min(1, overTimer / OVER_GRACE);
+  ctx.fillStyle = `rgba(255, 60, 60, ${0.06 + warnP * 0.22})`;
+  ctx.fillRect(0, 0, W, DEATH_LINE);
+
+  ctx.strokeStyle = `rgba(255, 60, 60, ${0.55 + warnP * 0.45})`;
+  ctx.lineWidth = 2 + warnP * 2;
+  ctx.setLineDash([6, 6]);
+  ctx.beginPath();
+  ctx.moveTo(0, DEATH_LINE);
+  ctx.lineTo(W, DEATH_LINE);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  for (const b of bodies) {
+    if (b.age > MIN_AGE && (b.y - b.r) < DEATH_LINE && overTimer > 0) {
+      const p = Math.min(1, overTimer / OVER_GRACE);
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r + 4 + p * 4, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255, 40, 40, ${0.4 + p * 0.6})`;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    if (b.spawn > 0) {
+      const s = 1 + b.spawn * 0.25;
+      drawBall(b.x, b.y, b.r * s, b.level);
+    } else {
+      drawBall(b.x, b.y, b.r, b.level);
+    }
+  }
+
+  if (!gameOver && !win && canDrop) {
+    const r = LEVELS[currentLevel].r;
+    const x = Math.min(Math.max(dropX, r + 2), W - r - 2);
+    const y = r + 5;
+
+    drawBall(x, y, r, currentLevel, 0.8);
+
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.18)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 5]);
+    ctx.beginPath();
+    ctx.moveTo(x, y + r);
+    ctx.lineTo(x, H);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  if (win && winShown) {
+    drawWin();
+  } else if (win) {
+    ctx.fillStyle = 'rgba(255, 215, 0, 0.22)';
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  if (gameOver) {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.62)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    ctx.font = 'bold 38px system-ui, sans-serif';
+    ctx.fillText('游戏结束', W / 2, H / 2 - 34);
+
+    ctx.font = 'bold 24px system-ui, sans-serif';
+    ctx.fillText('分数：' + score, W / 2, H / 2 + 18);
+
+    ctx.font = '17px system-ui, sans-serif';
+    ctx.fillText('点击屏幕重新开始', W / 2, H / 2 + 66);
+  }
+}
+
+/* ---------------- 主循环 ---------------- */
+
+function loop(now) {
+  const dt = Math.min((now - lastTime) / 1000, 0.05);
+  lastTime = now;
+  update(dt);
+  draw();
+  requestAnimationFrame(loop);
+}
+
+/* ---------------- 输入 ---------------- */
+
+function setDropX(clientX) {
+  const rect = cv.getBoundingClientRect();
+  dropX = (clientX - rect.left) / rect.width * W;
+}
+
+cv.addEventListener('pointerdown', e => {
+  e.preventDefault();
+
+  if (gameOver) { reset(); return; }
+  if (win) { if (winShown) reset(); return; }
+
+  setDropX(e.clientX);
+  if (e.pointerType === 'mouse') drop();
+  else pressing = true;
+}, { passive: false });
+
+cv.addEventListener('pointermove', e => {
+  if (gameOver || win) return;
+  setDropX(e.clientX);
+}, { passive: true });
+
+window.addEventListener('pointerup', e => {
+  if (gameOver || win) { pressing = false; return; }
+  if (pressing) { setDropX(e.clientX); drop(); }
+  pressing = false;
+});
+
+window.addEventListener('pointercancel', () => { pressing = false; });
+
+restartBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  reset();
+});
+
+window.addEventListener('keydown', e => {
+  if ((gameOver || (win && winShown)) && (e.key === ' ' || e.key === 'Enter')) {
+    reset();
+    return;
+  }
+  if (gameOver || win) return;
+  if (e.key === 'ArrowLeft')  dropX -= 18;
+  if (e.key === 'ArrowRight') dropX += 18;
+  if (e.key === ' ' || e.key === 'ArrowDown') { e.preventDefault(); drop(); }
+});
+
+/* ---------------- 启动 ---------------- */
+
+relayout();
+loadAssets();
+reset();
+requestAnimationFrame(loop);
+
+})();
+</script>
+</body>
+</html>

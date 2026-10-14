@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>校团委社团部招新 | 社聚青春</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0d2818;
+    color: #333;
+    line-height: 1.8;
+    padding: 16px;
+    min-height: 100vh;
+  }
+
+  /* ===== 背景层 ===== */
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(13,40,24,0.85) 0%, rgba(13,40,24,0.92) 100%),
+      url('https://picsum.photos/800/1600?random=1') center/cover no-repeat;
+    filter: blur(2px);
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.97);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+  }
+
+  /* ===== 顶部横幅 ===== */
+  .banner {
+    position: relative;
+    background:
+      linear-gradient(135deg, rgba(26,92,58,0.92) 0%, rgba(45,138,94,0.88) 100%),
+      url('https://picsum.photos/800/500?random=2') center/cover no-repeat;
+    color: #fff;
+    padding: 56px 24px 48px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .banner::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: rgba(255,255,255,0.97);
+    border-radius: 50% 50% 0 0;
+  }
+  .banner h1 {
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .banner p {
+    font-size: 14px;
+    opacity: 0.9;
+    letter-spacing: 1px;
+  }
+
+  /* ===== 装饰小图标 ===== */
+  .deco-icon {
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.6);
+  }
+
+  .content { padding: 24px; }
+
+  .section {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px dashed #d8e8de;
+  }
+  .section:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a5c3a;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    border-left: 4px solid #2d8a5e;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title img {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+  p { margin-bottom: 12px; font-size: 15px; color: #444; }
+  .highlight { color: #1a5c3a; font-weight: 600; }
+
+  .tag {
+    display: inline-block;
+    background: #e8f5ee;
+    color: #1a5c3a;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin: 3px 2px;
+    border: 1px solid #c5e0d1;
+  }
+
+  /* ===== JOIN US 分隔 ===== */
+  .join-us {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 28px 0;
+    color: #2d8a5e;
+    font-weight: bold;
+    font-size: 15px;
+    letter-spacing: 4px;
+  }
+  .join-us::before,
+  .join-us::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #2d8a5e, transparent);
+  }
+  .join-us span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: breathe 2.5s ease-in-out infinite;
+  }
+  .join-us img {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .list-item {
+    padding: 10px 0 10px 22px;
+    position: relative;
+    font-size: 15px;
+    color: #444;
+  }
+  .list-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 8px;
+    height: 8px;
+    background: #2d8a5e;
+    border-radius: 50%;
+  }
+
+  /* ===== 配图 ===== */
+  .figure {
+    margin: 20px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(26,92,58,0.15);
+  }
+  .figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .figure-caption {
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    padding: 8px;
+    background: #f8faf9;
+  }
+
+  .footer {
+    background: #f0f5f2;
+    padding: 20px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+    border-top: 1px solid #e0ebe5;
+  }
+
+  /* ===== 动画 ===== */
+  @keyframes breathe {
+    0%, 100% { opacity: 0.5; transform: scale(0.97); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bannerIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bgShift {
+    0% { background-position: center 0%; }
+    100% { background-position: center 100%; }
+  }
+
+  .bg-layer {
+    animation: bgShift 30s ease-in-out infinite alternate;
+  }
+
+  .banner h1 { animation: bannerIn 0.8s ease-out both; }
+  .banner p { animation: bannerIn 0.8s ease-out 0.2s both; }
+  .deco-icon { animation: bannerIn 0.6s ease-out both; }
+
+  /* 滚动入场：默认隐藏，JS 加 .visible 后触发 */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 标签依次弹入 */
+  .tag {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .tags-wrap.visible .tag {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .tags-wrap.visible .tag:nth-child(1) { transition-delay: 0.05s; }
+  .tags-wrap.visible .tag:nth-child(2) { transition-delay: 0.15s; }
+  .tags-wrap.visible .tag:nth-child(3) { transition-delay: 0.25s; }
+  .tags-wrap.visible .tag:nth-child(4) { transition-delay: 0.35s; }
+  .tags-wrap.visible .tag:nth-child(5) { transition-delay: 0.45s; }
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+
+<div class="page">
+
+  <div class="banner">
+    <img class="deco-icon" src="https://picsum.photos/120/120?random=10" alt="装饰">
+    <h1>校团委社团部招新</h1>
+    <p>社聚青春 · 以行践知，共筑百团风华</p>
+  </div>
+
+  <div class="content">
+
+    <div class="section reveal">
+      <p>秋风启新序，青春赴新程。</p>
+      <p>丰富多彩的校园社团，见证着无数北理工青年的热爱与成长。我们搭建起学校与广大学生社团之间的桥梁，是社团制度的建设者、社团发展的领航员、校园文化的筑造者。</p>
+      <p>如果你也热爱校园文化，渴望在学生工作中收获成长，那么，欢迎加入 <span class="highlight">校团委社团部！</span></p>
+    </div>
+
+    <div class="join-us reveal"><span><img src="https://picsum.photos/40/40?random=11" alt="">JOIN US<img src="https://picsum.photos/40/40?random=12" alt=""></span></div>
+
+    <div class="section reveal">
+      <div class="section-title"><img src="https://picsum.photos/44/44?random=13" alt="">我们是谁</div>
+      <p><span class="highlight">共青团北京理工大学委员会社团部</span>（以下简称“社团部”）是负责统筹全校学生社团建设管理、牵头指导学生社团发展服务中心开展各项工作，服务学校“五育融合”育人格局，协助校团委各项社团事务性工作的核心职能部门。</p>
+      <div class="figure">
+        <img src="https://picsum.photos/680/400?random=20" alt="社团大会">
+        <div class="figure-caption">社团大会</div>
+      </div>
+      <p>社团部致力于夯实五育并举校园育人阵地、引导广大学生传承 <span class="highlight">“延安根、军工魂、领军人”红色基因</span>、以培养 <span class="highlight">“胸怀壮志、明德精工、创新包容、时代担当”</span> 领军领导人才为己任的先锋学生力量。</p>
+    </div>
+
+    <div class="join-us reveal"><span><img src="https://picsum.photos/40/40?random=11" alt="">JOIN US<img src="https://picsum.photos/40/40?random=12" alt=""></span></div>
+
+    <div class="section reveal">
+      <div class="section-title"><img src="https://picsum.photos/44/44?random=14" alt="">丰富多彩的社团活动</div>
+      <div class="tags-wrap">
+        <span class="tag">社团巡礼</span>
+        <span class="tag">社团文化周</span>
+        <span class="tag">北湖音乐节</span>
+        <span class="tag">精品社团活动招标</span>
+        <span class="tag">高校社团工作交流会</span>
+      </div>
+      <div class="figure">
+        <img src="https://picsum.photos/680/380?random=21" alt="北湖音乐节">
+        <div class="figure-caption">北湖音乐节</div>
+      </div>
+      <p>我们统筹开展以上品牌项目，为校园文化建设贡献社团力量。</p>
+    </div>
+
+    <div class="join-us reveal"><span><img src="https://picsum.photos/40/40?random=11" alt="">JOIN US<img src="https://picsum.photos/40/40?random=12" alt=""></span></div>
+
+    <div class="section reveal">
+      <div class="section-title"><img src="https://picsum.photos/44/44?random=15" alt="">在这里，你将收获</div>
+      <div class="list-item">深度参与全校社团的统筹管理，近距离接触各类精彩校园社团活动</div>
+      <div class="list-item">掌握公文撰写、制度梳理、项目统筹、沟通协调的硬核实务能力</div>
+      <div class="list-item">熟悉第二课堂、五育并举、书院社区共建等学校育人工作体系</div>
+      <div class="list-item">参与北湖音乐节、社团巡礼等大型校园品牌活动从策划到落地的全过程</div>
+      <div class="list-item">结识有理想、有担当的优秀伙伴，拓展视野，积累学生工作宝贵经历</div>
+    </div>
+
+    <div class="join-us reveal"><span><img src="https://picsum.photos/40/40?random=11" alt="">JOIN US<img src="https://picsum.photos/40/40?random=12" alt=""></span></div>
+
+    <div class="section reveal">
+      <div class="section-title"><img src="https://picsum.photos/44/44?random=16" alt="">我们期待这样的你</div>
+      <div class="list-item">思想积极向上，有较强的责任意识、服务意识，做事细致严谨</div>
+      <div class="list-item">善于沟通协作，能够平衡学业与学生工作，有较好执行力</div>
+      <div class="list-item">具备基础文档处理能力，会 Word/Excel，有公文写作、活动策划经验优先</div>
+      <div class="list-item">热爱校园文化，对学生社团工作抱有热情，愿意主动学习新工作内容</div>
+      <div class="list-item">不限专业，有无学生工作经验都可以，我们会手把手带你成长</div>
+      <div class="list-item">不必身怀绝技，只需满怀热忱；不必经验满点，贵在踏实肯干</div>
+    </div>
+
+    <div class="join-us reveal"><span><img src="https://picsum.photos/40/40?random=11" alt="">JOIN US<img src="https://picsum.photos/40/40?random=12" alt=""></span></div>
+
+    <div class="section reveal">
+      <div class="section-title"><img src="https://picsum.photos/44/44?random=17" alt="">报名方式</div>
+      <div class="figure">
+        <img src="https://picsum.photos/300/300?random=30" alt="报名问卷">
+        <div class="figure-caption">报名问卷</div>
+      </div>
+      <div class="figure">
+        <img src="https://picsum.photos/300/300?random=31" alt="招新咨询群">
+        <div class="figure-caption">招新咨询群</div>
+      </div>
+    </div>
+
+    <div class="section reveal">
+      <div class="section-title"><img src="https://picsum.photos/44/44?random=18" alt="">结语</div>
+      <p><span class="highlight">百团繁花，源于点滴耕耘；青春华章，期待你来执笔。</span></p>
+      <p>从社团建设到校园活动，从思想引领到五育融通，校团委社团部期待与你并肩，一同守护北理工社团的蓬勃生机，共同书写属于北理工青年的校园文化篇章！</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    出品 | 校团委社团部 &nbsp;·&nbsp; 审核 | 周迨琛
+  </div>
+
+</div>
+
+<script>
+  // 滚动入场动画
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal, .tags-wrap').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
