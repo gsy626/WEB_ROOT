@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f2e8">
+<meta name="description" content="墨与理 · 中国山水 × 数学 × 物理 的个人主页">
+<title>墨与理 · 你的名字 | 北理工 · 数学 · 物理</title>
+<style>
+/* ========== 1. 变量与基础 ========== */
+:root{
+  --paper:#f7f2e8; --paper-2:#eee5d5; --paper-3:#fbf8f1;
+  --ink:#16181c; --ink-2:#3b4450; --ink-3:#7c8794;
+  --cinnabar:#9e2b25; --cinnabar-2:#c2412f;
+  --jade:#2c6b62; --gold:#b08a4a;
+  --serif:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC","SimSun",serif;
+  --kai:"Kaiti SC","STKaiti","KaiTi","楷体",var(--serif);
+  --math:"Times New Roman",Times,var(--serif);
+  --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  --ease:cubic-bezier(.19,1,.22,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--ink);font-family:var(--sans);overflow-x:hidden;
+  background:
+    radial-gradient(120% 70% at 50% -10%,#fdfaf3 0%,var(--paper) 42%,var(--paper-2) 100%) fixed;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(158,43,37,.16)}
+:focus-visible{outline:2px solid var(--cinnabar);outline-offset:3px}
+h1,h2,h3{font-weight:400}
+
+/* ========== 2. 画布层 / 纸纹 ========== */
+#scene{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+#inkCursor{position:fixed;inset:0;width:100%;height:100%;z-index:4;pointer-events:none}
+.grain{
+  position:fixed;inset:0;z-index:3;pointer-events:none;opacity:.3;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+}
+.glow{
+  position:fixed;left:0;top:0;width:420px;height:420px;margin:-210px 0 0 -210px;z-index:1;
+  pointer-events:none;border-radius:50%;opacity:.55;
+  background:radial-gradient(circle,rgba(158,43,37,.10),rgba(44,107,98,.06) 45%,rgba(0,0,0,0) 70%);
+  transition:opacity .6s var(--ease);
+}
+main,footer,nav{position:relative;z-index:2}
+
+/* ========== 3. 进度条与导航 ========== */
+.progress{position:fixed;left:0;top:0;height:2px;width:100%;z-index:30;background:transparent}
+.progress i{
+  display:block;height:100%;width:0;
+  background:linear-gradient(90deg,rgba(158,43,37,0),var(--cinnabar) 40%,var(--gold));
+  box-shadow:0 0 12px rgba(158,43,37,.5);
+}
+.nav{
+  position:fixed;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
+  padding:16px clamp(16px,4vw,46px);transition:background .6s var(--ease),backdrop-filter .6s,border-color .6s;
+  border-bottom:1px solid rgba(22,24,28,0);
+}
+.nav.solid{background:rgba(247,242,232,.74);backdrop-filter:blur(10px) saturate(1.1);border-bottom-color:rgba(22,24,28,.07)}
+.nav-logo{display:flex;align-items:center;gap:10px;font-family:var(--kai);font-size:19px;letter-spacing:.16em}
+.seal-mini{
+  width:30px;height:30px;display:grid;place-items:center;border-radius:2px;color:#fff8f2;
+  background:linear-gradient(145deg,var(--cinnabar-2),var(--cinnabar));font-size:16px;
+  box-shadow:0 6px 14px -8px rgba(158,43,37,.9);transform:rotate(-4deg);
+}
+.nav-links{display:flex;gap:clamp(12px,2.4vw,30px);list-style:none;margin:0;padding:0;font-size:14px;letter-spacing:.12em}
+.nav-links a{position:relative;padding:6px 2px;color:var(--ink-2);transition:color .4s}
+.nav-links a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--cinnabar);
+  transform:scaleX(0);transform-origin:left;transition:transform .55s var(--ease);
+}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+
+/* ========== 4. 首屏 ========== */
+.hero{
+  min-height:100vh;min-height:100svh;display:grid;place-items:center;text-align:center;
+  padding:clamp(100px,16vh,180px) 22px 90px;position:relative;
+}
+.hero-inner{max-width:880px;display:grid;justify-items:center;gap:22px}
+.kicker{
+  font-size:clamp(11px,1.4vw,13px);letter-spacing:.42em;text-transform:uppercase;color:var(--ink-3);
+  margin:0;padding-left:.42em;
+}
+.kicker b{color:var(--cinnabar);font-weight:500}
+.hero-name{
+  font-family:var(--kai);font-size:clamp(58px,13.5vw,168px);line-height:1;margin:0;
+  letter-spacing:.06em;display:flex;gap:.02em;
+}
+.hero-name span{
+  display:inline-block;color:transparent;background-image:linear-gradient(100deg,#16181c 0%,#3b4450 32%,var(--cinnabar) 50%,#3b4450 68%,#16181c 100%);
+  background-size:300% 100%;-webkit-background-clip:text;background-clip:text;
+  opacity:0;filter:blur(14px);transform:translateY(38px) rotate(3deg);
+  animation:charIn 1.15s var(--ease) forwards var(--delay), sheen 9s linear infinite var(--sheen);
+}
+.brush{width:min(560px,78vw);height:auto;overflow:visible}
+.brush path{
+  fill:none;stroke:url(#brushGrad);stroke-width:5;stroke-linecap:round;
+  stroke-dasharray:1200;stroke-dashoffset:1200;animation:draw 2.6s var(--ease) .7s forwards;
+}
+.quote{font-family:var(--kai);font-size:clamp(15px,2.1vw,21px);color:var(--ink-2);letter-spacing:.2em;margin:0}
+.quote small{display:block;margin-top:10px;font-size:12px;letter-spacing:.3em;color:var(--ink-3);font-family:var(--sans)}
+.tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.tag{
+  font-size:12.5px;letter-spacing:.18em;color:var(--ink-2);padding:7px 14px;border:1px solid rgba(22,24,28,.14);
+  border-radius:999px;background:rgba(255,255,255,.4);transition:.5s var(--ease);
+}
+.tag:hover{color:var(--cinnabar);border-color:rgba(158,43,37,.4);transform:translateY(-3px)}
+.seal{
+  width:96px;height:96px;display:grid;grid-template-columns:1fr 1fr;place-items:center;
+  padding:7px;gap:2px;border-radius:3px;color:#fff6ef;font-family:var(--kai);font-size:27px;
+  background:linear-gradient(150deg,var(--cinnabar-2),var(--cinnabar) 60%,#7c1f1b);
+  box-shadow:0 18px 34px -20px rgba(158,43,37,.95), inset 0 0 0 3px rgba(255,240,230,.55);
+  transform:rotate(-5deg);margin-top:8px;
+}
+.seal span{opacity:.96;text-shadow:0 1px 0 rgba(0,0,0,.18)}
+.motto{margin:2px 0 0;font-family:var(--kai);letter-spacing:.4em;font-size:13px;color:var(--ink-2);padding-left:.4em}
+.scroll-hint{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  display:grid;justify-items:center;gap:8px;font-size:11px;letter-spacing:.34em;color:var(--ink-3);
+}
+.scroll-hint i{display:block;width:1px;height:46px;background:linear-gradient(var(--ink-3),transparent);position:relative;overflow:hidden}
+.scroll-hint i::after{content:"";position:absolute;left:0;top:-46px;width:1px;height:46px;background:var(--cinnabar);animation:drop 2.4s ease-in-out infinite}
+
+/* ========== 5. 分区通用 ========== */
+.veil{background:linear-gradient(180deg,rgba(247,242,232,0) 0%,rgba(247,242,232,.86) 9%,rgba(247,242,232,.95) 90%,rgba(247,242,232,0) 100%);backdrop-filter:blur(2px)}
+.panel{max-width:1120px;margin:0 auto;padding:clamp(70px,10vh,120px) clamp(20px,4vw,34px);scroll-margin-top:70px}
+.sec-head{display:grid;gap:6px;margin-bottom:clamp(28px,4vw,48px)}
+.sec-num{font-family:var(--kai);color:var(--cinnabar);letter-spacing:.3em;font-size:14px}
+.sec-title{font-family:var(--kai);font-size:clamp(30px,5vw,52px);margin:0;letter-spacing:.14em}
+.sec-en{margin:0;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3)}
+.sec-line{display:block;height:1px;width:0;margin-top:16px;background:linear-gradient(90deg,var(--cinnabar),rgba(158,43,37,0));transition:width 1.6s var(--ease) .2s}
+.reveal .sec-line,.reveal.in .sec-line{width:100%}
+.lede{font-size:clamp(15px,1.7vw,17px);line-height:2.05;color:var(--ink-2);max-width:62ch;letter-spacing:.02em}
+.lede em{font-family:var(--kai);font-style:normal;color:var(--cinnabar)}
+.divider{display:flex;align-items:center;gap:18px;margin:0 auto;max-width:1120px;padding:0 clamp(20px,4vw,34px)}
+.divider span{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(22,24,28,.18),transparent)}
+.divider b{font-family:var(--kai);color:var(--ink-3);letter-spacing:.4em;font-size:12px;font-weight:400}
+
+/* ========== 6. 卡片 / 公式 ========== */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:16px;margin-top:34px}
+.card{
+  position:relative;overflow:hidden;padding:24px 22px 26px;border:1px solid rgba(22,24,28,.11);
+  border-radius:3px;background:rgba(255,255,255,.44);backdrop-filter:blur(4px);
+  transition:transform .7s var(--ease),box-shadow .7s var(--ease),border-color .7s;
+}
+.card::before{
+  content:"";position:absolute;inset:0;opacity:0;transition:opacity .6s;
+  background:radial-gradient(420px 220px at var(--mx,50%) var(--my,0%),rgba(158,43,37,.13),rgba(44,107,98,.06) 45%,transparent 70%);
+}
+.card:hover{transform:translateY(-7px);border-color:rgba(158,43,37,.36);box-shadow:0 30px 44px -32px rgba(22,24,28,.6)}
+.card:hover::before{opacity:1}
+.card .glyph{
+  font-family:var(--math);font-size:26px;color:var(--cinnabar);opacity:.85;line-height:1;
+  display:block;margin-bottom:14px;
+}
+.card h3{margin:0 0 12px;font-family:var(--kai);font-size:19px;letter-spacing:.16em}
+.card .note{margin:12px 0 0;font-size:13px;line-height:1.9;color:var(--ink-3)}
+.formula{font-family:var(--math);font-style:italic;font-size:clamp(17px,2.2vw,21px);letter-spacing:.02em;color:var(--ink)}
+.formula sup,.formula sub{font-style:italic;font-size:.62em}
+.frac{display:inline-flex;flex-direction:column;vertical-align:-.46em;text-align:center;font-size:.86em;line-height:1.05;margin:0 .18em}
+.frac .den{border-top:1px solid currentColor;padding-top:.06em;margin-top:.06em}
+.stage{
+  position:relative;margin-top:34px;border:1px solid rgba(22,24,28,.11);border-radius:3px;
+  background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,.24));overflow:hidden;
+}
+.stage canvas{display:block;width:100%;height:clamp(240px,38vh,360px)}
+.stage .cap{
+  position:absolute;left:16px;bottom:12px;font-size:11.5px;letter-spacing:.24em;color:var(--ink-3);
+}
+.slits{position:absolute;inset:0;pointer-events:none}
+.slit{position:absolute;top:50%;width:0;height:0}
+.slit i{
+  position:absolute;left:-6px;top:-6px;width:12px;height:12px;border-radius:50%;
+  background:var(--cinnabar);box-shadow:0 0 0 6px rgba(158,43,37,.14);
+}
+.slit i::after{
+  content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(158,43,37,.5);
+  animation:ping 2.8s ease-out infinite;
+}
+.slit small{position:absolute;left:-30px;top:16px;width:60px;text-align:center;font-size:10.5px;letter-spacing:.2em;color:var(--ink-3)}
+
+/* ========== 7. 星轨公式环 ========== */
+.orbit-wrap{display:grid;place-items:center;padding:clamp(30px,6vh,70px) 0}
+.orbit{position:relative;width:260px;height:260px;animation:spin 54s linear infinite}
+.orbit::before,.orbit::after{
+  content:"";position:absolute;left:50%;top:50%;border-radius:50%;transform:translate(-50%,-50%);
+  border:1px solid rgba(22,24,28,.12);
+}
+.orbit::before{width:230px;height:230px}
+.orbit::after{width:150px;height:150px;border-style:dashed;border-color:rgba(158,43,37,.22)}
+.orbit .core{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--kai);
+  font-size:30px;color:var(--ink);letter-spacing:.1em;
+}
+.orbit .sym{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(var(--a)) translateY(-115px)}
+.orbit .sym i{
+  display:block;font-style:normal;font-family:var(--math);font-size:19px;color:var(--ink-2);
+  animation:spinRev 54s linear infinite;
+}
+.orbit .sym:nth-child(odd) i{color:var(--cinnabar)}
+
+/* ========== 8. 联系 / 页脚 ========== */
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:30px}
+.link{
+  display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-radius:3px;
+  border:1px solid rgba(22,24,28,.12);background:rgba(255,255,255,.42);letter-spacing:.1em;font-size:14px;
+  transition:.6s var(--ease);
+}
+.link span{color:var(--ink-3);font-size:12px;letter-spacing:.24em}
+.link:hover{transform:translateX(6px);border-color:rgba(158,43,37,.4);color:var(--cinnabar)}
+footer{padding:40px 22px 60px;text-align:center;color:var(--ink-3);font-size:12.5px;letter-spacing:.16em}
+footer .seal-foot{
+  display:inline-grid;place-items:center;width:46px;height:46px;margin-bottom:16px;border-radius:2px;
+  font-family:var(--kai);font-size:20px;color:#fff6ef;transform:rotate(-4deg);
+  background:linear-gradient(150deg,var(--cinnabar-2),var(--cinnabar));
+  box-shadow:0 12px 26px -16px rgba(158,43,37,.9);
+}
+
+/* ========== 9. 入场与关键帧 ========== */
+.reveal{opacity:0;transform:translateY(30px);filter:blur(8px);transition:opacity 1.15s var(--ease),transform 1.15s var(--ease),filter 1.15s var(--ease);transition-delay:calc(var(--i,0)*95ms)}
+.reveal.in{opacity:1;transform:none;filter:blur(0)}
+.hero .reveal{transition-delay:calc(var(--i,0)*130ms + .35s)}
+@keyframes charIn{to{opacity:1;filter:blur(0);transform:none}}
+@keyframes sheen{from{background-position:130% 0}to{background-position:-30% 0}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes drop{0%{top:-46px}60%,100%{top:46px}}
+@keyframes ping{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinRev{from{transform:rotate(calc(-1 * var(--a) - 360deg))}to{transform:rotate(calc(-1 * var(--a)))}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero .scroll-hint{animation:fadeUp 1.4s var(--ease) 1.6s both}
+.tag{animation:floaty 6s ease-in-out infinite;animation-delay:calc(var(--i,0)*.6s)}
+
+@media (max-width:720px){
+  .nav-links{font-size:12.5px;letter-spacing:.06em}
+  .nav-logo span:last-child{display:none}
+  .hero-name{letter-spacing:.02em}
+  .scroll-hint{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  .reveal{opacity:1;transform:none;filter:none}
+  .hero-name span{opacity:1;filter:none;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<canvas id="scene" aria-hidden="true"></canvas>
+<div class="glow" id="glow" aria-hidden="true"></div>
+<canvas id="inkCursor" aria-hidden="true"></canvas>
+
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+<!-- ================= 导航 ================= -->
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="#top"><span class="seal-mini">理</span><span>墨与理</span></a>
+  <ul class="nav-links">
+    <li><a href="#landscape" data-sec="landscape">山水</a></li>
+    <li><a href="#math" data-sec="math">数</a></li>
+    <li><a href="#physics" data-sec="physics">理</a></li>
+    <li><a href="#contact" data-sec="contact">相逢</a></li>
+  </ul>
+</nav>
+
+<main id="top">
+
+  <!-- ================= 首屏 ================= -->
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="kicker reveal" style="--i:0">北京理工大学 · <b>数学</b> · <b>物理</b></p>
+      <h1 class="hero-name" id="heroName">你的名字</h1>
+
+      <svg class="brush" viewBox="0 0 600 40" aria-hidden="true">
+        <defs>
+          <linearGradient id="brushGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="rgba(22,24,28,0)"/>
+            <stop offset=".22" stop-color="#16181c"/>
+            <stop offset=".55" stop-color="#9e2b25"/>
+            <stop offset=".8" stop-color="#2c6b62"/>
+            <stop offset="1" stop-color="rgba(22,24,28,0)"/>
+          </linearGradient>
+        </defs>
+        <path d="M8 24 C 110 6, 190 34, 300 18 S 500 8, 592 22"/>
+      </svg>
+
+      <p class="quote reveal" style="--i:1">仰观宇宙之大，俯察品类之盛<small>兰亭集序 · 王羲之</small></p>
+
+      <div class="tags reveal" style="--i:2">
+        <span class="tag" style="--i:0">调和分析</span>
+        <span class="tag" style="--i:1">统计物理</span>
+        <span class="tag" style="--i:2">微分几何</span>
+        <span class="tag" style="--i:3">量子力学</span>
+        <span class="tag" style="--i:4">数值计算</span>
+      </div>
+
+      <div class="seal reveal" style="--i:3" aria-label="北京理工大学">
+        <span>北</span><span>京</span><span>理</span><span>工</span>
+      </div>
+      <p class="motto reveal" style="--i:4">德以明理 · 学以精工</p>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true"><i></i>SCROLL</div>
+  </header>
+
+  <!-- ================= 壹 · 山水 ================= -->
+  <section id="landscape" class="veil">
+    <div class="panel">
+      <div class="sec-head reveal">
+        <span class="sec-num">壹</span>
+        <h2 class="sec-title">山水之间</h2>
+        <p class="sec-en">Between Mountains and Waters</p>
+        <span class="sec-line"></span>
+      </div>
+
+      <p class="lede reveal" style="--i:1">
+        我在纸上画山，也在纸上算山。<em>水墨</em>讲究留白与气韵，数学讲究结构与极限——两者其实在做同一件事：
+        用极少的笔墨，勾勒出一个可以被反复推演的秩序。山峦的轮廓是折线的极限，云雾是未收敛的级数，
+        而一条江，是从河口回溯到源头的逆变换。
+      </p>
+      <p class="lede reveal" style="--i:2" style2>
+        求学于<em>北京理工大学</em>（1940 年始于延安），在公式与山水之间找同一种"简"。
+        我关心的方向横跨分析、几何与物理：把一个波动拆成无穷多个圆，把一个曲面写成曲率的积分，
+        把一片山看成一张被风吹皱的纸。
+      </p>
+
+      <div class="cards">
+        <article class="card reveal" style="--i:1">
+          <span class="glyph">山</span>
+          <h3>形与极限</h3>
+          <p class="note">山峰的轮廓是无数折线的收敛极限；再复杂的形状，也可以被分解成足够多的简单片段。</p>
+        </article>
+        <article class="card reveal" style="--i:2">
+          <span class="glyph">水</span>
+          <h3>流与变换</h3>
+          <p class="note">水无常形却守恒。正如变换之于函数：换一个坐标系，难的题目会显出它的对称。</p>
+        </article>
+        <article class="card reveal" style="--i:3">
+          <span class="glyph">云</span>
+          <h3>混沌与统计</h3>
+          <p class="note">云没有确定的边缘，却有确定的规律。统计物理处理的正是这种"看起来随机"的秩序。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider reveal"><span></span><b>壹 · 山水</b><span></span></div>
+
+  <!-- ================= 贰 · 数 ================= -->
+  <section id="math" class="veil">
+    <div class="panel">
+      <div class="sec-head reveal">
+        <span class="sec-num">贰</span>
+        <h2 class="sec-title">数</h2>
+        <p class="sec-en">Mathematics · Structure &amp; Spectrum</p>
+        <span class="sec-line"></span>
+      </div>
+
+      <p class="lede reveal" style="--i:1">
+        下面这张图是一段<em>离散傅里叶变换</em>的实时演算：把一条双纽线（8 字曲线）当作复平面上的周期函数，
+        用 69 个旋转的圆（共 69 个谐波分量）严格地把它重新画出来。红线的每一段，是一次复数乘法。
+      </p>
+
+      <div class="stage reveal" style="--i:2">
+        <canvas id="fourierCanvas" aria-label="傅里叶级数圆叠合动画"></canvas>
+        <div class="cap">FOURIER SERIES · 圆的叠合 · 双纽线 r² = cos 2θ</div>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal" style="--i:1">
+          <span class="glyph">e<sup>iπ</sup></span>
+          <h3>欧拉恒等式</h3>
+          <p class="formula">e<sup>iπ</sup> + 1 = 0</p>
+          <p class="note">五个最重要的常数相遇于一式。山水的"简"，在数学里叫"美"。</p>
+        </article>
+        <article class="card reveal" style="--i:2">
+          <span class="glyph">F</span>
+          <h3>傅里叶变换</h3>
+          <p class="formula">F(ξ) = ∫ f(x) e<sup>−2πiξx</sup> dx</p>
+          <p class="note">用整片频谱描述一个波形：把一条江拆成无数个圆。</p>
+        </article>
+        <article class="card reveal" style="--i:3">
+          <span class="glyph">ζ</span>
+          <h3>黎曼 ζ 函数</h3>
+          <p class="formula">ζ(s) = Σ<sub>n≥1</sub> <span class="frac"><span class="num">1</span><span class="den">n<sup>s</sup></span></span></p>
+          <p class="note">质数分布的秘密藏在复平面的零点里。</p>
+        </article>
+        <article class="card reveal" style="--i:4">
+          <span class="glyph">K</span>
+          <h3>高斯–博内定理</h3>
+          <p class="formula">∬<sub>M</sub> K dA = 2πχ(M)</p>
+          <p class="note">弯曲可以局部任意，拓扑却始终不动——几何的"守恒律"。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 星轨公式环 -->
+  <div class="orbit-wrap" aria-hidden="true">
+    <div class="orbit" id="orbit"><div class="core">理</div></div>
+  </div>
+
+  <!-- ================= 叁 · 理 ================= -->
+  <section id="physics" class="veil">
+    <div class="panel">
+      <div class="sec-head reveal">
+        <span class="sec-num">叁</span>
+        <h2 class="sec-title">理</h2>
+        <p class="sec-en">Physics · Waves &amp; Probability</p>
+        <span class="sec-line"></span>
+      </div>
+
+      <p class="lede reveal" style="--i:1">
+        下图为<em>双缝干涉</em>的实时波场：两个相干点源的振幅相加，明暗即为 |ψ|²。
+        概率在我们看不见的地方依然波澜壮阔——这正是量子力学最美的一页。
+      </p>
+
+      <div class="stage reveal" style="--i:2">
+        <canvas id="waveCanvas" aria-label="双缝干涉波场动画"></canvas>
+        <div class="slits" aria-hidden="true">
+          <div class="slit" style="left:42%"><i></i><small>双缝 A</small></div>
+          <div class="slit" style="left:58%"><i></i><small>双缝 B</small></div>
+        </div>
+        <div class="cap">DOUBLE SLIT · |ψ₁ + ψ₂|² · 相干叠加</div>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal" style="--i:1">
+          <span class="glyph">ψ</span>
+          <h3>薛定谔方程</h3>
+          <p class="formula">iħ <span class="frac"><span class="num">∂ψ</span><span class="den">∂t</span></span> = Ĥψ</p>
+          <p class="note">宇宙的演化是一条可逆的波动方程；而观测，把它化为概率。</p>
+        </article>
+        <article class="card reveal" style="--i:2">
+          <span class="glyph">∇</span>
+          <h3>麦克斯韦方程组</h3>
+          <p class="formula">∇·E = ρ/ε₀ &nbsp; ∇×B = μ₀J + μ₀ε₀ ∂E/∂t</p>
+          <p class="note">四个方程，写尽了光、电与磁的全部古典故事。</p>
+        </article>
+        <article class="card reveal" style="--i:3">
+          <span class="glyph">E</span>
+          <h3>能量–动量关系</h3>
+          <p class="formula">E² = (pc)² + (mc²)²</p>
+          <p class="note">静止质量也是一种能量：这是时间与空间达成的一份协议。</p>
+        </article>
+        <article class="card reveal" style="--i:4">
+          <span class="glyph">Δ</span>
+          <h3>不确定性原理</h3>
+          <p class="formula">Δx · Δp ≥ ħ / 2</p>
+          <p class="note">看得越清位置，就越看不清去向——一切精密的代价。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 肆 · 相逢 ================= -->
+  <section id="contact" class="veil">
+    <div class="panel">
+      <div class="sec-head reveal">
+        <span class="sec-num">肆</span>
+        <h2 class="sec-title">相逢</h2>
+        <p class="sec-en">Let's Compute Something Together</p>
+        <span class="sec-line"></span>
+      </div>
+
+      <p class="lede reveal" style="--i:1">
+        欢迎聊数学、物理、算法，或者只是聊一幅画。如果你也相信<em>公式可以很美</em>，我们大概能聊很久。
+      </p>
+
+      <div class="links">
+        <a class="link reveal" style="--i:1" href="mailto:you@example.com">you@example.com<span>MAIL</span></a>
+        <a class="link reveal" style="--i:2" href="https://www.bit.edu.cn" target="_blank" rel="noopener">北京理工大学<span>BIT</span></a>
+        <a class="link reveal" style="--i:3" href="#">GitHub<span>CODE</span></a>
+        <a class="link reveal" style="--i:4" href="#">知乎 / 博客<span>WRITE</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="seal-foot" aria-hidden="true">理</div>
+  <div>墨与理 · 中国山水 / 数学 / 物理 —— © <span id="year">2026</span> 你的名字</div>
+  <div style="margin-top:8px">「德以明理，学以精工」</div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $  = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
+  const TAU = Math.PI * 2;
+
+  /* ---------- 通用动画循环（页面隐藏时暂停绘制） ---------- */
+  function raf(fn){
+    let started = false, t0 = 0;
+    function step(now){
+      if(!started){ started = true; t0 = now; }
+      if(!document.hidden){ try{ fn(now - t0, now); }catch(e){ /* 单帧失败不影响整页 */ } }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  function onceVisible(el, cb){
+    if(!("IntersectionObserver" in window)){ cb(); return; }
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => { if(e.isIntersecting){ cb(); io.disconnect(); } });
+    }, { threshold: .02 });
+    io.observe(el);
+  }
+
+  /* =========================================================
+     一、首屏标题：逐字浮现 + 流光
+     ========================================================= */
+  (function heroName(){
+    const el = $("#heroName");
+    if(!el) return;
+    const chars = el.textContent.trim().split("");
+    el.textContent = "";
+    chars.forEach((ch, i) => {
+      const s = document.createElement("span");
+      s.textContent = ch;
+      s.style.setProperty("--delay", (300 + i * 95) + "ms");
+      s.style.setProperty("--sheen", (600 + i * 180) + "ms");
+      el.appendChild(s);
+    });
+  })();
+
+  /* =========================================================
+     二、滚动：进度条 / 导航高亮 / 揭示 / 卡片光斑
+     ========================================================= */
+  (function scrollUI(){
+    const bar = $("#progressBar"), nav = $("#nav");
+    function onScroll(){
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? Math.min(1, window.scrollY / h) : 0;
+      if(bar) bar.style.width = (p * 100).toFixed(2) + "%";
+      if(nav) nav.classList.toggle("solid", window.scrollY > 40);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // 揭示
+    const items = $$(".reveal");
+    if("IntersectionObserver" in window && !reduce){
+      const io = new IntersectionObserver((es) => {
+        es.forEach(e => { if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { threshold: .12, rootMargin: "0px 0px -8% 0px" });
+      items.forEach(el => io.observe(el));
+    } else {
+      items.forEach(el => el.classList.add("in"));
+    }
+
+    // 章节高亮
+    const links = $$(".nav-links a");
+    const secs = links.map(a => document.getElementById(a.dataset.sec)).filter(Boolean);
+    if("IntersectionObserver" in window && secs.length){
+      const io = new IntersectionObserver((es) => {
+        es.forEach(e => {
+          if(!e.isIntersecting) return;
+          links.forEach(a => a.classList.toggle("active", a.dataset.sec === e.target.id));
+        });
+      }, { threshold: .3, rootMargin: "-20% 0px -55% 0px" });
+      secs.forEach(s => io.observe(s));
+    }
+
+    // 卡片光斑跟随
+    document.addEventListener("pointermove", (e) => {
+      const card = e.target.closest ? e.target.closest(".card") : null;
+      if(!card) return;
+      const r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100).toFixed(1) + "%");
+      card.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100).toFixed(1) + "%");
+    }, { passive: true });
+  })();
+
+  /* =========================================================
+     三、山水背景（Canvas）：层叠山峦 · 云雾 · 朱砂日 · 飞鸟 · 浮墨
+     ========================================================= */
+  (function landscape(){
+    const cv = $("#scene");
+    if(!cv) return;
+    const ctx = cv.getContext("2d");
+    const S = { W: 0, H: 0, DPR: 1, px: .5, py: .5, tpx: .5, tpy: .5, scroll: 0, lastW: 0 };
+    let layers = [], mists = [], birds = [], motes = [];
+
+    const seeded = (s) => () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+
+    function build(){
+      const W = S.W, H = S.H;
+      const cfgs = [
+        { horizon: .74, h: .30, par: 16, sp: 1, seed: 11,
+          colA: "rgba(124,138,155,.34)", colB: "rgba(124,138,155,.03)" },
+        { horizon: .83, h: .34, par: 30, sp: 2, seed: 37,
+          colA: "rgba(68,82,100,.46)",  colB: "rgba(68,82,100,.05)" },
+        { horizon: .93, h: .38, par: 52, sp: 3, seed: 71,
+          colA: "rgba(24,27,33,.74)",   colB: "rgba(24,27,33,.09)" }
+      ];
+      layers = cfgs.map(c => {
+        const rnd = seeded(c.seed);
+        const waves = [];
+        for(let i = 0; i < 5; i++){
+          waves.push({ f: i + 1, a: (1 / Math.pow(1.9, i)) * (0.65 + rnd() * 0.75), p: rnd() * TAU });
+        }
+        return Object.assign({}, c, { waves: waves });
+      });
+
+      mists = [];
+      for(let i = 0; i < 6; i++){
+        mists.push({
+          y: H * (0.58 + i * 0.065), x: Math.random() * W,
+          w: W * (0.42 + Math.random() * 0.55), h: H * (0.05 + Math.random() * 0.05),
+          v: 0.04 + Math.random() * 0.08, a: 0.62 - Math.abs(i - 2.5) * 0.06
+        });
+      }
+
+      birds = [];
+      for(let i = 0; i < 4; i++){
+        birds.push({
+          x: Math.random() * W, y: H * (0.16 + Math.random() * 0.24),
+          s: 0.5 + Math.random() * 0.65, sp: 0.35 + Math.random() * 0.5,
+          ph: Math.random() * TAU, bob: 0.5 + Math.random(), flap: 4 + Math.random() * 3,
+          a: 0.3 + Math.random() * 0.3
+        });
+      }
+
+      motes = [];
+      const n = Math.round(W / 24);
+      for(let i = 0; i < n; i++){
+        motes.push({
+          x: Math.random() * W, y: Math.random() * H,
+          r: 0.4 + Math.random() * 1.9, vy: -(0.05 + Math.random() * 0.26),
+          vx: (Math.random() - 0.5) * 0.16, a: 0.06 + Math.random() * 0.3, ph: Math.random() * TAU
+        });
+      }
+    }
+
+    function resize(){
+      const W = window.innerWidth, H = window.innerHeight;
+      S.W = W; S.H = H;
+      S.DPR = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(W * S.DPR);
+      cv.height = Math.round(H * S.DPR);
+      ctx.setTransform(S.DPR, 0, 0, S.DPR, 0, 0);
+      if(Math.abs(W - S.lastW) > 60 || !layers.length){ build(); S.lastW = W; }
+    }
+
+    function ridgeY(l, x, time){
+      const shift = (S.px - .5) * l.par - S.scroll * 0.10 * (4 - l.sp);
+      const u = (x - shift) / S.W;                     // 整数频率 => 左右无缝
+      let v = 0;
+      for(let i = 0; i < l.waves.length; i++){
+        const w = l.waves[i];
+        v += Math.sin(u * TAU * w.f + w.p + time * 0.02) * w.a;
+      }
+      return S.H * l.horizon - v * l.h * S.H * 0.34;
+    }
+
+    function drawLayer(l, time){
+      const W = S.W, H = S.H;
+      ctx.beginPath();
+      ctx.moveTo(-60, H + 60);
+      for(let x = -60; x <= W + 60; x += 7) ctx.lineTo(x, ridgeY(l, x, time));
+      ctx.lineTo(W + 60, H + 60);
+      ctx.closePath();
+
+      const g = ctx.createLinearGradient(0, H * l.horizon - H * l.h * 0.8, 0, H);
+      g.addColorStop(0, l.colA);
+      g.addColorStop(1, l.colB);
+      ctx.fillStyle = g;
+      ctx.fill();
+
+      ctx.save();
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = "rgba(22,24,28,.18)";
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawMist(time, group){
+      const W = S.W;
+      for(let i = 0; i < mists.length; i++){
+        if((i % 3) !== (group % 3)) continue;
+        const m = mists[i];
+        const x = ((m.x + time * m.v * 26) % (W + m.w * 2.2)) - m.w * 1.1;
+        const g = ctx.createRadialGradient(x, m.y, 0, x, m.y, m.w);
+        g.addColorStop(0, "rgba(247,242,232," + (m.a * 0.9).toFixed(3) + ")");
+        g.addColorStop(1, "rgba(247,242,232,0)");
+        ctx.save();
+        ctx.translate(x, m.y);
+        ctx.scale(1, (m.h / m.w) * 2.4);
+        ctx.translate(-x, -m.y);
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(x, m.y, m.w, 0, TAU);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function drawBirds(time){
+      ctx.save();
+      ctx.lineCap = "round";
+      for(let i = 0; i < birds.length; i++){
+        const b = birds[i];
+        const x = ((b.x + time * 16 * b.sp) % (S.W + 240)) - 120;
+        const y = b.y + Math.sin(time * b.bob + b.ph) * 9;
+        const flap = Math.sin(time * b.flap + b.ph) * 0.5 + 0.5;
+        ctx.strokeStyle = "rgba(28,32,40," + b.a.toFixed(3) + ")";
+        ctx.lineWidth = 1.3 * b.s;
+        ctx.beginPath();
+        ctx.moveTo(x - 10 * b.s, y + flap * 5 * b.s);
+        ctx.quadraticCurveTo(x, y - 5 * b.s + flap * 4 * b.s, x + 10 * b.s, y + flap * 5 * b.s);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawMotes(time){
+      for(let i = 0; i < motes.length; i++){
+        const m = motes[i];
+        m.x += m.vx; m.y += m.vy;
+        if(m.y < -12){ m.y = S.H + 12; m.x = Math.random() * S.W; }
+        if(m.x < -12) m.x = S.W + 12;
+        if(m.x > S.W + 12) m.x = -12;
+        const a = m.a * (0.55 + 0.45 * Math.sin(time * 1.1 + m.ph));
+        ctx.fillStyle = "rgba(34,38,46," + a.toFixed(3) + ")";
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, m.r, 0, TAU);
+        ctx.fill();
+      }
+    }
+
+    function frame(t){
+      const W = S.W, H = S.H;
+      S.px += (S.tpx - S.px) * 0.045;
+      S.py += (S.tpy - S.py) * 0.045;
+      ctx.clearRect(0, 0, W, H);
+
+      // 朱砂日（远景）
+      const sx = W * 0.75 + (S.px - .5) * 30;
+      const sy = H * 0.23 + (S.py - .5) * 16;
+      const pulse = 1 + Math.sin(t * 0.55) * 0.035;
+      const rg = ctx.createRadialGradient(sx, sy, 0, sx, sy, H * 0.36);
+      rg.addColorStop(0, "rgba(158,43,37,.20)");
+      rg.addColorStop(.32, "rgba(158,43,37,.07)");
+      rg.addColorStop(1, "rgba(158,43,37,0)");
+      ctx.fillStyle = rg;
+      ctx.beginPath(); ctx.arc(sx, sy, H * 0.36, 0, TAU); ctx.fill();
+      ctx.fillStyle = "rgba(158,43,37,.52)";
+      ctx.beginPath(); ctx.arc(sx, sy, H * 0.032 * pulse, 0, TAU); ctx.fill();
+
+      // 山峦 + 层间云雾
+      for(let i = 0; i < layers.length; i++){
+        drawLayer(layers[i], t);
+        drawMist(t, i);
+      }
+      drawBirds(t);
+      drawMotes(t);
+    }
+
+    window.addEventListener("resize", resize);
+    window.addEventListener("scroll", () => { S.scroll = window.scrollY; }, { passive: true });
+    window.addEventListener("pointermove", (e) => {
+      S.tpx = e.clientX / window.innerWidth;
+      S.tpy = e.clientY / window.innerHeight;
+      const gl = $("#glow");
+      if(gl){ gl.style.transform = "translate3d(" + e.clientX + "px," + e.clientY + "px,0)"; }
+    }, { passive: true });
+
+    resize();
+    if(reduce){ frame(0); } else { raf(frame); }
+  })();
+
+  /* =========================================================
+     四、墨迹跟随
+     ========================================================= */
+  (function inkTrail(){
+    if(reduce) return;
+    if(window.matchMedia("(hover: none)").matches) return;
+    const cv = $("#inkCursor");
+    if(!cv) return;
+    const ctx = cv.getContext("2d");
+    let w = 0, h = 0, dots = [], px = -1, py = -1;
+
+    function resize(){
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth; h = window.innerHeight;
+      cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    window.addEventListener("pointermove", (e) => {
+      if(px < 0){ px = e.clientX; py = e.clientY; return; }
+      const d = Math.hypot(e.clientX - px, e.clientY - py);
+      if(d > 4){
+        const fast = d > 55;
+        dots.push({
+          x: e.clientX, y: e.clientY,
+          r: (fast ? 8 : 5) + Math.random() * 6,
+          a: fast ? 0.10 : 0.20,
+          hue: Math.random() < 0.16
+        });
+        if(dots.length > 46) dots.shift();
+      }
+      px = e.clientX; py = e.clientY;
+    }, { passive: true });
+
+    raf(function(){
+      ctx.clearRect(0, 0, w, h);
+      for(let i = dots.length - 1; i >= 0; i--){
+        const d = dots[i];
+        d.a *= 0.955; d.r *= 0.985; d.y += 0.25; d.x += (Math.random() - .5) * 0.5;
+        if(d.a < 0.004){ dots.splice(i, 1); continue; }
+        const g = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, d.r);
+        const col = d.hue ? "158,43,37" : "26,30,38";
+        g.addColorStop(0, "rgba(" + col + "," + (d.a).toFixed(3) + ")");
+        g.addColorStop(.6, "rgba(" + col + "," + (d.a * 0.35).toFixed(3) + ")");
+        g.addColorStop(1, "rgba(" + col + ",0)");
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, TAU); ctx.fill();
+      }
+    });
+  })();
+
+  /* =========================================================
+     五、傅里叶级数（圆的叠合画双纽线）
+     ========================================================= */
+  (function fourier(){
+    const cv = $("#fourierCanvas");
+    if(!cv) return;
+    const ctx = cv.getContext("2d");
+    let w = 0, h = 0, scale = 1, epi = [], trail = [];
+
+    const N = 256, K = 34;
+    const pts = [];
+    for(let i = 0; i < N; i++){
+      const t = i / N * TAU;
+      const s = Math.sin(t), c = Math.cos(t), d = 1 + s * s;   // 双纽线
+      pts.push([c / d, (s * c) / d * 1.42]);
+    }
+    let maxR = 0;
+    pts.forEach(p => { const r = Math.hypot(p[0], p[1]); if(r > maxR) maxR = r; });
+    pts.forEach(p => { p[0] /= maxR; p[1] /= maxR; });
+
+    // 离散傅里叶变换（复数：f = x + iy）
+    (function buildDFT(){
+      const list = [];
+      for(let k = -K; k <= K; k++){
+        let re = 0, im = 0;
+        for(let n = 0; n < N; n++){
+          const th = TAU * k * n / N;
+          const ct = Math.cos(th), st = Math.sin(th);
+          re += pts[n][0] * ct + pts[n][1] * st;
+          im += pts[n][1] * ct - pts[n][0] * st;
+        }
+        re /= N; im /= N;
+        const amp = Math.hypot(re, im);
+        if(amp > 1e-4) list.push({ k: k, re: re, im: im, amp: amp });
+      }
+      list.sort((a, b) => b.amp - a.amp);   // 大幅度的圆在外层，观感更好
+      epi = list;
+    })();
+
+    function resize(){
+      const r = cv.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = Math.max(200, r.width); h = Math.max(160, r.height);
+      cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      scale = Math.min(w * 0.30, h * 0.40);
+      trail = [];
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    function frame(t){
+      const p = (t * 0.00013) % 1;          // 一个周期约 7.7s
+      const cx = w / 2, cy = h / 2;
+      ctx.clearRect(0, 0, w, h);
+
+      // 层次网格
+      ctx.save();
+      ctx.strokeStyle = "rgba(22,24,28,.05)";
+      ctx.lineWidth = 1;
+      for(let x = (cx % 40); x < w; x += 40){ ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+      for(let y = (cy % 40); y < h; y += 40){ ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+      ctx.restore();
+
+      let x = cx, y = cy;
+      for(let i = 0; i < epi.length; i++){
+        const e = epi[i];
+        const rad = e.amp * scale;
+        const th = TAU * e.k * p;
+
+        if(rad > 1.4){
+          ctx.beginPath();
+          ctx.arc(x, y, rad, 0, TAU);
+          ctx.strokeStyle = "rgba(44,107,98," + (0.05 + Math.min(0.16, rad / (h * 1.6))).toFixed(3) + ")";
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+
+        const nx = x + (e.re * Math.cos(th) - e.im * Math.sin(th)) * scale;
+        const ny = y + (e.re * Math.sin(th) + e.im * Math.cos(th)) * scale;
+
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(nx, ny);
+        ctx.strokeStyle = "rgba(158,43,37,.26)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        x = nx; y = ny;
+      }
+
+      // 笔尖轨迹
+      trail.push([x, y]);
+      if(trail.length > 460) trail.shift();
+
+      if(trail.length > 2){
+        ctx.save();
+        ctx.lineJoin = "round"; ctx.lineCap = "round";
+        for(let i = 1; i < trail.length; i++){
+          const a = i / trail.length;
+          ctx.beginPath();
+          ctx.moveTo(trail[i - 1][0], trail[i - 1][1]);
+          ctx.lineTo(trail[i][0], trail[i][1]);
+          ctx.strokeStyle = i === trail.length - 1
+            ? "rgba(158,43,37,.95)"
+            : "rgba(22,24,28," + (a * a * 0.85).toFixed(3) + ")";
+          ctx.lineWidth = 0.6 + a * 2.1;
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      // 笔尖
+      const g = ctx.createRadialGradient(x, y, 0, x, y, 16);
+      g.addColorStop(0, "rgba(158,43,37,.55)");
+      g.addColorStop(1, "rgba(158,43,37,0)");
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(x, y, 16, 0, TAU); ctx.fill();
+      ctx.fillStyle = "#9e2b25";
+      ctx.beginPath(); ctx.arc(x, y, 2.4, 0, TAU); ctx.fill();
+    }
+
+    onceVisible(cv, () => { if(reduce){ frame(1200); } else { raf(frame); } });
+  })();
+
+  /* =========================================================
+     六、双缝干涉（波场 |ψ₁+ψ₂|²）
+     ========================================================= */
+  (function interference(){
+    const cv = $("#waveCanvas");
+    if(!cv) return;
+    const ctx = cv.getContext("2d");
+    const INK = [24, 28, 36];
+    let w = 0, h = 0, img = null;
+
+    function resize(){
+      const r = cv.getBoundingClientRect();
+      w = Math.max(80, Math.round(r.width / 3.4));
+      h = Math.max(60, Math.round(r.height / 3.4));
+      cv.width = w; cv.height = h;
+      img = ctx.createImageData(w, h);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    function frame(t){
+      const time = t * 0.0022;
+      const lam = Math.max(9, w * 0.055);          // 波长
+      const kk = TAU / lam;
+      const ax = w * 0.42, bx = w * 0.58, ay = h * 0.5, by = h * 0.5;
+      const d = img.data;
+
+      for(let y = 0; y < h; y++){
+        for(let x = 0; x < w; x++){
+          const r1 = Math.hypot(x - ax, y - ay) + 5;
+          const r2 = Math.hypot(x - bx, y - by) + 5;
+          // 相干叠加
+          const a = (Math.cos(kk * r1 - time) + Math.cos(kk * r2 - time)) * 0.5;
+          const inten = a * a;
+          const dx = x - w * 0.5, dy = y - h * 0.5;
+          const att = Math.exp(-(dx * dx + dy * dy) / (2 * Math.pow(w * 0.52, 2)));
+          let v = Math.pow(inten, 1.5) * (0.16 + 1.5 * att);
+          if(v > 1) v = 1;
+          const i4 = (y * w + x) * 4;
+          d[i4] = INK[0]; d[i4 + 1] = INK[1]; d[i4 + 2] = INK[2];
+          d[i4 + 3] = (v * 232) | 0;
+        }
+      }
+      ctx.putImageData(img, 0, 0);
+    }
+
+    onceVisible(cv, () => { if(reduce){ frame(900); } else { raf(frame); } });
+  })();
+
+  /* =========================================================
+     七、星轨公式环
+     ========================================================= */
+  (function orbit(){
+    const box = $("#orbit");
+    if(!box) return;
+    const syms = ["∑", "∫", "∂", "∇", "π", "ħ", "∞", "√"];
+    syms.forEach((s, i) => {
+      const el = document.createElement("span");
+      el.className = "sym";
+      el.style.setProperty("--a", (i * 45) + "deg");
+      el.innerHTML = "<i>" + s + "</i>";
+      box.appendChild(el);
+    });
+  })();
+
+  /* 年份 */
+  const y = $("#year");
+  if(y) y.textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
