@@ -50,7 +50,10 @@ node .tools/build.js cicada-song
 ```powershell
 node .tools/verify-math.js   # 用 KaTeX 预渲染全部公式，报告语法错误
 node .tools/check-site.js    # 检查链接、素材、风格引用、页面结构
+node .tools/audit.js         # 逐篇统计公式/图片，并检查正文是否残留 LaTeX 或 $ 定界符
 ```
+
+当前状态：**604 条公式全部渲染通过，0 处 LaTeX 残渣，167 条链接与 39 张图片全部可达。**
 
 ## 本地预览
 

@@ -118,12 +118,10 @@ function findMathSpans(text) {
     };
   }).sort((a, b) => a.start - b.start);
 
-  // 没被配对的定界符：按落单处理（不渲染，直接丢掉）
-  const used = new Set();
-  spans.forEach((s) => used.add(s.start));
+  // 没配上对的定界符：原样保留（宁可显示成普通文本，也不要吞掉正文）
   delims.forEach((d) => {
     if (!spans.some((s) => s.start === d.pos)) {
-      spans.push({ start: d.pos, end: d.pos + d.len, tex: null, block: d.block, ref: '', stray: true });
+      spans.push({ start: d.pos, end: d.pos + d.len, tex: null, block: d.block, ref: '', stray: true, keepDelims: true });
     }
   });
   return spans.sort((a, b) => a.start - b.start);
@@ -156,9 +154,6 @@ function mergeInlineMathLines(text) {
 function extractEqCards(text, store, stats) {
   const lines = text.split('\n');
   const out = [];
-  if (process.env.MD_DEBUG === '2') {
-    lines.forEach((l, n) => { if (/\.eq\b/.test(l)) console.log('[eqline]', n + 1, JSON.stringify(l)); });
-  }
   for (let i = 0; i < lines.length; i++) {
     const tl = lines[i].replace(/^[ \t]+/, '');
     if (!/^\.eq\b/.test(tl)) { out.push(lines[i]); continue; }
@@ -196,26 +191,31 @@ function extractEqCards(text, store, stats) {
 }
 
 /** 预先抽出 $$ / $$$ 行间公式，换成占位符（\u0004B<n>\u0004）
-    行级扫描：整行只有 $$$ 或 $$$ {#标签} 才算围栏，公式内部的行内 $ 不会被误判 */
+    行级扫描：整行只有 $$$（可带 {#标签}）才算围栏；收尾必须用同样长度的围栏，
+    否则会把后面的行内 $ 当成收尾，把整段正文吞进公式里。 */
 function extractBlockMath(text, store, stats) {
   const lines = text.split('\n');
-  const fenceRe = /^[ \t]*(\$\$\$?)([ \t]*\{#([^}]*)\})?[ \t]*$/;
-  const isFence = (l) => fenceRe.test(l);
+  const fenceRe = /^[ \t]*(\$\$+)[ \t]*(\{#([^}]*)\})?[ \t]*$/;
+  const fenceOf = (l) => {
+    const m = l.match(fenceRe);
+    return m ? { len: m[1].length, ref: m[3] || '' } : null;
+  };
   const out = [];
   for (let i = 0; i < lines.length; i++) {
-    const m = lines[i].match(fenceRe);
-    if (!m) { out.push(lines[i]); continue; }
-    // 往后找同样形式的收尾围栏
+    const open = fenceOf(lines[i]);
+    if (!open || open.len < 2) { out.push(lines[i]); continue; }
+    // 往后找"同样长度"的收尾围栏
     let close = -1;
     for (let j = i + 1; j < lines.length; j++) {
-      if (isFence(lines[j])) { close = j; break; }
+      const f = fenceOf(lines[j]);
+      if (f && f.len === open.len) { close = j; break; }
     }
     if (close < 0) { out.push(lines[i]); continue; }
     const body = lines.slice(i + 1, close).join('\n').trim();
     const looksMath = body.length < 400 && (/\\[a-zA-Z]|\^|_\{|[=<>]|\d/.test(body) || /^[\x00-\x7F\s]*$/.test(body));
     if (!body || !looksMath) { out.push(lines[i]); continue; }
     if (stats) stats.mathBlock++;
-    const ref = m[3] ? ` data-ref="${escapeAttr(m[3])}"` : '';
+    const ref = open.ref ? ` data-ref="${escapeAttr(open.ref)}"` : '';
     store.push(`<span class="math-block"${ref}>${escapeHtml(body)}</span>`);
     out.push(`\u0004B${store.length - 1}\u0004`);
     i = close;
@@ -226,10 +226,6 @@ function extractBlockMath(text, store, stats) {
 /** 把落单的 $ 定义符换成占位符，内容交给 KaTeX；返回已转义的 HTML */
 function protectMath(text, store) {
   const spans = findMathSpans(text);
-  if (process.env.MD_DEBUG === '2' && /u_0/.test(text)) {
-    console.log('[input]', JSON.stringify(text));
-    console.log('[spans]', JSON.stringify(spans.map((s) => ({ s: s.start, e: s.end, block: s.block, tex: (s.tex || '').slice(0, 50) }))));
-  }
   if (!spans.length) return text;
   let out = '';
   let cursor = 0;
@@ -241,7 +237,8 @@ function protectMath(text, store) {
       const cls = sp.block ? 'math-block' : 'math-inline';
       out += store(`<span class="${cls}"${attr}>${escapeHtml(sp.tex)}</span>`);
     }
-    // 落单的 $ 直接丢掉
+    // 没配上对的定界符：保留原样，避免吞掉后面的正文
+    if (sp.keepDelims) out += escapeHtml(text.slice(sp.start, sp.end));
     cursor = sp.end;
   }
   out += escapeHtml(text.slice(cursor));
@@ -251,9 +248,6 @@ function protectMath(text, store) {
 /** 行内 Markdown → HTML */
 function inline(text, ctx) {
   let s = String(text);
-  if (process.env.MD_DEBUG === '3' && s.indexOf('\u0000') >= 0) {
-    console.log('[inline-with-NUL]', JSON.stringify(s.slice(0, 120)));
-  }
   // 0. LaTeX 换行记号 → <br/>，先换成占位符，避免被转义
   s = s.replace(/\u0006/g, () => ctx.push('<br/>'));
   // 1. 先取出公式，避免内部字符被后续规则改写
@@ -326,7 +320,27 @@ function tidyMathHtml(html) {
   // 收尾修正：公式内容里不该再有 $ 定界符
   html = html.replace(/(<span class="math-(?:inline|block)"[^>]*>)([^<]*)(<\/span>)/g,
     (mm, a, inner, b) => a + inner.replace(/\$/g, '') + b);
+  // 最后清一遍"漏在正文里的 LaTeX 残渣"（公式容器与代码展板内部不动）
+  html = cleanTexResidue(html);
   return dropUnmatchedClosers(html, ['span', 'div', 'p', 'figure', 'li', 'ul', 'ol', 'td', 'tr', 'table', 'blockquote', 'h2', 'h3', 'h4']);
+}
+
+/** 把漏在正文里的零散 LaTeX 语法清掉（只处理非公式、非代码的文本片段） */
+function cleanTexResidue(html) {
+  const segments = html.split(/(<span class="math-(?:inline|block)"[\s\S]*?<\/span>|<pre\b[\s\S]*?<\/pre>|<code\b[\s\S]*?<\/code>)/);
+  let res = segments.map((seg, i) => {
+    if (i % 2 === 1) return seg;                        // 奇数下标是受保护片段
+    return seg
+      .replace(/\\\\/g, ' ')                            // LaTeX 换行残留
+      .replace(/\\[a-zA-Z@]+\s*(\[[^\]]*\])?/g, ' ')    // 命令名
+      .replace(/[{}]/g, '')                             // 残留花括号
+      .replace(/\$/g, ' ')                              // 漏在正文里的定界符（真公式已被抽成 span）
+      .replace(/[ \t]{2,}/g, ' ');
+  }).join('');
+  // 清掉只剩标点/空白的段落
+  res = res.replace(/<p>[\s&;]*<\/p>/g, '')
+    .replace(/<p>\s*(?:&[a-z]+;|[.,、，。；:：\s])*\s*<\/p>/g, '');
+  return res;
 }
 
 /** 丢掉没有对应开标签的收尾标签（只处理行内/块级白名单） */
@@ -366,10 +380,6 @@ function createContext(opts) {
       return `\u0000${store.length - 1}\u0000`;
     },
     restore(s) {
-      if (process.env.MD_DEBUG === '3') {
-        const found = (s.match(/\u0000(\d+)\u0000/g) || []);
-        if (found.length) console.log('[restore]', found.join(','), 'store=', store.length);
-      }
       return s.replace(/\u0000(\d+)\u0000/g, (m, n) => store[Number(n)] || '');
     }
   };
@@ -435,8 +445,8 @@ function convert(text, opts = {}) {
     .replace(/^\s*<!-+.*$/gm, '');
   // ---- 行内公式跨行时并成一行，避免换行把配对关系打乱 ----
   const merged = mergeInlineMathLines(String(text).replace(/\r\n?/g, '\n'));
-  const withoutEq = extractEqCards(merged, blockStore, stats);
-  const extracted = extractBlockMath(withoutEq, blockStore, stats);
+  const withoutEq = extractBlockMath(merged, blockStore, stats);
+  const extracted = extractEqCards(withoutEq, blockStore, stats);
   const lines = extracted
     .replace(/<!--[\s\S]*?-->/g, '')      // HTML 注释（QD 里用来注释掉整段内容）
     .replace(/!?-{2,}>?/g, '')            // QD 里 <!--- ... ---> 这种不完整注释的残留

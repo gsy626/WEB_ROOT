@@ -38,23 +38,23 @@
 <li>guoshaoyu</li>
 </ul>
 <h1 id="一道极值点偏移问题">一道极值点偏移问题</h1>
-<p><span class="math-inline">g(x) = -1 - x + \ln{x} + t</span></p>
-<p><span class="math-inline">g(x_1) = g(x_2) = 0</span></p>
-<p><strong>证明</strong>：<span class="math-inline">x_1 + x_2 &gt; t</span></p>
+<p><span class="math-inline">g(x) = -1 - x + \ln{x} + t</span> </p>
+<p><span class="math-inline">g(x_1) = g(x_2) = 0</span> </p>
+<p><strong>证明</strong>：<span class="math-inline">x_1 + x_2 &gt; t</span> </p>
 <p><strong>证</strong>：</p>
 <figure class="post-figure" style="width:80%"><img src="/content/shift-of-the-extremum-point/assets/image/fig.png" alt=" " style="width:80%" loading="lazy"/></figure>
-<p>图：<span class="math-inline">y = x - \ln{x} + 1</span> 与 <span class="math-inline">y = t</span></p>
+<p>图：<span class="math-inline">y = x - \ln{x} + 1</span> 与 <span class="math-inline">y = t</span> </p>
 <p>由 <span class="math-inline">g(x) = 0</span> 得：</p>
 <span class="math-block">-1 - x + \ln{x} + t = 0</span>
 <span class="math-block">\Leftrightarrow x + 1 - \ln{x} = t</span>
 <p>如图1所示。</p>
-<p>易得 <span class="math-inline">t &gt; 2</span>，不妨设 <span class="math-inline">0 &lt; x_1 &lt; 1 &lt; x_2</span>。</p>
+<p>易得 <span class="math-inline">t &gt; 2</span> ，不妨设 <span class="math-inline">0 &lt; x_1 &lt; 1 &lt; x_2</span> 。</p>
 <span class="math-block">\begin{aligned}
 &amp; x_1 + x_2 &gt; t \\
 \Leftrightarrow &amp; x_1 + x_2 &gt; x_1 + 1 - \ln{x_1} \\
 \Leftrightarrow &amp; x_2 + \ln{x_1} &gt; 1
 \end{aligned}</span>
-<p>设 <span class="math-inline">x_1 = x_1(t),\; x_2 = x_2(t)</span>，<span class="math-inline">h(t) = x_2 + \ln{x_1}</span>，则只需证 <span class="math-inline">h(t) &gt; 1</span>。</p>
+<p>设 <span class="math-inline">x_1 = x_1(t),\; x_2 = x_2(t)</span> ，<span class="math-inline">h(t) = x_2 + \ln{x_1}</span> ，则只需证 <span class="math-inline">h(t) &gt; 1</span> 。</p>
 <span class="math-block" data-ref="eq:a1">\begin{aligned}
 &amp; g(x_1) = -1 - x_1 + \ln{x_1} + t = 0 \\
 &amp; g(x_2) = -1 - x_2 + \ln{x_2} + t = 0
@@ -73,22 +73,22 @@
 &amp; x_1'(t) = \frac{1}{1 - \frac{1}{x_1}} = \frac{x_1}{x_1 - 1} \\
 &amp; x_2'(t) = \frac{1}{1 - \frac{1}{x_2}} = \frac{x_2}{x_2 - 1}
 \end{aligned}</span>
-<p>由 <span class="math-inline">h(t) = x_2 + \ln{x_1}</span>，对 <span class="math-inline">t</span> 求导：</p>
+<p>由 <span class="math-inline">h(t) = x_2 + \ln{x_1}</span> ，对 <span class="math-inline">t</span> 求导：</p>
 <span class="math-block" data-ref="eq:a5">\begin{aligned}
 h'(t) &amp;= x_2'(t) + \frac{x_1'(t)}{x_1} \\
 &amp;= \frac{x_2}{x_2 - 1} + \frac{\frac{x_1}{x_1 - 1}}{x_1} \\
 &amp;= \frac{x_2}{x_2 - 1} + \frac{1}{x_1 - 1} \\
 &amp;= \frac{x_1 x_2 - 1}{(x_1 - 1)(x_2 - 1)}
 \end{aligned}</span>
-<p>已得 <span class="math-inline">x_1 &lt; 1 &lt; x_2</span>，下证 <span class="math-inline">x_1 x_2 &lt; 1</span>。</p>
+<p>已得 <span class="math-inline">x_1 &lt; 1 &lt; x_2</span> ，下证 <span class="math-inline">x_1 x_2 &lt; 1</span> 。</p>
 <p>由</p>
 <span class="math-block">\begin{cases}
 t = 1 + x_1 - \ln{x_1} \\
 t = 1 + x_2 - \ln{x_2}
 \end{cases}</span>
 <p>上式减下式得：</p>
-<p><span class="math-inline">x_2 - x_1 = \ln{x_2} - \ln{x_1} = \ln{\frac{x_2}{x_1}}</span></p>
-<p>设 <span class="math-inline">p = \frac{x_2}{x_1} &gt; 1</span>，</p>
+<p><span class="math-inline">x_2 - x_1 = \ln{x_2} - \ln{x_1} = \ln{\frac{x_2}{x_1}}</span> </p>
+<p>设 <span class="math-inline">p = \frac{x_2}{x_1} &gt; 1</span> ，</p>
 <span class="math-block">\begin{cases}
 x_2 - x_1 = \ln{p} \\
 p = \frac{x_2}{x_1}
@@ -102,7 +102,7 @@ x_2 = \frac{1}{p-1} \ln{p}
 x_1 x_2 &amp;= \frac{p}{(p-1)^2} \ln^2{p} \\
 &amp;= \left( \frac{\sqrt{p}}{p-1} \ln{p} \right)^2
 \end{aligned}</span>
-<p>下证 <span class="math-inline">\frac{\sqrt{p}}{p-1} \ln{p} &lt; 1</span>。</p>
+<p>下证 <span class="math-inline">\frac{\sqrt{p}}{p-1} \ln{p} &lt; 1</span> 。</p>
 <span class="math-block" data-ref="eq:a7">\begin{aligned}
 &amp; \frac{\sqrt{p}}{p-1} \ln{p} &lt; 1 \\
 \Leftrightarrow &amp; \ln{p} &lt; \frac{p-1}{\sqrt{p}} \\
@@ -110,7 +110,7 @@ x_1 x_2 &amp;= \frac{p}{(p-1)^2} \ln^2{p} \\
 \Leftrightarrow &amp; 2\ln{q} &lt; \frac{q^2 - 1}{q} \\
 \Leftrightarrow &amp; 2\ln{q} - \frac{q^2 - 1}{q} &lt; 0
 \end{aligned}</span>
-<p>设 <span class="math-inline">m(q) = 2\ln{q} - \frac{q^2 - 1}{q}</span>，</p>
+<p>设 <span class="math-inline">m(q) = 2\ln{q} - \frac{q^2 - 1}{q}</span> ，</p>
 <span class="math-block">\begin{aligned}
 m'(q) &amp;= 2 \cdot \frac{1}{q} - 1 - \frac{1}{q^2} \\
 &amp;= \frac{2q - q^2 - 1}{q^2} \\
@@ -134,78 +134,78 @@ m'(q) &amp;= 2 \cdot \frac{1}{q} - 1 - \frac{1}{q^2} \\
 \end{aligned}</span>
 <p><strong>即证</strong></p>
 <h2 id="extra-1">附：LaTeX 双栏版 ji zhi dian pian yi.tex</h2>
-<p> g(x)=-1-x+ {x}+t</p>
-<p> g <span class="math-inline">x_1</span>=g<span class="math-inline">x_2</span>=0</p>
+<p> g(x)=-1-x+ x+t</p>
+<p> g <span class="math-inline">x_1</span> =g<span class="math-inline">x_2</span> =0</p>
 <p>证</p>
 <p> x_1+x_2&gt;t</p>
 <p>证:</p>
-<figure class="post-figure" style="width:320px"><figcaption>y=x- ln x</figcaption></figure>
-<p>&amp;amp;g<span class="math-inline">x</span>=0<br/>
-&amp;amp; -1-x+ {x}+t=0<br/>
-&amp;amp; x+1- {x}=t</p>
+<figure class="post-figure" style="width:320px"><figcaption> y=x- ln x</figcaption></figure>
+<p>&amp;amp;g<span class="math-inline">x</span> =0<br/>
+&amp;amp; -1-x+ x+t=0<br/>
+&amp;amp; x+1- x=t</p>
 <p>如图1</p>
-<p>易得<span class="math-inline">t&gt;2</span>, 不妨设<span class="math-inline">0&lt;x_1&lt;1&lt;x_2</span></p>
+<p>易得<span class="math-inline">t&gt;2</span> , 不妨设<span class="math-inline">0&lt;x_1&lt;1&lt;x_2</span> </p>
 <p>\ &amp; x_1+x_2&gt;t<br/>
- &amp; x_1+x_2&gt;x_1+1- {x_1}<br/>
- &amp; x_2+ {x_1}&gt;{}1</p>
+ &amp; x_1+x_2&gt;x_1+1- x_1<br/>
+ &amp; x_2+ x_1&gt;1</p>
 <p>设</p>
 <p> x_1=x_1 ( t ),x_2=x_2 ( t )</p>
-<p> h<span class="math-inline">t</span>=x_2+ {x_1}</p>
+<p> h<span class="math-inline">t</span> =x_2+ x_1</p>
 <p>则只需证</p>
-<p> h<span class="math-inline">t</span>&amp;gt;1</p>
-<p>\ &amp;amp; g<span class="math-inline">x_1</span>=-1-x_1+ {x_1}+t=0<br/>
- \ &amp;amp; g<span class="math-inline">x_2</span>=-1-x_2+ {x_2}+t=0</p>
+<p> h<span class="math-inline">t</span> &amp;gt;1</p>
+<p>\ &amp;amp; g<span class="math-inline">x_1</span> =-1-x_1+ x_1+t=0<br/>
+ \ &amp;amp; g<span class="math-inline">x_2</span> =-1-x_2+ x_2+t=0</p>
 <p>即</p>
-<p>\ &amp; t=1+x_1- {x_1}<br/>
-\ &amp; t=1+x_2- {x_2}</p>
-<p>两侧对<span class="math-inline">t</span>求导</p>
-<p>\ &amp;amp; 1= <span class="math-inline">1- {1}{x_1}</span>x_1'<span class="math-inline">t</span><br/>
-\ &amp;amp; 1= <span class="math-inline">1- {1}{x_2}</span>x_2'<span class="math-inline">t</span></p>
-<p>\ &amp;amp; x_1'<span class="math-inline">t</span>= {1}{1- {1}{x_1} }= {x_1}{x_1-1}<br/>
-\ &amp;amp; x_2'<span class="math-inline">t</span>= {1}{1- {1}{x_2} }= {x_2}{x_2-1}</p>
-<p> h<span class="math-inline">t</span>=x_2+ {x_1}</p>
-<p>对<span class="math-inline">t</span>求导</p>
-<p>h'<span class="math-inline">t</span>=&amp;amp; x_2'<span class="math-inline">t</span>+ {x_1'<span class="math-inline">t</span>}{x_1} <br/>
-=&amp;amp; {x_2}{x_2-1}+ { {x_1}{x_1-1}}{x_1} <br/>
-=&amp;amp; {x_2}{x_2-1}+ {1}{x_1-1}<br/>
-=&amp;amp; {x_1x_2-1}{<span class="math-inline">x_1-1 x_2-1</span>}</p>
-<p>已得<span class="math-inline">x_1&lt;1{}, _2&gt;1</span>,下证明 <span class="math-inline">x_1x_2{ }&lt;{ }1</span></p>
-<p>t=1+x_1- {x_1}<br/>
-t=1+x_2- {x_2}</p>
+<p>\ &amp; t=1+x_1- x_1<br/>
+\ &amp; t=1+x_2- x_2</p>
+<p>两侧对<span class="math-inline">t</span> 求导</p>
+<p>\ &amp;amp; 1= <span class="math-inline">1- {1}{x_1}</span> x_1'<span class="math-inline">t</span> <br/>
+\ &amp;amp; 1= <span class="math-inline">1- {1}{x_2}</span> x_2'<span class="math-inline">t</span> </p>
+<p>\ &amp;amp; x_1'<span class="math-inline">t</span> = 11- 1x_1 = x_1x_1-1<br/>
+\ &amp;amp; x_2'<span class="math-inline">t</span> = 11- 1x_2 = x_2x_2-1</p>
+<p> h<span class="math-inline">t</span> =x_2+ x_1</p>
+<p>对<span class="math-inline">t</span> 求导</p>
+<p>h'<span class="math-inline">t</span> =&amp;amp; x_2'<span class="math-inline">t</span> + x_1'<span class="math-inline">t</span> x_1 <br/>
+=&amp;amp; x_2x_2-1+ x_1x_1-1x_1 <br/>
+=&amp;amp; x_2x_2-1+ 1x_1-1<br/>
+=&amp;amp; x_1x_2-1<span class="math-inline">x_1-1 x_2-1</span> </p>
+<p>已得<span class="math-inline">x_1&lt;1{}, _2&gt;1</span> ,下证明 <span class="math-inline">x_1x_2{ }&lt;{ }1</span> </p>
+<p>t=1+x_1- x_1<br/>
+t=1+x_2- x_2</p>
 <p>上式减下式得</p>
-<p> x_2-x_1 = {x_2}- {x_1}= { {x_2}{x_1}}</p>
-<p>设<span class="math-inline">p= {x_2}{x_1}</span>, <span class="math-inline">p&gt;1</span></p>
-<p>x_2-x_1 = {p} <br/>
-p= {x_2}{x_1}</p>
+<p> x_2-x_1 = x_2- x_1= x_2x_1</p>
+<p>设<span class="math-inline">p= {x_2}{x_1}</span> , <span class="math-inline">p&gt;1</span> </p>
+<p>x_2-x_1 = p <br/>
+p= x_2x_1</p>
 <p>得</p>
-<p>x_1= {p}{p-1} {p}<br/>
-x_2= {1}{p-1} {p}</p>
-<p>x_1x_2=&amp;amp; {p}{<span class="math-inline">p-1</span>^2} ^2{p}<br/>
-=&amp;amp; <span class="math-inline">{ {p}}{p-1} {p}</span>^2</p>
-<p>下证<span class="math-inline">{ {p}}{p-1} {p} &lt; 1</span></p>
-<p>&amp; { {p}}{p-1} {p} &lt; 1<br/>
-&amp; {p}&lt; {p-1}{ {p}}<br/>
-&amp; {设} q= {p}, q&gt;1<br/>
-&amp; 2 {q} &lt; {q^2-1}{q}<br/>
-&amp; 2 {q}- {q^2-1}{q}&lt;0</p>
-<p>设<span class="math-inline">m</span>q<span class="math-inline">= 2 {q}- {q^2-1}{q}</span></p>
-<p>	m' <span class="math-inline">q</span>&amp;amp;=2 {1}{q}-1- {1}{q^2}<br/>
-	&amp;amp;= {2q-q^2-1}{q^2}<br/>
-	&amp;amp;=- {<span class="math-inline">q-1</span>^2}{q^2} { }&amp;lt;0</p>
-<p> m<span class="math-inline">q</span> {在} <span class="math-inline">2,+</span>{ } <br/>
+<p>x_1= pp-1 p<br/>
+x_2= 1p-1 p</p>
+<p>x_1x_2=&amp;amp; p<span class="math-inline">p-1</span> ^2 ^2p<br/>
+=&amp;amp; <span class="math-inline">{ {p}}{p-1} {p}</span> ^2</p>
+<p>下证<span class="math-inline">{ {p}}{p-1} {p} &lt; 1</span> </p>
+<p>&amp; pp-1 p &lt; 1<br/>
+&amp; p&lt; p-1 p<br/>
+&amp; 设 q= p, q&gt;1<br/>
+&amp; 2 q &lt; q^2-1q<br/>
+&amp; 2 q- q^2-1q&lt;0</p>
+<p>设<span class="math-inline">m</span> q<span class="math-inline">= 2 {q}- {q^2-1}{q}</span> </p>
+<p>	m' <span class="math-inline">q</span> &amp;amp;=2 1q-1- 1q^2<br/>
+	&amp;amp;= 2q-q^2-1q^2<br/>
+	&amp;amp;=- <span class="math-inline">q-1</span> ^2q^2 &amp;lt;0</p>
+<p> m<span class="math-inline">q</span> 在 <span class="math-inline">2,+</span> <br/>
  q 2,m<span class="math-inline">q</span> 0<br/>
- q&amp;gt;0,{ }m<span class="math-inline">q</span>&amp;lt;0<br/>
- { {p}}{p-1} {p} &amp;lt; 1<br/>
- {由} <span class="math-inline">(a6)</span>,{ }x_1x_2&amp;lt;1</p>
-<p>&amp;amp; {由}<span class="math-inline">(a5)</span>,{ }h'<span class="math-inline">t</span>= {x_1x_2-1}{<span class="math-inline">x_1-1 x_2-1</span>}<br/>
-&amp;amp; x_1&amp;lt;1,{ }x_2&amp;gt;1,{ }x_1x_2&amp;lt;1<br/>
-&amp;amp; h'<span class="math-inline">t</span>&amp;gt;0<br/>
-&amp;amp;h<span class="math-inline">t</span> {在} <span class="math-inline">2,+</span> <br/>
-&amp;amp; {当}t 2<br/>
-&amp;amp;{ }x_1 1,{ }x_1 1,{ } {x_1} 0<br/>
-&amp;amp;h<span class="math-inline">t</span>=x_2+ {x_1} 1<br/>
-&amp;amp; t&amp;gt;2,h<span class="math-inline">t</span>&amp;gt;1<br/>
-&amp;amp; {即证}</p>
+ q&amp;gt;0, m<span class="math-inline">q</span> &amp;lt;0<br/>
+ pp-1 p &amp;lt; 1<br/>
+ 由 <span class="math-inline">(a6)</span> , x_1x_2&amp;lt;1</p>
+<p>&amp;amp; 由<span class="math-inline">(a5)</span> , h'<span class="math-inline">t</span> = x_1x_2-1<span class="math-inline">x_1-1 x_2-1</span> <br/>
+&amp;amp; x_1&amp;lt;1, x_2&amp;gt;1, x_1x_2&amp;lt;1<br/>
+&amp;amp; h'<span class="math-inline">t</span> &amp;gt;0<br/>
+&amp;amp;h<span class="math-inline">t</span> 在 <span class="math-inline">2,+</span> <br/>
+&amp;amp; 当t 2<br/>
+&amp;amp; x_1 1, x_1 1, x_1 0<br/>
+&amp;amp;h<span class="math-inline">t</span> =x_2+ x_1 1<br/>
+&amp;amp; t&amp;gt;2,h<span class="math-inline">t</span> &amp;gt;1<br/>
+&amp;amp; 即证</p>
     </article>
     <div class="post-source">
   <div>原始文稿（2 份）</div>

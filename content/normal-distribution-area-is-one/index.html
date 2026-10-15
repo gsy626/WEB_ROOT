@@ -36,11 +36,11 @@
     <article class="post-body">
 <h1 id="normal-distribution">normal distribution</h1>
 <figure class="post-figure" style="width:50%"><figcaption>Quarkdown</figcaption></figure>
-<h4 id="证明正态分布曲线与-x-轴围成的面积是1">证明正态分布曲线与<span class="math-inline">x</span>轴围成的面积是1</h4>
+<h4 id="证明正态分布曲线与-x-轴围成的面积是1">证明正态分布曲线与<span class="math-inline">x</span> 轴围成的面积是1</h4>
 <div class="eq-card"><span class="eq-label">正态分布函数</span><span class="math-inline">f(x)= \frac{1}{ \sigma \sqrt{2 \pi } }	e^{-	\frac{ \left( x-\mu \right)^2 }{ 2 \sigma ^2 }	}</span></div>
 <p>简单起见，这里只考虑标准正态分布</p>
 <div class="eq-card"><span class="eq-label">标准正态分布</span><span class="math-inline">f(x)= \frac{1}{ \sqrt{2 \pi } }	e^{-	\frac{ x^2 }{ 2 }	}</span></div>
-<p>设正态分布曲线与<span class="math-inline">x</span>轴围成的面积<span class="math-inline">S</span></p>
+<p>设正态分布曲线与<span class="math-inline">x</span> 轴围成的面积<span class="math-inline">S</span> </p>
 <div class="eq-card"><span class="math-inline">S = \int_{-\infty }^{+\infty}	f(x) d x</span></div>
 <p>下面进行一些操作</p>
 <span class="math-block">S^2 = S \cdot S = S \cdot \int_{-\infty }^{+\infty}	f(x) d x</span>
@@ -52,10 +52,10 @@
 <p>总结一下</p>
 <div class="callout callout-note"><span class="callout-title"><span class="math-block">S^2 =\int_{-\infty }^{+\infty}	\left(\int_{-\infty }^{+\infty} f(y) d y \right)\cdot f(x) d x</span></span>
 <span class="math-block">=\int_{-\infty }^{+\infty}	\int_{-\infty }^{+\infty}		\frac{1}{ 2 \pi  }	e^{	\frac{ x^2+y^2 }{ 2 }	}	 d y d x</span>
-<p> 设<span class="math-inline">g(x,y)= \frac{1}{ 2 \pi  }	e^{-	\frac{ x^2+y^2 }{ 2 }	}</span></p>
+<p> 设<span class="math-inline">g(x,y)= \frac{1}{ 2 \pi  }	e^{-	\frac{ x^2+y^2 }{ 2 }	}</span> </p>
 <div class="eq-card"><span class="math-inline">S^2 =\int_{-\infty }^{+\infty}	\int_{-\infty }^{+\infty}		g(x,y)	 d y d x</span></div>
 <figure class="post-figure" style="width:80%"><img src="/content/normal-distribution-area-is-one/assets/image/image1.png" alt="image1" style="width:80%" loading="lazy"/><figcaption>image1</figcaption></figure>
-<p> 它表示曲面<span class="math-inline">z = g(x,y)</span>与<span class="math-inline">x-y</span>平面所围成的体积</p>
+<p> 它表示曲面<span class="math-inline">z = g(x,y)</span> 与<span class="math-inline">x-y</span> 平面所围成的体积</p>
 <p> 下面建立极坐标系</p>
 <span class="math-block">\begin{cases}
  	x &amp;=  r \cos{ \theta } \\
@@ -63,7 +63,7 @@
  \end{cases}</span>
 <div class="callout callout-tip"><span class="callout-title">给高中生的提示</span>
 <figure class="post-figure" style="width:80%"><img src="/content/normal-distribution-area-is-one/assets/image/image2.png" alt="image2" style="width:80%" loading="lazy"/><figcaption>image2</figcaption></figure>
-<p> 面积微元<span class="math-inline">dS =	\frac{1}{2}	 (r+dr)^2  d\theta -		\frac{1}{2}	 r^2 d\theta</span></p>
+<p> 面积微元<span class="math-inline">dS =	\frac{1}{2}	 (r+dr)^2  d\theta -		\frac{1}{2}	 r^2 d\theta</span> </p>
 <span class="math-block">dS =	rdrd\theta	+\frac{1}{2} (dr)^2d\theta</span>
 <p> 忽略高阶小量</p>
 <span class="math-block">dS=  	rdrd\theta</span>

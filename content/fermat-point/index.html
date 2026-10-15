@@ -40,9 +40,9 @@
 <figure class="post-figure" style="width:50%"><figcaption>Quarkdown</figcaption></figure>
 <h3 id="1">1</h3>
 <span class="math-block">f(x,y)= \sum_{k=1}^{k=3} \sqrt{ (x-x_k)^2+(y-y_k)^2 }</span>
-<p><span class="math-inline">P(x,y)</span>不与<span class="math-inline">(x_k,y_k)</span>重合.</p>
-<p><span class="math-inline">\nabla =(f'_x ,f'_y) = \left( \sum_{k=1}^{k=3} \frac{	x-x_k	}{\sqrt{ (x-x_k)^2+(y-y_k)^2 }},\sum_{k=1}^{k=3} \frac{	y-y_k	}{\sqrt{ (x-x_k)^2+(y-y_k)^2 }} \right)</span>
-<span class="math-inline">\nabla=\sum_{k=1}^{k=3} \frac{ \overrightarrow{A_kP} }{\left| A_kP \right|}</span>
+<p><span class="math-inline">P(x,y)</span> 不与<span class="math-inline">(x_k,y_k)</span> 重合.</p>
+<p><span class="math-inline">\nabla =(f'_x ,f'_y) = \left( \sum_{k=1}^{k=3} \frac{	x-x_k	}{\sqrt{ (x-x_k)^2+(y-y_k)^2 }},\sum_{k=1}^{k=3} \frac{	y-y_k	}{\sqrt{ (x-x_k)^2+(y-y_k)^2 }} \right)</span> 
+<span class="math-inline">\nabla=\sum_{k=1}^{k=3} \frac{ \overrightarrow{A_kP} }{\left| A_kP \right|}</span> 
 设</p>
 <span class="math-block">f(x) =
 \begin{cases}
@@ -50,66 +50,66 @@
     &amp; \hat{b}=\frac{ \overrightarrow{A_kP} }{\left| A_kP \right|} (k=2) \\
     &amp; \hat{c}=\frac{ \overrightarrow{A_kP} }{\left| A_kP \right|} (k=3)
 \end{cases}</span>
-<p><span class="math-inline">\nabla=\hat{a}+\hat{b}+\hat{c}</span></p>
+<p><span class="math-inline">\nabla=\hat{a}+\hat{b}+\hat{c}</span> </p>
 <h3 id="2">2</h3>
 <div class="callout callout-tip"><span class="callout-title"><span class="math-block">\Delta f=\nabla \cdot \Delta \vec{r}=f'_x \Delta x+f'_y \Delta y</span></span>
-<p>函数在某点<span class="math-inline">Q</span>取最值，必要条件是该点<span class="math-inline">\nabla =\vec{0}</span></p>
-<p>令<span class="math-inline">\nabla=\hat{a}+\hat{b}+\hat{c}=\vec{0}</span></p>
+<p>函数在某点<span class="math-inline">Q</span> 取最值，必要条件是该点<span class="math-inline">\nabla =\vec{0}</span> </p>
+<p>令<span class="math-inline">\nabla=\hat{a}+\hat{b}+\hat{c}=\vec{0}</span> </p>
 <figure class="post-figure"><img src="/content/fermat-point/assets/image/image1.png" alt="" loading="lazy"/></figure>
-<p>三个单位向量之和为零向量，显然任意两单位向量夹角为<span class="math-inline">\frac{2\pi}{3}</span></p>
-<p>即该 <span class="math-inline">Q</span> 满足这样的条件:<span class="math-inline">\angle A_1QA_2=\angle A_2QA_3=\angle A_3QA_1=\frac{2\pi}{3}</span>.</p>
-<p>而且很容易知道,当三角形所有内角均小于<span class="math-inline">\frac{2\pi}{3}</span>时,<span class="math-inline">Q</span>点存在于三角形内部;当三角形有一内角大于等于<span class="math-inline">\frac{2\pi}{3}</span> 时,<span class="math-inline">P</span>点不存在.(有一内角大于<span class="math-inline">\frac{2\pi}{3}</span>的情况尤其明;当有一内角<span class="math-inline">A</span>等于<span class="math-inline">\frac{2\pi}{3}</span>时,似乎<span class="math-inline">P</span>在<span class="math-inline">A</span>点时条件成立,但函数定义域不包含<span class="math-inline">A</span>点,这在最后再进行分析.)</p>
-<h4 id="2-1-先分析-q-点存在的情况-三角形所有内角均小于-frac-2-pi-3">2.1 先分析<span class="math-inline">Q</span>点存在的情况,三角形所有内角均小于<span class="math-inline">\frac{2\pi}{3}</span></h4>
-<p>先由<span class="math-inline">\angle A_1QA_2=\angle A_2QA_3=\angle A_3QA_1=\frac{2\pi}{3}</span>求出<span class="math-inline">Q</span>,
-<strong>接着证明<span class="math-inline">Q</span>点是极小值点.</strong></p>
+<p>三个单位向量之和为零向量，显然任意两单位向量夹角为<span class="math-inline">\frac{2\pi}{3}</span> </p>
+<p>即该 <span class="math-inline">Q</span> 满足这样的条件:<span class="math-inline">\angle A_1QA_2=\angle A_2QA_3=\angle A_3QA_1=\frac{2\pi}{3}</span> .</p>
+<p>而且很容易知道,当三角形所有内角均小于<span class="math-inline">\frac{2\pi}{3}</span> 时,<span class="math-inline">Q</span> 点存在于三角形内部;当三角形有一内角大于等于<span class="math-inline">\frac{2\pi}{3}</span> 时,<span class="math-inline">P</span> 点不存在.(有一内角大于<span class="math-inline">\frac{2\pi}{3}</span> 的情况尤其明;当有一内角<span class="math-inline">A</span> 等于<span class="math-inline">\frac{2\pi}{3}</span> 时,似乎<span class="math-inline">P</span> 在<span class="math-inline">A</span> 点时条件成立,但函数定义域不包含<span class="math-inline">A</span> 点,这在最后再进行分析.)</p>
+<h4 id="2-1-先分析-q-点存在的情况-三角形所有内角均小于-frac-2-pi-3">2.1 先分析<span class="math-inline">Q</span> 点存在的情况,三角形所有内角均小于<span class="math-inline">\frac{2\pi}{3}</span> </h4>
+<p>先由<span class="math-inline">\angle A_1QA_2=\angle A_2QA_3=\angle A_3QA_1=\frac{2\pi}{3}</span> 求出<span class="math-inline">Q</span> ,
+<strong>接着证明<span class="math-inline">Q</span> 点是极小值点.</strong></p>
 <div class="callout callout-tip"><span class="callout-title">需要用到二元函数泰勒展开式</span>
 <span class="math-block">\Delta f=f(x_Q+\Delta x,y_Q+\Delta y)-f(x_Q,y_Q)</span>
 <span class="math-block">\Delta f=\left( f'_x \Delta x+f'_y \Delta y \right)+\frac{1}{2!} \left( f''_{x^2} {\Delta x}^2+2f''_{xy} \Delta x \Delta y+f''_{^2} {\Delta y}^2  \right)+ o \left( {\Delta x}^2+{\Delta y}^2 \right)</span>
-<p> 在<span class="math-inline">Q</span>点附近时,忽略最后一项并带入导数的值.</p>
+<p> 在<span class="math-inline">Q</span> 点附近时,忽略最后一项并带入导数的值.</p>
 <span class="math-block">\Delta f=\frac{1}{2!} \left( \frac{ (y_Q-y_k)^2}{\left((x_Q-x_k)^2+(y_Q-y_k)^2\right)^{\frac{3}{2}}} {\Delta x}^2-2\frac{ (x_Q-x_k)(y_Q-y_k)}{\left((x_Q-x_k)^2+(y_Q-y_k)^2\right)^{\frac{3}{2}}} \Delta x \Delta y+\frac{ (x_Q-x_k)^2}{\left((x_Q-x_k)^2+(y_Q-y_k)^2\right)^{\frac{3}{2}}}{\Delta y}^2  \right)</span>
 <span class="math-block">\Delta f=\frac{1}{2!}  \frac{\left(	(y_Q-y_k)\Delta x -	(x_Q-x_k) \Delta y \right)^2	}{\left((x_Q-x_k)^2+(y_Q-y_k)^2\right)^{\frac{3}{2}}}</span>
-<p><span class="math-inline">\Delta f=f(x_Q+\Delta x,y_Q+\Delta y)-f(x_Q,y_Q)</span>恒大于等于0,说明<span class="math-inline">Q</span>点周围的点对应函数值均大于等于<span class="math-inline">f(Q)</span>,即<span class="math-inline">Q</span>点为极小值点.</p>
-<p><strong>但这还不能说明<span class="math-inline">Q</span>点取函数最小值,还需要考虑定义域的边界位置(三个顶点).</strong></p>
-<p>以<span class="math-inline">A_1</span>点为例,
-在该顶点处,<span class="math-inline">f(A_1)</span>函数值显然存在,但<span class="math-inline">f'_x|_{A_1}</span>和<span class="math-inline">f'_y|_{A_1}</span>不存在,因为
-<span class="math-inline">\lim_{(x,y)\rightarrow (x_1,y_1)}\frac{	x-x_1	}{\sqrt{ (x-x_1)^2+(y-y_1)^2 }}, \lim_{(x,y)\rightarrow (x_1,y_1)}\frac{	y-y_1	}{\sqrt{ (x-x_1)^2+(y-y_1)^2 }}</span>不存在.</p>
-<p>为了确定<strong>这点附近</strong>的函数值变化情况,需要为点<span class="math-inline">P</span>确定一个运动方向. 使<span class="math-inline">P</span>点从<span class="math-inline">A_1</span>点开始沿一射线运动,运动方向用<span class="math-inline">\hat{v}</span>表示.
+<p><span class="math-inline">\Delta f=f(x_Q+\Delta x,y_Q+\Delta y)-f(x_Q,y_Q)</span> 恒大于等于0,说明<span class="math-inline">Q</span> 点周围的点对应函数值均大于等于<span class="math-inline">f(Q)</span> ,即<span class="math-inline">Q</span> 点为极小值点.</p>
+<p><strong>但这还不能说明<span class="math-inline">Q</span> 点取函数最小值,还需要考虑定义域的边界位置(三个顶点).</strong></p>
+<p>以<span class="math-inline">A_1</span> 点为例,
+在该顶点处,<span class="math-inline">f(A_1)</span> 函数值显然存在,但<span class="math-inline">f'_x|_{A_1}</span> 和<span class="math-inline">f'_y|_{A_1}</span> 不存在,因为
+<span class="math-inline">\lim_{(x,y)\rightarrow (x_1,y_1)}\frac{	x-x_1	}{\sqrt{ (x-x_1)^2+(y-y_1)^2 }}, \lim_{(x,y)\rightarrow (x_1,y_1)}\frac{	y-y_1	}{\sqrt{ (x-x_1)^2+(y-y_1)^2 }}</span> 不存在.</p>
+<p>为了确定<strong>这点附近</strong>的函数值变化情况,需要为点<span class="math-inline">P</span> 确定一个运动方向. 使<span class="math-inline">P</span> 点从<span class="math-inline">A_1</span> 点开始沿一射线运动,运动方向用<span class="math-inline">\hat{v}</span> 表示.
 这样,</p>
 <span class="math-block">\lim_{(x,y)\rightarrow (x_1,y_1)} \left( \frac{	x-x_1	}{\sqrt{ (x-x_1)^2+(y-y_1)^2 }}, \frac{	y-y_1	}{\sqrt{ (x-x_1)^2+(y-y_1)^2 }} \right)=
 \hat{v}</span>
 <span class="math-block">\lim_{(x,y)\rightarrow (x_1,y_1)}\nabla=
 \hat{a}+\hat{b}+\vec{v}</span>
 <figure class="post-figure"><img src="/content/fermat-point/assets/image/image2.png" alt="" loading="lazy"/></figure>
-<p><strong>下面证明当三角形内角小于<span class="math-inline">\frac{2\pi}{3}</span>时,顶点不是极值点.</strong></p>
-<p>取<span class="math-inline">P</span>点运动的方向<span class="math-inline">\hat{v}</span>与<span class="math-inline">\angle A_1</span>的角平分线平行. <em>在<span class="math-inline">A_1</span>点附近</em>,如图.</p>
+<p><strong>下面证明当三角形内角小于<span class="math-inline">\frac{2\pi}{3}</span> 时,顶点不是极值点.</strong></p>
+<p>取<span class="math-inline">P</span> 点运动的方向<span class="math-inline">\hat{v}</span> 与<span class="math-inline">\angle A_1</span> 的角平分线平行. <em>在<span class="math-inline">A_1</span> 点附近</em>,如图.</p>
 <figure class="post-figure"><img src="/content/fermat-point/assets/image/image3.png" alt="" loading="lazy"/></figure>
 <figure class="post-figure"><img src="/content/fermat-point/assets/image/image4.png" alt="" loading="lazy"/></figure>
 <ul>
 <li>当<span class="math-inline">P</span> 在三角形内部,
-<span class="math-inline">\Delta f=f(P)-f(A_1)=\nabla \cdot \Delta \vec{r}=\left( \hat{a}+\hat{b}+\hat{v} \right) \cdot \left| \vec{r} \right| \hat{v}=  \left| \vec{r} \right| \left( \left( \hat{a}+\hat{b} \right) \cdot \hat{v} +1 \right) =  \left| \vec{r} \right| \left(- \left| \hat{a}+\hat{b} \right| \cdot \left| \hat{v} \right| +1 \right)</span>.</li>
+<span class="math-inline">\Delta f=f(P)-f(A_1)=\nabla \cdot \Delta \vec{r}=\left( \hat{a}+\hat{b}+\hat{v} \right) \cdot \left| \vec{r} \right| \hat{v}=  \left| \vec{r} \right| \left( \left( \hat{a}+\hat{b} \right) \cdot \hat{v} +1 \right) =  \left| \vec{r} \right| \left(- \left| \hat{a}+\hat{b} \right| \cdot \left| \hat{v} \right| +1 \right)</span> .</li>
 </ul>
-<p>由夹角小于<span class="math-inline">\frac{2\pi}{3}</span>,得 <span class="math-inline">\left| \hat{a}+\hat{b} \right|&gt;1</span>,<span class="math-inline">\Delta f=f(P)-f(A_1)&lt;0</span>.</p>
+<p>由夹角小于<span class="math-inline">\frac{2\pi}{3}</span> ,得 <span class="math-inline">\left| \hat{a}+\hat{b} \right|&gt;1</span> ,<span class="math-inline">\Delta f=f(P)-f(A_1)&lt;0</span> .</p>
 <ul>
 <li>当<span class="math-inline">P</span> 在三角形外部,
-<span class="math-inline">\Delta f=f(P)-f(A_1)=\nabla \cdot \Delta \vec{r}=\left( \hat{a}+\hat{b}+\hat{v} \right) \cdot \left| \vec{r} \right| \hat{v}=  \left| \vec{r} \right| \left( \left( \hat{a}+\hat{b} \right) \cdot \hat{v} +1 \right) =  \left| \vec{r} \right| \left( \left| \hat{a}+\hat{b} \right| \cdot \left| \hat{v} \right| +1 \right)</span>.</li>
+<span class="math-inline">\Delta f=f(P)-f(A_1)=\nabla \cdot \Delta \vec{r}=\left( \hat{a}+\hat{b}+\hat{v} \right) \cdot \left| \vec{r} \right| \hat{v}=  \left| \vec{r} \right| \left( \left( \hat{a}+\hat{b} \right) \cdot \hat{v} +1 \right) =  \left| \vec{r} \right| \left( \left| \hat{a}+\hat{b} \right| \cdot \left| \hat{v} \right| +1 \right)</span> .</li>
 </ul>
-<p><span class="math-inline">\Delta f=f(P)-f(A_1)&gt;0</span>.</p>
-<p><span class="math-inline">P</span>点从<span class="math-inline">A_1</span>开始在附近沿角平分线直线运动,向内部运动时函数值小于<span class="math-inline">f(A_1)</span>,向外部运动时函数值大于<span class="math-inline">f(A_1)</span>,显然<span class="math-inline">A_1</span>点不会是极值点.
+<p><span class="math-inline">\Delta f=f(P)-f(A_1)&gt;0</span> .</p>
+<p><span class="math-inline">P</span> 点从<span class="math-inline">A_1</span> 开始在附近沿角平分线直线运动,向内部运动时函数值小于<span class="math-inline">f(A_1)</span> ,向外部运动时函数值大于<span class="math-inline">f(A_1)</span> ,显然<span class="math-inline">A_1</span> 点不会是极值点.
 同样地,所有顶点都不会是极值点.</p>
-<p>综合分析定义域内部极值点和定义域边界,<span class="math-inline">Q</span>点就是要求的最小值点.</p>
-<h4 id="2-2-分析-q-点不存在的情况-三角形有一内角大于等于-frac-2-pi-3">2.2 分析<span class="math-inline">Q</span>点不存在的情况,三角形有一内角大于等于<span class="math-inline">\frac{2\pi}{3}</span></h4>
+<p>综合分析定义域内部极值点和定义域边界,<span class="math-inline">Q</span> 点就是要求的最小值点.</p>
+<h4 id="2-2-分析-q-点不存在的情况-三角形有一内角大于等于-frac-2-pi-3">2.2 分析<span class="math-inline">Q</span> 点不存在的情况,三角形有一内角大于等于<span class="math-inline">\frac{2\pi}{3}</span> </h4>
 <ul>
-<li><span class="math-inline">Q</span>点不存在<span class="math-inline">\rightarrow</span>在定义域内部不存在极值点.</li>
-<li>由<span class="math-inline">2.1</span>得<span class="math-inline">\rightarrow</span>在内角小于<span class="math-inline">\frac{2\pi}{3}</span>的顶点处不是极值点.</li>
+<li><span class="math-inline">Q</span> 点不存在<span class="math-inline">\rightarrow</span> 在定义域内部不存在极值点.</li>
+<li>由<span class="math-inline">2.1</span> 得<span class="math-inline">\rightarrow</span> 在内角小于<span class="math-inline">\frac{2\pi}{3}</span> 的顶点处不是极值点.</li>
 </ul>
-<p>只需考虑内角大于等于<span class="math-inline">\frac{2\pi}{3}</span>的那一顶点.</p>
-<p>设该顶点为<span class="math-inline">A_1</span>,仍限制<span class="math-inline">P</span>从<span class="math-inline">A_1</span>出发沿某一射线在附近运动.下面任取运动方向<span class="math-inline">\hat{v}</span>,</p>
-<p><span class="math-inline">\Delta f=f(P)-f(A_1)=\nabla \cdot \Delta \vec{r}=\left( \hat{a}+\hat{b}+\hat{v} \right) \cdot \left| \vec{r} \right| \hat{v}=  \left| \vec{r} \right| \left( \left( \hat{a}+\hat{b} \right) \cdot \hat{v} +1 \right)</span>
-<span class="math-inline">=   \left| \vec{r} \right| \left( \left| \hat{a}+\hat{b} \right| \cos{\theta} +1 \right)</span>
-<span class="math-inline">\theta</span>为<span class="math-inline">\hat{a}+\hat{b}</span>与<span class="math-inline">\hat{v}</span>夹角.由<span class="math-inline">\hat{a}</span>与<span class="math-inline">\hat{b}</span>夹角大于等于<span class="math-inline">\frac{2\pi}{3}</span>,
-<span class="math-inline">\Delta f=f(P)-f(A_1) =   \left| \vec{r} \right| \left( \left| \hat{a}+\hat{b} \right| \cos{\theta} +1 \right) \ge  \left| \vec{r} \right| \left(1 \cdot \left(- 1\right)+1 \right) =0</span></p>
-<p>在<span class="math-inline">A_1</span> 点周围,函数值<span class="math-inline">f(P)</span>均不小于 <span class="math-inline">f(P)</span>,故<span class="math-inline">A_1</span>是极小值点.
-综合分析,在三角形大于等于<span class="math-inline">\frac{2\pi}{3}</span>的内角处<span class="math-inline">f</span>取最小值.</p>
+<p>只需考虑内角大于等于<span class="math-inline">\frac{2\pi}{3}</span> 的那一顶点.</p>
+<p>设该顶点为<span class="math-inline">A_1</span> ,仍限制<span class="math-inline">P</span> 从<span class="math-inline">A_1</span> 出发沿某一射线在附近运动.下面任取运动方向<span class="math-inline">\hat{v}</span> ,</p>
+<p><span class="math-inline">\Delta f=f(P)-f(A_1)=\nabla \cdot \Delta \vec{r}=\left( \hat{a}+\hat{b}+\hat{v} \right) \cdot \left| \vec{r} \right| \hat{v}=  \left| \vec{r} \right| \left( \left( \hat{a}+\hat{b} \right) \cdot \hat{v} +1 \right)</span> 
+<span class="math-inline">=   \left| \vec{r} \right| \left( \left| \hat{a}+\hat{b} \right| \cos{\theta} +1 \right)</span> 
+<span class="math-inline">\theta</span> 为<span class="math-inline">\hat{a}+\hat{b}</span> 与<span class="math-inline">\hat{v}</span> 夹角.由<span class="math-inline">\hat{a}</span> 与<span class="math-inline">\hat{b}</span> 夹角大于等于<span class="math-inline">\frac{2\pi}{3}</span> ,
+<span class="math-inline">\Delta f=f(P)-f(A_1) =   \left| \vec{r} \right| \left( \left| \hat{a}+\hat{b} \right| \cos{\theta} +1 \right) \ge  \left| \vec{r} \right| \left(1 \cdot \left(- 1\right)+1 \right) =0</span> </p>
+<p>在<span class="math-inline">A_1</span> 点周围,函数值<span class="math-inline">f(P)</span> 均不小于 <span class="math-inline">f(P)</span> ,故<span class="math-inline">A_1</span> 是极小值点.
+综合分析,在三角形大于等于<span class="math-inline">\frac{2\pi}{3}</span> 的内角处<span class="math-inline">f</span> 取最小值.</p>
 </div>
 </div>
     </article>
