@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>椭圆的光学性质 · 个人项目博客</title>
+<meta name="description" content="证明椭圆焦点发出的光线经反射后必经另一焦点：证法一求导得法向量，证法二用梯度与等值线的垂直关系。"/>
+<meta name="generator" content="PERSONAL_PROJECTS → WEB_ROOT 静态博客生成器"/>
+<link rel="stylesheet" href="/style/base.css"/>
+<link rel="stylesheet" href="/style/math.css"/>
+<link rel="stylesheet" href="/style/vendor/katex/katex.min.css"/>
+</head>
+<body data-style="math">
+<nav class="site-nav">
+  <a class="brand" href="/index.html">PERSONAL&nbsp;PROJECTS</a>
+  <div class="nav-right">
+    <a class="nav-link" href="/index.html">全部博文</a>
+    <a class="nav-link" href="/index.html?style=casual">休闲随笔风格</a>
+    <a class="nav-link" href="/index.html?style=gallery">图鉴风格</a>
+  </div>
+</nav>
+
+<main class="post">
+  <header class="post-head wrap">
+    <p class="kicker">Elliptical optical properties</p>
+    <h1>椭圆的光学性质</h1>
+    <p class="subtitle">证明椭圆焦点发出的光线经反射后必经另一焦点：证法一求导得法向量，证法二用梯度与等值线的垂直关系。</p>
+    <div class="post-meta">
+    <span class="chip style-math">数理风格</span>
+    <time datetime="2026-06-15">2026-06-15</time>
+    <span>#解析几何</span><span>#向量</span><span>#梯度</span>
+  </div>
+  </header>
+  <div class="wrap">
+    
+    <article class="post-body">
+<p>2026/6/13</p>
+<figure class="post-figure" style="width:80%"><img src="/content/optical-properties-of-the-ellipse/assets/image/1.png" alt="椭圆光学性质示意图" style="width:80%" loading="lazy"/><figcaption>椭圆光学性质示意图</figcaption></figure>
+<p>我们知道椭圆具有这样的光学性质:
+ 由焦点<span class="math-inline">F_1</span>
+ 发出的一条光线<span class="math-inline">\bvec{F_1P}</span>,经椭圆面反射,出射光线经过
+另一焦点	<span class="math-inline">F_2</span></p>
+<p>即 
+入射光线为<span class="math-inline">\bvec{F_1P}</span>,出射光线为<span class="math-inline">\bvec{PF_2}</span></p>
+<p>光学性质有多样的证明方法,下面给出一种较为直接的证法</p>
+<p>欲证光学性质,只需证<span class="math-inline">P</span>点的法线平分<span class="math-inline">\angle F_1PF_2</span></p>
+<p>只需证<span class="math-inline">P</span>点的法向量<span class="math-inline">\vec{n}</span>与<span class="math-inline">\angle F_1PF_2</span>的角平分线共线</p>
+<p>设椭圆<span class="math-inline">C</span>焦点<span class="math-inline">F_1 \left( -c,0\right)</span>       <span class="math-inline">F_2 \left( c,0\right)</span></p>
+<p>长轴长为<span class="math-inline">2a</span></p>
+<p>椭圆上任意一点<span class="math-inline">P</span> <span class="math-inline">\left( x_0,y_0\right)</span> </p>
+<h4 id="求-angle-f_1pf_2-的角平分线s">求<span class="math-inline">\angle F_1PF_2</span>的角平分线S</h4>
+<figure class="post-figure" style="width:80%"><img src="/content/optical-properties-of-the-ellipse/assets/./image/2.png" alt="椭圆光学性质示意图2" style="width:80%" loading="lazy"/><figcaption>椭圆光学性质示意图2</figcaption></figure>
+<p>设<span class="math-inline">\vec{u}</span> 为<span class="math-inline">PF_1</span>的单位向量,<span class="math-inline">\vec{v}</span> 为<span class="math-inline">PF_2</span>的单位向量</p>
+<p><span class="math-inline">\vec{u}=\frac{\bvec{PF_1}}{\left| PF_1 \right| }</span> 
+<span class="math-inline">\vec{v}=\frac{\bvec{PF_2}}{\left| PF_2 \right| }</span>
+<span class="math-inline">\vec{w}=\vec{u}+\vec{v}</span></p>
+<p> 则<span class="math-inline">PADB</span>为菱形,<span class="math-inline">PD</span>为<span class="math-inline">PA</span>与<span class="math-inline">PB</span>的角平分线,
+即<span class="math-inline">\vec{w}</span>与<span class="math-inline">\angle F_1PF_2</span>的角平分线共线</p>
+<p><span class="math-inline">\vec{w}= \frac{\bvec{PF_1}}{\left| PF_1 \right| }+\frac{\bvec{PF_2}}{\left| PF_2 \right| }</span></p>
+<h4 id="求-p-点法向量-vec-n">求<span class="math-inline">P</span>点法向量<span class="math-inline">\vec{n}</span></h4>
+<p>先写出椭圆方程
+<span class="math-inline">\sqrt{\left( x+c \right) ^2+y ^2}+\sqrt{\left( x-c \right) ^2+y ^2}=2a</span></p>
+<h4 id="法一">法一</h4>
+<p> 两侧对<span class="math-inline">x</span>求导</p>
+<p><span class="math-inline">\frac{x+c}{\sqrt{\left( x+c \right) ^2+y ^2}}+\frac{y}{\sqrt{\left( x+c \right) ^2+y ^2}} \dfrac{dy}{dx}+\frac{x-c}{\sqrt{\left( x-c \right) ^2+y^2}}+\frac{y}{\sqrt{\left( x-c \right) ^2+y ^2}}\dfrac{dy}{dx}=0</span></p>
+<p>可以解得<span class="math-inline">\frac{dy}{dx}</span></p>
+<p> <span class="math-inline">P</span>点切线斜率为<span class="math-inline">\left. \frac{dy}{dx} \right| _{x=x_0}</span></p>
+<p>切线方向向量<span class="math-inline">\vec{l}= \left( 1,\left. \frac{dy}{dx} \right|  _{x=x_0} \right)</span> </p>
+<p>则</p>
+<p><span class="math-inline">\vec{n} =  \left( \left. \frac{dy}{dx} \right|  _{x=x_0},-1 \right)</span></p>
+<p><span class="math-inline">=  \left( \frac{x+c}{\sqrt{\left( x+c \right) ^2+y ^2}}+\frac{x-c}{\sqrt{\left( x-c \right) ^2+y^2}} , \frac{y}{\sqrt{\left( x+c \right) ^2+y ^2}}+\frac{y}{\sqrt{\left( x-c \right) ^2+y ^2}} \right)</span></p>
+<p><span class="math-inline">=\frac{\bvec{F_1P}}{\left|PF_1\right|}+\frac{\bvec{F_2P}}{\left| PF_2 \right| }</span></p>
+<h4 id="法二">法二</h4>
+<p>设<span class="math-inline">f \left( x,y\right) =\sqrt{\left( x+c \right) ^2+y ^2}+\sqrt{\left( x-c \right) ^2+y ^2}</span>
+ 则椭圆<span class="math-inline">C</span>是<span class="math-inline">f</span>的一条等值线</p>
+<p> 由<span class="math-inline">\nabla f</span>与<span class="math-inline">f \left( x,y\right)</span>等值线垂直</p>
+<p> 得</p>
+<span class="math-block">\begin{aligned}
+\vec{n} = &amp;\nabla f \\
+        = &amp; \left( f_x', f_y' \right) \\
+        = &amp; \left( \frac{x+c}{\sqrt{\left( x+c \right) ^2+y ^2}}+\frac{x-c}{\sqrt{\left( x-c \right) ^2+y^2}} , \frac{y}{\sqrt{\left( x+c \right) ^2+y ^2}} + \frac{y}{\sqrt{\left( x-c \right) ^2+y^2}} \right)  \\
+        = &amp;\frac{\overrightarrow{F_1P}}{\left|PF_1\right|}+\frac{\overrightarrow{F_2P}}{\left| PF_2 \right| }
+\end{aligned}</span>
+<h4 id="结论">结论</h4>
+<p>综上</p>
+<span class="math-block">\begin{aligned}
+		&amp;\vec{w}=\frac{\bvec{PF_1}}{\left| PF_1 \right| }+\frac{\bvec{PF_2}}{\left| PF_2 \right| } \\
+	&amp;\vec{n}=\frac{\bvec{F_1P}}{\left|PF_1\right|}+\frac{\bvec{F_2P}}{\left| PF_2 \right| }
+\end{aligned}</span>
+<p> 故
+<span class="math-inline">\vec{w} \parallel \vec{n}</span>光学性质得证</p>
+<h2 id="extra-1">附：LaTeX 草稿 椭圆光学性质.txt</h2>
+<p>图片1</p>
+<p>	我们知道椭圆具有这样的光学性质:
+	由焦点<span class="math-inline">F_1</span> 发出的一条光线<span class="math-inline">{F_1P}</span>,经椭圆面反射,出射光线经过
+另一焦点	<span class="math-inline">F_2</span></p>
+<p>即
+入射光线为<span class="math-inline">{F_1P}</span>,出射光线为<span class="math-inline">{PF_2}</span></p>
+<p>光学性质有多样的证明方法,下面给出一种较为直接的证法</p>
+<p>欲证光学性质,只需证<span class="math-inline">P</span>点的法线平分<span class="math-inline">F_1PF_2</span></p>
+<p>只需证<span class="math-inline">P</span>点的法向量<span class="math-inline">{n}</span>与<span class="math-inline">F_1PF_2</span>的角平分线共线</p>
+<p>设椭圆<span class="math-inline">C</span>焦点<span class="math-inline">F_1 ( -c,0 )</span> <span class="math-inline">F_2 ( c,0 )</span>
+ , 长轴长为<span class="math-inline">2a</span></p>
+<p>椭圆上任意一点P</p>
+<p> ( x_0,y_0 ) {求 F_1PF_2的角平分线}</p>
+
+<p>设<span class="math-inline">{u}</span> 为<span class="math-inline">PF_1</span>的单位向量,<span class="math-inline">{v}</span> 为<span class="math-inline">PF_2</span>的单位向量</p>
+<p>则<span class="math-inline">PADB</span>为菱形,<span class="math-inline">PD</span>为<span class="math-inline">PA</span>与<span class="math-inline">PB</span>的角平分线,
+即<span class="math-inline">{w}</span>与<span class="math-inline">F_1PF_2</span>的角平分线共线</p>
+<p> {求<span class="math-inline">P</span>点法向量<span class="math-inline">{n}</span>}
+先写出椭圆方程</p>
+<p> {法一}</p>
+<p>	则</p>
+<p> {法二}
+设</p>
+<p> f left( x,y right) = sqrt( x+c right) ^2+y ^2+</p>
+<p> 则椭圆<span class="math-inline">C</span>是<span class="math-inline">f</span>的一条等值线</p>
+<p> 由<span class="math-inline">f</span>与<span class="math-inline">f ( x,y )</span>等值线垂直</p>
+<p> 得</p>
+<p> {结论}
+综上</p>
+<p> 故</p>
+<p> vec w textfractionsolidus textfractionsolidus vec n
+ 光学性质得证</p>
+    </article>
+    <div class="post-source">
+  <div>原始文稿（2 份）</div>
+  <div>· Quarkdown 主文档 main.qd &nbsp;<span class="muted">PERSONAL_PROJECTS/qd/2026-6-15=Elliptical Optical Properties/main.qd</span></div>
+<div>· LaTeX 草稿 椭圆光学性质.txt &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/Optical Properties of Ellipse/椭圆光学性质.txt</span></div>
+</div>
+    <div class="post-nav"><a href="/content/shift-of-the-extremum-point/index.html">← 上一篇 一道极值点偏移问题</a><a href="/content/charged-particles-in-combined-fields/index.html">下一篇 → 复合场中带电粒子的运动</a></div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div>由 <code>PERSONAL_PROJECTS/tex</code> 与 <code>PERSONAL_PROJECTS/qd</code> 的原始文稿转换生成 · 公式由 KaTeX 渲染</div>
+</footer>
+<button class="to-top" type="button" aria-label="返回顶部">↑</button>
+<script src="/style/vendor/katex/katex.min.js"></script>
+<script src="/style/blog.js"></script>
+</body>
+</html>

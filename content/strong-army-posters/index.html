@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>强军主题海报 · 个人项目博客</title>
+<meta name="description" content="军训小组作业：以深红与鎏金为主色的 A3 横版海报，六幅插图矩阵 + 放射光芒 + 四角装饰，全部由 TikZ 绘制。"/>
+<meta name="generator" content="PERSONAL_PROJECTS → WEB_ROOT 静态博客生成器"/>
+<link rel="stylesheet" href="/style/base.css"/>
+<link rel="stylesheet" href="/style/gallery.css"/>
+<link rel="stylesheet" href="/style/vendor/katex/katex.min.css"/>
+</head>
+<body data-style="gallery">
+<nav class="site-nav">
+  <a class="brand" href="/index.html">PERSONAL&nbsp;PROJECTS</a>
+  <div class="nav-right">
+    <a class="nav-link" href="/index.html">全部博文</a>
+    <a class="nav-link" href="/index.html?style=math">数理风格</a>
+    <a class="nav-link" href="/index.html?style=casual">休闲随笔风格</a>
+  </div>
+</nav>
+
+<main class="post">
+  <header class="post-head wrap">
+    <p class="kicker">Posters on the theme of a strong military</p>
+    <h1>强军主题海报</h1>
+    <p class="subtitle">军训小组作业：以深红与鎏金为主色的 A3 横版海报，六幅插图矩阵 + 放射光芒 + 四角装饰，全部由 TikZ 绘制。</p>
+    <div class="post-meta">
+    <span class="chip style-gallery">图鉴风格</span>
+    <time datetime="2026-10-14">2026-10-14（推断）</time>
+    <span>#海报</span><span>#TikZ</span><span>#国防教育</span>
+  </div>
+  </header>
+  <div class="wrap">
+    <nav class="toc"><div class="toc-title">目录</div><ol>
+<li class="toc-2"><a href="#figures">海报里的六幅插图</a></li>
+<li class="toc-2"><a href="#sources">源码</a></li>
+</ol></nav>
+    <article class="post-body">
+<figure class="poster-figure" data-zoom="1">
+      <img src="/content/strong-army-posters/assets/preview/poster4.png" alt="全民国防教育 · 强军有我" loading="lazy"/>
+      <figcaption>全民国防教育 · 强军有我 · A3 横版</figcaption>
+    </figure>
+<figure class="poster-figure" data-zoom="1">
+      <img src="/content/strong-army-posters/assets/preview/poster5.png" alt="建军百年 · 强军有我" loading="lazy"/>
+      <figcaption>建军百年 · 强军有我 · A3 横版</figcaption>
+    </figure>
+<h2 id="figures">海报里的六幅插图</h2>
+<div class="gallery-grid">
+<figure><img src="/content/strong-army-posters/assets/figures/tank.png" alt="陆战铁甲" loading="lazy"/><figcaption>陆战铁甲</figcaption></figure>
+<figure><img src="/content/strong-army-posters/assets/figures/missile.png" alt="大国长剑" loading="lazy"/><figcaption>大国长剑</figcaption></figure>
+<figure><img src="/content/strong-army-posters/assets/figures/ship.png" alt="向海图强" loading="lazy"/><figcaption>向海图强</figcaption></figure>
+<figure><img src="/content/strong-army-posters/assets/figures/jet.png" alt="制空雄鹰" loading="lazy"/><figcaption>制空雄鹰</figcaption></figure>
+<figure><img src="/content/strong-army-posters/assets/figures/emblem.png" alt="军魂永驻" loading="lazy"/><figcaption>军魂永驻</figcaption></figure>
+<figure><img src="/content/strong-army-posters/assets/figures/logo.png" alt="忠诚担当" loading="lazy"/><figcaption>忠诚担当</figcaption></figure>
+</div>
+<h2 id="sources">源码</h2>
+<details class="code-drawer">
+      <summary><span class="drawer-title">全民国防教育 · 强军有我</span><span class="drawer-meta">poster4.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass[12pt]{article}
+\usepackage[a3paper,landscape,margin=0pt]{geometry}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[fontset=fandol]{ctex}
+\usetikzlibrary{positioning,calc,fadings,decorations.pathmorphing,shadows}
+
+% 优先用 PNG（已转换好的），fallback 到 jpg 和绝对路径
+\graphicspath{{images_png/}{images/}{/home/ubuntu/Projects/poster4/images_png/}}
+
+\definecolor{deepred}{HTML}{B01B22}
+\definecolor{gold}{HTML}{D4AF37}
+\definecolor{darkbg}{HTML}{1A1A1A}
+
+\pagestyle{empty}
+
+\begin{document}
+\begin{tikzpicture}[remember picture, overlay]
+
+% ========== 背景 ==========
+\fill[darkbg] (current page.south west) rectangle (current page.north east);
+
+\begin{scope}
+  \clip (current page.south west) rectangle (current page.north east);
+  \foreach \x in {-5,0,...,60}{
+    \fill[white, opacity=0.02]
+      ($(current page.south west)+(\x,0)$) rectangle ++(1.2,30);
+  }
+\end{scope}
+
+% ========== 顶部标题 ==========
+\node[anchor=north] at ($(current page.north)+(0,-1.0)$) {
+  \begin{tikzpicture}
+    \node[fill=deepred, rounded corners=4pt, inner sep=14pt,
+          drop shadow={shadow xshift=3pt, shadow yshift=-3pt, black, opacity=0.6}]
+          (titlebox) {
+      \sffamily\bfseries\color{white}\fontsize{60}{68}\selectfont
+      全民国防教育 · 强军有我
+    };
+    \node[below=6pt of titlebox, text=gold,
+          font=\sffamily\fontsize{22}{26}\selectfont] {
+      增强国防观念 \quad|\quad 履行国防义务 \quad|\quad 共筑钢铁长城
+    };
+  \end{tikzpicture}
+};
+
+% ========== 中部六图矩阵（PNG） ==========
+\coordinate (gridcenter) at ($(current page.center)+(0,-1.2)$);
+
+\foreach \file/\cap/\xpos/\ypos in {%
+  {tank.png}/{陆战铁甲}/{-9.1}/{3.4},%
+  {missile.png}/{大国长剑}/{0}/{3.4},%
+  {ship.png}/{向海图强}/{9.1}/{3.4},%
+  {jet.png}/{制空雄鹰}/{-9.1}/{-3.4},%
+  {emblem.png}/{军魂永驻}/{0}/{-3.4},%
+  {logo.png}/{忠诚担当}/{9.1}/{-3.4}%
+}{%
+  \begin{scope}[shift={($(gridcenter)+(\xpos cm,\ypos cm)$)}]
+    \node[inner sep=0pt] (pic) {%
+      \includegraphics[width=8.5cm,height=6cm,keepaspectratio]{\file}%
+    };
+    \draw[gold, line width=1.5pt, rounded corners=2pt]
+      (pic.south west) rectangle (pic.north east);
+    \node[anchor=south, fill=deepred, text=white, opacity=0.92,
+          text opacity=1, minimum width=8.5cm, inner sep=5pt,
+          font=\sffamily\bfseries\fontsize{20}{24}\selectfont]
+      at (pic.south) {\cap};
+  \end{scope}
+}
+
+% ========== 底部标语 ==========
+\node[anchor=south] at ($(current page.south)+(0,1.0)$) {
+  \begin{tikzpicture}
+    \node[fill=gold, text=darkbg, rounded corners=3pt, inner sep=10pt,
+          font=\sffamily\bfseries\fontsize{26}{30}\selectfont] {
+      强国必须强军 \quad 军强才能国安
+    };
+  \end{tikzpicture}
+};
+
+% ========== 四角装饰 ==========
+\foreach \corner/\rx/\ry in {
+  south west/0/0, south east/1/0, north west/0/1, north east/1/1
+}{
+  \begin{scope}[shift={(current page.\corner)}]
+    \pgfmathsetmacro\sx{\rx==0?1:-1}
+    \pgfmathsetmacro\sy{\ry==0?1:-1}
+    \draw[gold, line width=3pt]
+      (0.4*\sx,0.4*\sy) -- (2.2*\sx,0.4*\sy) -- (2.2*\sx,1.4*\sy);
+    \draw[deepred, line width=1.5pt]
+      (0.7*\sx,0.7*\sy) -- (1.6*\sx,0.7*\sy) -- (1.6*\sx,1.1*\sy);
+  \end{scope}
+}
+
+\end{tikzpicture}
+\end{document}</code></pre>
+      </div>
+    </details>
+<details class="code-drawer">
+      <summary><span class="drawer-title">建军百年 · 强军有我</span><span class="drawer-meta">poster5.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass[12pt]{article}
+\usepackage[a3paper,landscape,margin=0pt]{geometry}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage[fontset=fandol]{ctex}
+\usetikzlibrary{positioning,calc,fadings,decorations.pathmorphing,shadows}
+
+% 优先用 PNG（已转换好的），fallback 到 jpg 和绝对路径
+\graphicspath{{images_png/}{images/}{/home/ubuntu/Projects/poster4/images_png/}}
+
+\definecolor{deepred}{HTML}{B01B22}
+\definecolor{gold}{HTML}{D4AF37}
+\definecolor{darkbg}{HTML}{1A1A1A}
+
+% 新增第二个背景所需的颜色
+\definecolor{bgdeepred}{RGB}{139,0,0}
+\definecolor{bggold}{RGB}{255,215,0}
+\definecolor{bgbrightgold}{RGB}{255,240,150}
+
+\pagestyle{empty}
+
+\begin{document}
+	\begin{tikzpicture}[remember picture, overlay]
+
+		% ========== 背景（来自第二个文档的风格） ==========
+		% 深红底色
+		\fill[bgdeepred] (current page.south west) rectangle (current page.north east);
+
+		% 同心圆
+		\fill[red!50!black, opacity=0.55] (current page.center) circle (34);
+		\fill[red!60!black, opacity=0.45] (current page.center) circle (26);
+		\fill[red!70!black, opacity=0.35] (current page.center) circle (18);
+
+		% 顶部横向条纹
+		\foreach \i in {0,0.5,...,6} {
+			\fill[red!75!black, opacity={0.05+0.06*\i}]
+			($(current page.north west)+(0,-\i*1.2)$) rectangle ($(current page.north east)+(0,-\i*1.2-0.6)$);
+		}
+
+		% 顶部光晕
+		\fill[red!95!black, opacity=0.45] (current page.north) circle (23);
+		\fill[red!98!black, opacity=0.35] (current page.north) circle (15);
+
+		% 放射光芒
+		\foreach \angle in {0,15,...,345} {
+			\draw[bggold!25!red, line width=0.6pt, opacity=0.35]
+			(current page.center) -- ++(\angle:47);
+		}
+		\foreach \angle in {7.5,22.5,...,352.5} {
+			\draw[bggold!40!red, line width=1.2pt, opacity=0.18]
+			(current page.center) -- ++(\angle:42);
+		}
+		\foreach \angle in {200,210,...,340} {
+			\draw[bgbrightgold, line width=0.5pt, opacity=0.25]
+			(current page.north) -- ++(\angle:31);
+		}
+
+		% 金色粒子
+		\foreach \x/\y/\r in {
+			5.78/27.84/0.09, 11.81/26.98/0.08, 30.19/27.47/0.11, 36.23/26.61/0.08,
+			3.94/20.42/0.08, 38.06/20.79/0.09, 7.35/15.47/0.06, 34.65/15.10/0.08,
+			4.73/9.28/0.08, 37.28/9.65/0.06, 8.40/11.76/0.06, 33.60/11.39/0.08,
+			14.44/22.89/0.08, 27.56/22.52/0.06, 17.85/28.22/0.08, 24.15/27.84/0.09,
+			11.03/3.96/0.06, 30.98/4.33/0.08, 6.56/6.44/0.06, 35.44/6.81/0.08,
+			9.98/17.57/0.06, 32.03/17.94/0.08, 13.65/12.99/0.06, 28.35/13.37/0.06
+		} {
+			\fill[bgbrightgold, opacity=0.85] (\x,\y) circle (\r);
+		}
+
+		% ========== 顶部标题 ==========
+		\node[anchor=north] at ($(current page.north)+(0,-1.0)$) {
+			\begin{tikzpicture}
+				\node[fill=deepred, rounded corners=4pt, inner sep=14pt,
+				drop shadow={shadow xshift=3pt, shadow yshift=-3pt, black, opacity=0.6}]
+				(titlebox) {
+					\sffamily\bfseries\color{white}\fontsize{60}{68}\selectfont
+					建军百年 · 强军有我
+				};
+				\node[below=6pt of titlebox, text=gold,
+				font=\sffamily\fontsize{22}{26}\selectfont] {
+					增强国防观念 \quad|\quad 履行国防义务 \quad|\quad 共筑钢铁长城
+				};
+			\end{tikzpicture}
+		};
+
+		% ========== 中部六图矩阵（PNG） ==========
+		\coordinate (gridcenter) at ($(current page.center)+(0,-1.2)$);
+
+		\foreach \file/\cap/\xpos/\ypos in {%
+			{tank.png}/{陆战铁甲}/{-9.1}/{3.4},%
+			{missile.png}/{大国长剑}/{0}/{3.4},%
+			{ship.png}/{向海图强}/{9.1}/{3.4},%
+			{jet.png}/{制空雄鹰}/{-9.1}/{-3.4},%
+			{emblem.png}/{军魂永驻}/{0}/{-3.4},%
+			{logo.png}/{忠诚担当}/{9.1}/{-3.4}%
+		}{%
+			\begin{scope}[shift={($(gridcenter)+(\xpos cm,\ypos cm)$)}]
+				\node[inner sep=0pt] (pic) {%
+					\includegraphics[width=8.5cm,height=6cm,keepaspectratio]{\file}%
+				};
+				\draw[gold, line width=1.5pt, rounded corners=2pt]
+				(pic.south west) rectangle (pic.north east);
+				\node[anchor=south, fill=deepred, text=white, opacity=0.92,
+				text opacity=1, minimum width=8.5cm, inner sep=5pt,
+				font=\sffamily\bfseries\fontsize{20}{24}\selectfont]
+				at (pic.south) {\cap};
+			\end{scope}
+		}
+
+		% ========== 底部标语 ==========
+		\node[anchor=south] at ($(current page.south)+(0,1.0)$) {
+			\begin{tikzpicture}
+				\node[fill=gold, text=darkbg, rounded corners=3pt, inner sep=10pt,
+				font=\sffamily\bfseries\fontsize{26}{30}\selectfont] {
+					强国必须强军 \quad 军强才能国安
+				};
+			\end{tikzpicture}
+		};
+		% ========== 右下角签名 ==========
+		\node[anchor=south east, text=gold,
+		font=\sffamily\fontsize{10}{10}\selectfont]
+		at ($(current page.south east)+(-1.8cm,1.2cm)$) {
+			8A619
+		};
+		% ========== 四角装饰 ==========
+		\foreach \corner/\rx/\ry in {
+			south west/0/0, south east/1/0, north west/0/1, north east/1/1
+		}{
+			\begin{scope}[shift={(current page.\corner)}]
+				\pgfmathsetmacro\sx{\rx==0?1:-1}
+				\pgfmathsetmacro\sy{\ry==0?1:-1}
+				\draw[gold, line width=3pt]
+				(0.4*\sx,0.4*\sy) -- (2.2*\sx,0.4*\sy) -- (2.2*\sx,1.4*\sy);
+				\draw[deepred, line width=1.5pt]
+				(0.7*\sx,0.7*\sy) -- (1.6*\sx,0.7*\sy) -- (1.6*\sx,1.1*\sy);
+			\end{scope}
+		}
+
+	\end{tikzpicture}
+\end{document}</code></pre>
+      </div>
+    </details>
+    </article>
+    <div class="post-source">
+  <div>原始文稿（3 份）</div>
+  <div>· README.md &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/poster/README.md</span></div>
+<div>· poster4/poster4.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/poster/poster4/poster4.tex</span></div>
+<div>· poster5/poster5.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/poster/poster5/poster5.tex</span></div>
+</div>
+    <div class="post-nav"><a href="/content/deepseek-wallpapers/index.html">← 上一篇 DeepSeek 制作的壁纸</a><span></span></div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div>由 <code>PERSONAL_PROJECTS/tex</code> 与 <code>PERSONAL_PROJECTS/qd</code> 的原始文稿转换生成 · 公式由 KaTeX 渲染</div>
+</footer>
+<button class="to-top" type="button" aria-label="返回顶部">↑</button>
+<script src="/style/vendor/katex/katex.min.js"></script>
+<script src="/style/blog.js"></script>
+</body>
+</html>

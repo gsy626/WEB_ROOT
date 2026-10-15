@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>八省联考压轴题的另一种写法 · 个人项目博客</title>
+<meta name="description" content="围绕 h(x)=√(x+45)−√(x+5) 与迭代数列 x_{n+1}=g(x_n)，构造三条夹逼直线完成放缩，证明 [Σxᵢ]=4n。"/>
+<meta name="generator" content="PERSONAL_PROJECTS → WEB_ROOT 静态博客生成器"/>
+<link rel="stylesheet" href="/style/base.css"/>
+<link rel="stylesheet" href="/style/math.css"/>
+<link rel="stylesheet" href="/style/vendor/katex/katex.min.css"/>
+</head>
+<body data-style="math">
+<nav class="site-nav">
+  <a class="brand" href="/index.html">PERSONAL&nbsp;PROJECTS</a>
+  <div class="nav-right">
+    <a class="nav-link" href="/index.html">全部博文</a>
+    <a class="nav-link" href="/index.html?style=casual">休闲随笔风格</a>
+    <a class="nav-link" href="/index.html?style=gallery">图鉴风格</a>
+  </div>
+</nav>
+
+<main class="post">
+  <header class="post-head wrap">
+    <p class="kicker">Finale of the eight-province joint exam</p>
+    <h1>八省联考压轴题的另一种写法</h1>
+    <p class="subtitle">围绕 h(x)=√(x+45)−√(x+5) 与迭代数列 x_{n+1}=g(x_n)，构造三条夹逼直线完成放缩，证明 [Σxᵢ]=4n。</p>
+    <div class="post-meta">
+    <span class="chip style-math">数理风格</span>
+    <time datetime="2026-06-21">2026-06-21（推断）</time>
+    <span>#数列</span><span>#放缩法</span><span>#夹逼</span>
+  </div>
+  </header>
+  <div class="wrap">
+    <nav class="toc"><div class="toc-title">目录</div><ol>
+<li class="toc-3"><a href="#g-x-性质">g(x)性质</a></li>
+<li class="toc-3"><a href="#背景">背景</a></li>
+<li class="toc-3"><a href="#构造直线">构造直线</a></li>
+<li class="toc-3"><a href="#放缩">放缩</a></li>
+</ol></nav>
+    <article class="post-body">
+<p><span class="math-inline">h(x)= {x+45}- {x+5}</span>
+求 <span class="math-inline">[ ^{n}_{1}x_{i}]</span></p>
+<h3 id="g-x-性质">g(x)性质</h3>
+<p><span class="math-inline">g^{ }(x)= {1}{2 {x+45}}- {1}{2 {x+5}}</span>
+<span class="math-inline">g^{ }(x)=- {1}{4(x+45)^{3/2}} + {1}{4(x+5)^{3/2}}&gt;0</span></p>
+<p><span class="math-inline">x&gt;0</span>时，g(x) textuparrow g(x)下凸</p>
+<h3 id="背景">背景</h3>
+<p>由第一问得 3.9&amp;lt;x xiab 2n &amp;lt;4.0
+ , 4.0&amp;lt;x xiab 2n=1 &amp;lt;4.1
+发现<span class="math-inline">|x_{n}-4|</span> 且 0</p>
+<h3 id="构造直线">构造直线</h3>
+<p><span class="math-inline">g^{ }(4)=- {2}{21}</span></p>
+<p>构造3条直线：</p>
+<p> a(x)=- {2}{21}(x-4)+4</p>
+<p> a(x)=- {1}{4}(x-4)+4</p>
+<p> a(x)=-k(x-4)+4</p>
+<p>易证：</p>
+<p> 0&lt;x&lt;4,a(x)&lt;g(x)&lt;b(x) (01)</p>
+<p> 4&lt;x&lt;5,a(x)&lt;g(x)&lt;c(x) (02)</p>
+<h3 id="放缩">放缩</h3>
+<p><span class="math-inline">0&lt;x_{2k}&lt;4</span> 且<span class="math-inline">(01)</span></p>
+<p><span class="math-inline">a(x_{2k})&lt;g(x_{2k})&lt;b(x_{2k})</span></p>
+<p><span class="math-inline">a(x)</span></p>
+<p><span class="math-inline">a(x_{2k})&gt;a(4)=4</span></p>
+<p><span class="math-inline">g(x_{2k})=x_{2k+1}</span></p>
+<p><span class="math-inline">4&lt;a(x_{2k})&lt;x_{2k+1}&lt;b(x_{2k})</span></p>
+<p>即</p>
+<ul>
+<li>{2}{21}(x_{2k}-4)+4&lt;x_{2k+1}&lt;- {1}{4}(x_{2k}-4)+4 (1)</li>
+</ul>
+<p>令<span class="math-inline">k=1</span></p>
+<ul>
+<li>{2}{21}(x_{2}-4)&lt;x_{3}-4&lt;- {1}{4}(x_{2}-4) (7)</li>
+</ul>
+<p> be 0&lt;X&lt;4,c(x)&gt;g(x)&gt;a(x)</p>
+<p><span class="math-inline">c(a(x_{2k}))&gt;g(a(x_{2k})) , g(x_{2k+1})&gt;a(x_{2k=1})</span></p>
+<p><span class="math-inline">c,g,a</span></p>
+<p> so g(a(x_ 2k ))&gt;
+g(x_ 2k+1 ),a(x xiab 2k+1 )&gt;a(b(x xiab 2k ))</p>
+<p><span class="math-inline">c(a(x_{2k}))&gt;g(x_{2k+1})&gt;a(b(x_{2k}))</span></p>
+<p>即
+-2/21[-1/4(x xiab 2k -4)]+4
+&lt;x xiab 2k+2 &lt;
+-k[-2/21(x xiab 2k-4 )]+4</p>
+<p> {1}{42}(x_{2k}-4)&lt;x_{2k+2}-4&lt; {2}{21}k(x_{2k-4})(2)</p>
+<p> frac 1 1-1/42 (x xiab 2 -4)
+&lt; frac 1-( frac 1 42 )^ n 1- frac 1 42 (x xiab 2 -4)
+&lt; sigm 1 n x xiab 2k -4
+&lt; frac 1-( frac 2k 21 )^ n 1- frac 2k 21 (x xiab 2 -4)
+&lt;(x xiab 2 -4)</p>
+<p>即
+ frac 1 1-1/42 (x xiab 2 -4)&lt;
+ sigm 1 n x xiab 2k -4
+&lt;(x xiab 2 -4) (3)</p>
+<p>类似的，可得</p>
+<ul>
+<li>{2}{21}(x_{2k-1}-4)+4&lt;x_{2k}&lt;-k(x_{2k-1}-4)+4 ()</li>
+</ul>
+<p>令<span class="math-inline">k=1</span></p>
+<ul>
+<li>{2}{21}(x_{1}-4)&lt;x_{2}-4&lt;-k(x_{1}-4) (9)</li>
+</ul>
+<p> frac 1 1-1/42 (x xiab 3 -4)</p>
+<blockquote><p>frac 1-( frac 1 42 )^ n 1- frac 1 42 (x xiab 3 -4)
+sigm 1 n x xiab 2k+1 -4
+frac 1-( frac 2k 21 )^ n 1- frac 2k 21 (x xiab 3 -4)
+(x xiab 3 -4)</p></blockquote>
+<p>即
+ frac 1 1-1/42 (x xiab 3 -4)&gt;
+ sigm 1 n x xiab 2k+1 -4</p>
+<blockquote><p>(x xiab 3 -4) (6)</p></blockquote>
+<p>由<span class="math-inline">(3)(6)</span></p>
+<p>(x xiab 3 -4)+ frac 1 1-1/42 (x xiab 2 -4)&lt;
+ sigm 2 n x xiab i -4&lt;
+ frac 1 1-1/42 (x xiab 3 -4)+(x xiab 2 -4)</p>
+<p>由<span class="math-inline">(7)</span></p>
+<p>(- frac 2 21 + frac 1 1- frac 1 42 )(x xiab 2 -4)
+&lt; sigm 2 n x xiab i -4&lt;
+( frac 1 1- frac 1 42 (- frac 1 4 )+1)(x xiab 2 -4)</p>
+<p><span class="math-inline">0&lt;- {2}{21}+ {1}{1- {1}{42}}&lt;1</span>且<span class="math-inline">(x_{2}-4)&lt;0</span></p>
+<p> so (- frac 2 21 + frac 1 1- frac 1 42 )(x xiab 2 -4)&gt;
+(x xiab 2 -4)</p>
+<p><span class="math-inline">{1}{1- {1}{42}}(- {1}{4})+1&gt;0</span>且<span class="math-inline">(x_{2}-4)&lt;0</span></p>
+<p><span class="math-inline">( {1}{1- {1}{42}}(- {1}{4})+1)(x_{2}-4)&lt;0</span></p>
+<p>得
+(x xiab 2 -4)&lt;
+ sigm 2 n x xiab i -4
+&lt;0</p>
+<p>由<span class="math-inline">(9)</span></p>
+<ul>
+<li>frac 2 21 (x xiab 1 -4)&lt;
+sigm 2 n x xiab i -4</li>
+</ul>
+<p>&lt;0
+即</p>
+<ul>
+<li>frac 2 21 &lt;
+sigm 2 n x xiab i -4</li>
+</ul>
+<p>&lt;0</p>
+
+<ul>
+<li>frac 2 21 &lt;</li>
+</ul>
+<p>( sigm 2 n x xiab i )-4(n-1)
+&lt;0</p>
+<ul>
+<li>frac 2 21 +4(n-1)&lt;</li>
+</ul>
+<p>( sigm 2 n x xiab i )
+&lt;4(n-1)</p>
+<p>1- frac 2 21 +4n&lt;
+( sigm 2 n x xiab i )+5
+&lt;4n+1</p>
+<p>1- frac 2 21 +4n&lt;
+ sigm 1 n x xiab i
+&lt;4n+1</p>
+
+<p> [ ^{n}_{1}x_{i}]= 4n</p>
+    </article>
+    <div class="post-source">
+  <div>原始文稿（1 份）</div>
+  <div>· LaTeX 源文件 八省联考压轴题.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/八省联考压轴/八省联考压轴题.tex</span></div>
+</div>
+    <div class="post-nav"><a href="/content/thoughts-on-the-distance-function/index.html">← 上一篇 有关距离函数的思考</a><a href="/content/28-tone-temperament-line-groups/index.html">下一篇 → 28 音律线组的 LaTeX 排版</a></div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div>由 <code>PERSONAL_PROJECTS/tex</code> 与 <code>PERSONAL_PROJECTS/qd</code> 的原始文稿转换生成 · 公式由 KaTeX 渲染</div>
+</footer>
+<button class="to-top" type="button" aria-label="返回顶部">↑</button>
+<script src="/style/vendor/katex/katex.min.js"></script>
+<script src="/style/blog.js"></script>
+</body>
+</html>

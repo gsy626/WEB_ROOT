@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>高中数学试卷排版模板 · 个人项目博客</title>
+<meta name="description" content="从题干到选项再到答题卡的完整试卷模板：自定义 \choices 选项宏、页脚、标题双横线与题目分区。"/>
+<meta name="generator" content="PERSONAL_PROJECTS → WEB_ROOT 静态博客生成器"/>
+<link rel="stylesheet" href="/style/base.css"/>
+<link rel="stylesheet" href="/style/math.css"/>
+<link rel="stylesheet" href="/style/vendor/katex/katex.min.css"/>
+</head>
+<body data-style="math">
+<nav class="site-nav">
+  <a class="brand" href="/index.html">PERSONAL&nbsp;PROJECTS</a>
+  <div class="nav-right">
+    <a class="nav-link" href="/index.html">全部博文</a>
+    <a class="nav-link" href="/index.html?style=casual">休闲随笔风格</a>
+    <a class="nav-link" href="/index.html?style=gallery">图鉴风格</a>
+  </div>
+</nav>
+
+<main class="post">
+  <header class="post-head wrap">
+    <p class="kicker">High school maths exam paper templates</p>
+    <h1>高中数学试卷排版模板</h1>
+    <p class="subtitle">从题干到选项再到答题卡的完整试卷模板：自定义 \choices 选项宏、页脚、标题双横线与题目分区。</p>
+    <div class="post-meta">
+    <span class="chip style-math">数理风格</span>
+    <time datetime="2026-06-14">2026-06-14</time>
+    <span>#LaTeX 模板</span><span>#试卷排版</span>
+  </div>
+  </header>
+  <div class="wrap">
+    <nav class="toc"><div class="toc-title">目录</div><ol>
+<li class="toc-2"><a href="#extra-1">附：示例 shijuan-example.tex</a></li>
+<li class="toc-2"><a href="#printable">可打印原件</a></li>
+</ol></nav>
+    <article class="post-body">
+<p> 清苑一中2026届高一年级六月供题</p>
+<p> 数 学</p>
+<p> begin minipage [b] 0.5</p>
+<p> 清苑一中高一数学组命制</p>
+<p> begin minipage [b] 0.5</p>
+<p> 2026.6</p>
+<p> 本卷共4页，19题，全卷满分150分。用时120分钟。</p>
+<p> 注意事项：</p>
+<ol>
+<li>选择题的作答：每小题选出答案后，用2B铅笔把答题卡上对应题目的答案标号涂黑。</li>
+<li>非选择题的作答：用黑色签字笔直接答在答题卡上对应的答题区域内。</li>
+</ol>
+<p> 一、单项选择题：本题共8小题，每小题5分，共40分。在每小题给出的四个选项中，只有一项是符合题目要求。</p>
+<ol>
+<li>若 <span class="math-inline">a, b</span> 为实数，且 <span class="math-inline">{a}{2+i} = b-i</span>，则 <span class="math-inline">a+b=</span></li>
+</ol>
+<ul>
+<li><strong>A.</strong> 7</li>
+<li><strong>B.</strong> 5</li>
+<li><strong>C.</strong> -5</li>
+<li><strong>D.</strong> -7</li>
+</ul>
+<p>1.</p>
+<ul>
+<li><strong>A.</strong></li>
+<li><strong>B.</strong></li>
+<li><strong>C.</strong></li>
+<li><strong>D.</strong></li>
+</ul>
+<p>1.</p>
+<ul>
+<li><strong>A.</strong></li>
+<li><strong>B.</strong></li>
+<li><strong>C.</strong></li>
+<li><strong>D.</strong></li>
+</ul>
+<p>1.</p>
+<ul>
+<li><strong>A.</strong></li>
+<li><strong>B.</strong></li>
+<li><strong>C.</strong></li>
+<li><strong>D.</strong></li>
+</ul>
+<p>1.</p>
+<ul>
+<li><strong>A.</strong></li>
+<li><strong>B.</strong></li>
+<li><strong>C.</strong></li>
+<li><strong>D.</strong></li>
+</ul>
+<p> 二、多项选择题：本题共3小题，每小题6分，共18分。在每小题给出的选项中，有多项符合题目要求。全部选对的得6分，部分选对的得部分分，有选错的得0分。</p>
+<ol>
+<li>在 <span class="math-inline">(2x - {1}{x})^2 (x^2 + 2)</span> 的展开式中，含 <span class="math-inline">x^2</span> 项的系数为</li>
+</ol>
+<ul>
+<li><strong>A.</strong> 240</li>
+<li><strong>B.</strong> -240</li>
+<li><strong>C.</strong> 80</li>
+<li><strong>D.</strong> -80</li>
+</ul>
+<p>1.</p>
+<ul>
+<li><strong>A.</strong></li>
+<li><strong>B.</strong></li>
+<li><strong>C.</strong></li>
+<li><strong>D.</strong></li>
+</ul>
+<p>1.</p>
+<ul>
+<li><strong>A.</strong></li>
+<li><strong>B.</strong></li>
+<li><strong>C.</strong></li>
+<li><strong>D.</strong></li>
+</ul>
+<p> 三、填空题：本题共3小题，每小题5分，共15分。</p>
+<ol>
+<li>已知向量 <span class="math-inline">{a} = (1, 2)</span>，<span class="math-inline">{b} = (3, -4)</span>，则 <span class="math-inline">{a} {b} =</span>&amp;lt;span class=&amp;quot;blank&amp;quot; style=&amp;quot;display:inline-block;min-width:3cm;border-bottom:1px solid currentColor&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;</li>
+<li>&lt;span class=&quot;blank&quot; style=&quot;display:inline-block;min-width:3cm;border-bottom:1px solid currentColor&quot;&gt;&lt;/span&gt;</li>
+<li>&lt;span class=&quot;blank&quot; style=&quot;display:inline-block;min-width:3cm;border-bottom:1px solid currentColor&quot;&gt;&lt;/span&gt;</li>
+</ol>
+<p> 四、解答题：本题共5小题，共77分。解答应写出文字说明、证明过程或演算步骤。</p>
+<ol>
+<li>(13分) 已知数列 <span class="math-inline">\{a_n\}</span> 的前 <span class="math-inline">n</span> 项和为 <span class="math-inline">S_n</span>，且 <span class="math-inline">S_n = 2a_n - 1</span>。</li>
+</ol>
+<ol>
+<li>( 分)</li>
+</ol>
+<ol>
+<li>( 分)</li>
+</ol>
+<ol>
+<li>( 分)</li>
+</ol>
+<ol>
+<li>( 分)</li>
+</ol>
+<h2 id="extra-1">附：示例 shijuan-example.tex</h2>
+<p> 清苑一中2026届高一年级六月供题</p>
+<p> 数 学</p>
+<p> begin minipage [b] 0.5</p>
+<p> 清苑一中高一数学组命制</p>
+<p> begin minipage [b] 0.5</p>
+<p> 2026.6</p>
+<p> 本卷共4页，19题，全卷满分150分。用时120分钟。</p>
+<p> 注意事项：</p>
+<ol>
+<li>选择题的作答：每小题选出答案后，用2B铅笔把答题卡上对应题目的答案标号涂黑。</li>
+<li>非选择题的作答：用黑色签字笔直接答在答题卡上对应的答题区域内。</li>
+</ol>
+<p> 一、单项选择题：本题共8小题，每小题5分，共40分。在每小题给出的四个选项中，只有一项是符合题目要求。</p>
+<ol>
+<li>若 <span class="math-inline">a, b</span> 为实数，且 <span class="math-inline">{a}{2+i} = b-i</span>，则 <span class="math-inline">a+b=</span></li>
+</ol>
+<ul>
+<li><strong>A.</strong> 7</li>
+<li><strong>B.</strong> 5</li>
+<li><strong>C.</strong> -5</li>
+<li><strong>D.</strong> -7</li>
+</ul>
+<ol>
+<li>若集合 <span class="math-inline">A = \{x _2 x &lt; 2\}</span>，<span class="math-inline">B = \{x x^2 - 2x - 3 0\}</span>，则 <span class="math-inline">A B =</span></li>
+</ol>
+<ul>
+<li><strong>A.</strong> <span class="math-inline">(0, 3]</span></li>
+<li><strong>B.</strong> <span class="math-inline">(0, 3)</span></li>
+<li><strong>C.</strong> <span class="math-inline">[-1, 3]</span></li>
+<li><strong>D.</strong> <span class="math-inline">[-1, 3)</span></li>
+</ul>
+<ol>
+<li>在 <span class="math-inline">ABC</span> 中，若 <span class="math-inline">AB = 8, AC = 5, BC = 7</span>，则 <span class="math-inline">C =</span></li>
+</ol>
+<ul>
+<li><strong>A.</strong> 0</li>
+<li><strong>B.</strong> <span class="math-inline">{1}{7}</span></li>
+<li><strong>C.</strong> <span class="math-inline">{1}{2}</span></li>
+<li><strong>D.</strong> <span class="math-inline">{11}{14}</span></li>
+</ul>
+<ol>
+<li>在平面直角坐标系中，<span class="math-inline">O</span> 为坐标原点，已知 <span class="math-inline">A(2, 0), B(0, 1)</span> 是两定点，<span class="math-inline">OC AB</span> 于 <span class="math-inline">C</span>，且 <span class="math-inline">{OC} = {OA} + {OB}</span>，则 <span class="math-inline">- =</span></li>
+</ol>
+<ul>
+<li><strong>A.</strong> -1</li>
+<li><strong>B.</strong> <span class="math-inline">- {3}{5}</span></li>
+<li><strong>C.</strong> <span class="math-inline">{3}{5}</span></li>
+<li><strong>D.</strong> 1</li>
+</ul>
+<ol>
+<li>某科技馆“人造太阳”模型外观为圆台形，上底面半径为0.8 m，下底面半径为1.2 m，圆台母线长为1.5 m，模型外侧面需要喷漆，则喷漆面积为</li>
+</ol>
+<ul>
+<li><strong>A.</strong> <span class="math-inline">{3 }{5} { m}^2</span></li>
+<li><strong>B.</strong> <span class="math-inline">{ m}^2</span></li>
+<li><strong>C.</strong> <span class="math-inline">3 { m}^2</span></li>
+<li><strong>D.</strong> <span class="math-inline">6 { m}^2</span></li>
+</ul>
+<p> 二、多项选择题：本题共3小题，每小题6分，共18分。在每小题给出的选项中，有多项符合题目要求。全部选对的得6分，部分选对的得部分分，有选错的得0分。</p>
+<ol>
+<li>在 <span class="math-inline">(2x - {1}{x})^2 (x^2 + 2)</span> 的展开式中，含 <span class="math-inline">x^2</span> 项的系数为</li>
+</ol>
+<ul>
+<li><strong>A.</strong> 240</li>
+<li><strong>B.</strong> -240</li>
+<li><strong>C.</strong> 80</li>
+<li><strong>D.</strong> -80</li>
+</ul>
+<ol>
+<li>在科技下乡的大趋势下，某果园使用一种智能水果分选机筛选某种水果，将该种水果分为大果和小果两类，该分选机把大果错误筛选为小果以及把小果错误筛选为大果的概率均为0.1，经过分选机筛选分类之后大果所占比例为0.58，则可推测该果园中这种水果里的大果所占的真实比例为</li>
+</ol>
+<ul>
+<li><strong>A.</strong> 0.55</li>
+<li><strong>B.</strong> 0.6</li>
+<li><strong>C.</strong> 0.65</li>
+<li><strong>D.</strong> 0.7</li>
+</ul>
+<ol>
+<li>若数列 <span class="math-inline">\{a_n\}</span> 中，<span class="math-inline">a_1 = 1</span>，<span class="math-inline">a_{n+1} = (a_n + 1) - {a_n}{a_n + 1}</span>，则</li>
+</ol>
+<ul>
+<li><strong>A.</strong> <span class="math-inline">a_{2025} &gt; a_{2026} &gt; a_{2025} + 1</span></li>
+<li><strong>B.</strong> <span class="math-inline">a_{2025} &lt; a_{2026} &lt; a_{2025} + 1</span></li>
+<li><strong>C.</strong> <span class="math-inline">a_{2025} &gt; a_{2026} &gt; a_{2025}</span></li>
+<li><strong>D.</strong> <span class="math-inline">a_{2025} &lt; a_{2026} &lt; a_{2025}</span></li>
+</ul>
+<p> 三、填空题：本题共3小题，每小题5分，共15分。</p>
+<ol>
+<li>已知向量 <span class="math-inline">{a} = (1, 2)</span>，<span class="math-inline">{b} = (3, -4)</span>，则 <span class="math-inline">{a} {b} =</span>&amp;lt;span class=&amp;quot;blank&amp;quot; style=&amp;quot;display:inline-block;min-width:3cm;border-bottom:1px solid currentColor&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;</li>
+<li>在 <span class="math-inline">ABC</span> 中，角 <span class="math-inline">A, B, C</span> 的对边分别为 <span class="math-inline">a, b, c</span>，若 <span class="math-inline">a = 2</span>，<span class="math-inline">b = 3</span>，<span class="math-inline">B = {3}{4}</span>，则 <span class="math-inline">A =</span>&amp;lt;span class=&amp;quot;blank&amp;quot; style=&amp;quot;display:inline-block;min-width:3cm;border-bottom:1px solid currentColor&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;</li>
+<li>已知函数 <span class="math-inline">f(x) = x^3 - 3x</span>，则 <span class="math-inline">f(x)</span> 在区间 <span class="math-inline">[0, 2]</span> 上的最大值为&amp;lt;span class=&amp;quot;blank&amp;quot; style=&amp;quot;display:inline-block;min-width:3cm;border-bottom:1px solid currentColor&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;</li>
+</ol>
+<p> 四、解答题：本题共5小题，共77分。解答应写出文字说明、证明过程或演算步骤。</p>
+<ol>
+<li>(13分) 已知数列 <span class="math-inline">\{a_n\}</span> 的前 <span class="math-inline">n</span> 项和为 <span class="math-inline">S_n</span>，且 <span class="math-inline">S_n = 2a_n - 1</span>。</li>
+</ol>
+<ol>
+<li>(15分) 在 <span class="math-inline">ABC</span> 中，内角 <span class="math-inline">A, B, C</span> 的对边分别为 <span class="math-inline">a, b, c</span>，且 <span class="math-inline">2b C = 2a - c</span>。</li>
+</ol>
+<ol>
+<li>(15分) 如图，在四棱锥 <span class="math-inline">P-ABCD</span> 中，底面 <span class="math-inline">ABCD</span> 是正方形，<span class="math-inline">PA</span> 平面 <span class="math-inline">ABCD</span>，<span class="math-inline">PA = AB = 2</span>。</li>
+</ol>
+<ol>
+<li>(17分) 已知椭圆 <span class="math-inline">C: {x^2}{a^2} + {y^2}{b^2} = 1 (a &gt; b &gt; 0)</span> 的离心率为 <span class="math-inline">{ {2}}{2}</span>，且过点 <span class="math-inline">(0, 1)</span>。</li>
+</ol>
+<ol>
+<li>(17分) 已知函数 <span class="math-inline">f(x) = x x - ax^2 - x</span>。</li>
+</ol>
+<h2 id="printable">可打印原件</h2>
+<ul class="file-list"><li><a href="/content/exam-paper-typesetting-templates/assets/pdf/shijuan.pdf">shijuan.pdf</a></li><li><a href="/content/exam-paper-typesetting-templates/assets/pdf/shijuan-example.pdf">shijuan-example.pdf</a></li><li><a href="/content/exam-paper-typesetting-templates/assets/pdf/shijuan-modle.pdf">shijuan-modle.pdf</a></li></ul>
+    </article>
+    <div class="post-source">
+  <div>原始文稿（2 份）</div>
+  <div>· 模板 shijuan-modle.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/2026-6-14=shijuan/shijuan-modle.tex</span></div>
+<div>· 示例 shijuan-example.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/2026-6-14=shijuan/shijuan-example.tex</span></div>
+</div>
+    <div class="post-nav"><a href="/content/28-tone-temperament-line-groups/index.html">← 上一篇 28 音律线组的 LaTeX 排版</a><a href="/content/june-maths-homework-paper/index.html">下一篇 → 高一数学六月作业卷</a></div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div>由 <code>PERSONAL_PROJECTS/tex</code> 与 <code>PERSONAL_PROJECTS/qd</code> 的原始文稿转换生成 · 公式由 KaTeX 渲染</div>
+</footer>
+<button class="to-top" type="button" aria-label="返回顶部">↑</button>
+<script src="/style/vendor/katex/katex.min.js"></script>
+<script src="/style/blog.js"></script>
+</body>
+</html>

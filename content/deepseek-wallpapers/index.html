@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>DeepSeek 制作的壁纸 · 个人项目博客</title>
+<meta name="description" content="十二张用纯 TikZ 代码画出来的桌面与手机壁纸：深空星野、金环暗夜、宣纸远山……每张都附完整源码。"/>
+<meta name="generator" content="PERSONAL_PROJECTS → WEB_ROOT 静态博客生成器"/>
+<link rel="stylesheet" href="/style/base.css"/>
+<link rel="stylesheet" href="/style/gallery.css"/>
+<link rel="stylesheet" href="/style/vendor/katex/katex.min.css"/>
+</head>
+<body data-style="gallery">
+<nav class="site-nav">
+  <a class="brand" href="/index.html">PERSONAL&nbsp;PROJECTS</a>
+  <div class="nav-right">
+    <a class="nav-link" href="/index.html">全部博文</a>
+    <a class="nav-link" href="/index.html?style=math">数理风格</a>
+    <a class="nav-link" href="/index.html?style=casual">休闲随笔风格</a>
+  </div>
+</nav>
+
+<main class="post">
+  <header class="post-head wrap">
+    <p class="kicker">Wallpapers drawn with TikZ</p>
+    <h1>DeepSeek 制作的壁纸</h1>
+    <p class="subtitle">十二张用纯 TikZ 代码画出来的桌面与手机壁纸：深空星野、金环暗夜、宣纸远山……每张都附完整源码。</p>
+    <div class="post-meta">
+    <span class="chip style-gallery">图鉴风格</span>
+    <time datetime="2026-09-12">2026-09-12</time>
+    <span>#壁纸</span><span>#TikZ</span><span>#生成艺术</span>
+  </div>
+  </header>
+  <div class="wrap">
+    
+    <article class="post-body">
+<div class="gallery-grid">
+<figure>
+      <img src="/content/deepseek-wallpapers/assets/preview/bkg1.png" alt="深空星野" loading="lazy"/>
+      <figcaption>深空星野 · 16:9 桌面</figcaption>
+    </figure>
+<figure>
+      <img src="/content/deepseek-wallpapers/assets/preview/bkg2.1.png" alt="青蓝极光" loading="lazy"/>
+      <figcaption>青蓝极光 · 16:9 桌面</figcaption>
+    </figure>
+<figure>
+      <img src="/content/deepseek-wallpapers/assets/preview/bkg2.2.png" alt="极光叠影" loading="lazy"/>
+      <figcaption>极光叠影 · 16:9 桌面</figcaption>
+    </figure>
+<figure>
+      <img src="/content/deepseek-wallpapers/assets/preview/bkg3.png" alt="极简流光" loading="lazy"/>
+      <figcaption>极简流光 · 16:9 桌面</figcaption>
+    </figure>
+<figure>
+      <img src="/content/deepseek-wallpapers/assets/preview/bkg4.png" alt="鎏金同心环" loading="lazy"/>
+      <figcaption>鎏金同心环 · 32:18 桌面</figcaption>
+    </figure>
+<figure>
+      <img src="/content/deepseek-wallpapers/assets/preview/bkg4.2.png" alt="鎏金同心环 · 疏" loading="lazy"/>
+      <figcaption>鎏金同心环 · 疏 · 32:18 桌面</figcaption>
+    </figure>
+<figure>
+      <img src="/content/deepseek-wallpapers/assets/preview/bkg5.png" alt="朱砂留白" loading="lazy"/>
+      <figcaption>朱砂留白 · 手机竖屏</figcaption>
+    </figure>
+<figure>
+      <img src="/content/deepseek-wallpapers/assets/preview/bkg5.2.png" alt="朱砂留白 · 疏" loading="lazy"/>
+      <figcaption>朱砂留白 · 疏 · 手机竖屏</figcaption>
+    </figure>
+<figure>
+      <img src="/content/deepseek-wallpapers/assets/preview/bkg6.png" alt="宣纸远山" loading="lazy"/>
+      <figcaption>宣纸远山 · 手机竖屏</figcaption>
+    </figure>
+<figure>
+      <img src="/content/deepseek-wallpapers/assets/preview/bkg6.2.png" alt="宣纸远山 · 疏" loading="lazy"/>
+      <figcaption>宣纸远山 · 疏 · 手机竖屏</figcaption>
+    </figure>
+<figure>
+      <img src="/content/deepseek-wallpapers/assets/preview/bkg7.png" alt="青绿山水" loading="lazy"/>
+      <figcaption>青绿山水 · 手机竖屏</figcaption>
+    </figure>
+<figure>
+      <img src="/content/deepseek-wallpapers/assets/preview/bkg7.2.png" alt="青绿山水 · 疏" loading="lazy"/>
+      <figcaption>青绿山水 · 疏 · 手机竖屏</figcaption>
+    </figure>
+</div>
+<h2 id="sources">全部源码</h2>
+<p class="muted small">点开任意一条即可查看完整 LaTeX 源码，右上角可一键复制。</p>
+<details class="code-drawer">
+      <summary><span class="drawer-title">深空星野</span><span class="drawer-meta">document.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass[tikz,border=0pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shadings,fadings,calc,decorations.pathmorphing,backgrounds}
+
+\tikzfading[name=glow, inner color=transparent!0, outer color=transparent!100]
+\tikzfading[name=vignette, inner color=transparent!100, outer color=transparent!0]
+
+\begin{document}
+	\begin{tikzpicture}[x=1cm,y=1cm]
+		\def\W{16}
+		\def\H{9}
+
+		\clip (0,0) rectangle (\W,\H);
+
+		% 1. 深空背景径向渐变
+		\shade[shading=radial, inner color=cyan!25!blue!50!black, outer color=black]
+		(0,0) rectangle (\W,\H);
+
+		% 2. 彩色光晕
+		\fill[cyan, path fading=glow, opacity=0.55] (8,4.5) circle (6);
+		\fill[magenta, path fading=glow, opacity=0.35] (3,7) circle (4);
+		\fill[blue, path fading=glow, opacity=0.45] (13,2) circle (4.5);
+		\fill[purple, path fading=glow, opacity=0.30] (12,7) circle (3.5);
+
+		% 3. 星空
+		\pgfmathsetseed{2024}
+		\foreach \i in {1,...,700} {
+			\pgfmathsetmacro{\x}{\W*rnd}
+			\pgfmathsetmacro{\y}{\H*rnd}
+			\pgfmathsetmacro{\r}{0.2+0.8*rnd}
+			\pgfmathsetmacro{\op}{0.15+0.85*rnd}
+			\fill[white, opacity=\op] (\x,\y) circle (\r pt);
+		}
+		\pgfmathsetseed{2025}
+		\foreach \i in {1,...,120} {
+			\pgfmathsetmacro{\x}{\W*rnd}
+			\pgfmathsetmacro{\y}{\H*rnd}
+			\pgfmathsetmacro{\r}{0.4+1.0*rnd}
+			\pgfmathsetmacro{\op}{0.3+0.7*rnd}
+			\fill[cyan!80!white, opacity=\op] (\x,\y) circle (\r pt);
+		}
+
+		% 4. 科技网格
+		\foreach \x in {0,1,...,16} {
+			\draw[cyan, opacity=0.025, line width=0.3pt] (\x,0) -- (\x,\H);
+		}
+		\foreach \y in {0,1,...,9} {
+			\draw[cyan, opacity=0.025, line width=0.3pt] (0,\y) -- (\W,\y);
+		}
+
+		% 5. 同心圆与刻度（已修正）
+		\foreach \r in {1,1.5,...,5} {
+			\draw[cyan, opacity=0.06, line width=0.4pt] (8,4.5) circle (\r);
+		}
+		\draw[cyan, opacity=0.15, dashed, line width=0.6pt] (8,4.5) circle (3.8);
+		\foreach \a in {0,15,...,345} {
+			\pgfmathsetmacro{\px}{8+3.8*cos(\a)}
+			\pgfmathsetmacro{\py}{4.5+3.8*sin(\a)}
+			\fill[cyan, opacity=0.4] (\px,\py) circle (0.8pt);
+		}
+
+		% 6. 抽象波浪
+		\draw[cyan, opacity=0.12, line width=1.2pt, smooth, domain=0:\W, samples=200]
+		plot (\x, {4.5 + 1.6*sin(50*\x) + 0.7*sin(110*\x+1)});
+		\draw[magenta, opacity=0.10, line width=1.0pt, smooth, domain=0:\W, samples=200]
+		plot (\x, {4.5 + 2.0*sin(35*\x+2) + 0.5*cos(90*\x)});
+		\draw[blue, opacity=0.10, line width=0.8pt, smooth, domain=0:\W, samples=200]
+		plot (\x, {4.5 + 1.2*sin(70*\x+0.5) + 0.9*cos(40*\x)});
+
+		% 7. 几何多边形
+		\draw[cyan, opacity=0.18, line width=1pt] (8,0.8) -- (1,7.5) -- (15,7.5) -- cycle;
+		\draw[magenta, opacity=0.12, line width=0.8pt] (8,8.2) -- (2,1.5) -- (14,1.5) -- cycle;
+		\draw[blue, opacity=0.15, line width=0.7pt] (0,4.5) -- (16,4.5);
+		\draw[cyan, opacity=0.10, line width=0.6pt] (8,0) -- (8,9);
+
+		% 8. 流星
+		\pgfmathsetseed{7}
+		\foreach \i in {1,...,12} {
+			\pgfmathsetmacro{\x}{2+12*rnd}
+			\pgfmathsetmacro{\y}{2+6*rnd}
+			\pgfmathsetmacro{\len}{1+2*rnd}
+			\draw[white, opacity=0.25, line width=0.5pt] (\x,\y) -- ++(-0.5*\len,-0.3*\len);
+			\draw[white, opacity=0.15, line width=1pt] (\x,\y) -- ++(-0.3*\len,-0.18*\len);
+		}
+
+		% 9. 边缘暗角
+		\fill[black, path fading=vignette, opacity=0.8] (0,0) rectangle (\W,\H);
+
+	\end{tikzpicture}
+\end{document}</code></pre>
+      </div>
+    </details>
+<details class="code-drawer">
+      <summary><span class="drawer-title">青蓝极光</span><span class="drawer-meta">document.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass[tikz,border=0pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shadings,fadings}
+
+% 光晕：中心不透明，边缘透明
+\tikzfading[name=glow, inner color=transparent!0, outer color=transparent!100]
+% 暗角：中心透明，边缘不透明
+\tikzfading[name=vignette, inner color=transparent!100, outer color=transparent!0]
+
+\begin{document}
+	\begin{tikzpicture}[line cap=round]
+		\def\W{16}      % 画布宽
+		\def\H{9}       % 画布高
+		\def\HZ{3}      % 地平线高度
+
+		\clip (0,0) rectangle (\W,\H);
+
+		% ===== 1. 天空渐变 =====
+		\shade[top color=blue!25!black, bottom color=magenta!40!black]
+		(0,\HZ) rectangle (\W,\H);
+
+		% ===== 2. 地面渐变 =====
+		\shade[top color=magenta!20!black, bottom color=black]
+		(0,0) rectangle (\W,\HZ);
+
+		% ===== 3. 星空 =====
+		\pgfmathsetseed{42}
+		\foreach \i in {1,...,160} {%
+			\pgfmathsetmacro{\sx}{\W*rnd}%
+			\pgfmathsetmacro{\sy}{\HZ + 5.5*rnd}%
+			\pgfmathsetmacro{\sr}{0.2 + 0.7*rnd}%
+			\pgfmathsetmacro{\so}{0.15 + 0.75*rnd}%
+			\fill[white, opacity=\so] (\sx,\sy) circle (\sr pt);
+		}
+
+		% ===== 4. 太阳外发光 =====
+		\fill[orange!60!red, path fading=glow, opacity=0.6]
+		(8,4.8) circle (2.6);
+
+		% ===== 5. 太阳本体（带条纹）=====
+		\begin{scope}
+			\clip (8,4.8) circle (1.5);
+			\shade[top color=yellow!95!white, bottom color=red!65!magenta]
+			(6.5,3.3) rectangle (9.5,6.3);
+			% 水平条纹，越往下越粗
+			\foreach \yy/\hh in {%
+				4.25/0.06, 4.13/0.07, 4.00/0.08, 3.86/0.09,
+				3.71/0.10, 3.55/0.11, 3.38/0.12%
+			} {%
+				\fill[black!85!blue] (6.5,\yy) rectangle (9.5,\yy-\hh);
+			}
+		\end{scope}
+
+		% ===== 6. 地平线光晕 =====
+		\fill[magenta!55!white, path fading=glow, opacity=0.5]
+		(8,\HZ) ellipse [x radius=8.5, y radius=0.7];
+
+		% ===== 7. 远山剪影 =====
+		\fill[black!90!blue]
+		(0,3) --
+		(0,3.2) -- (0.8,3.55) -- (1.6,3.25) -- (2.5,3.75) --
+		(3.4,3.3) -- (4.2,3.6) -- (5.1,3.15) -- (6.0,3.5) --
+		(7.0,3.25) -- (7.8,3.7) -- (8.6,3.3) -- (9.4,3.6) --
+		(10.3,3.2) -- (11.2,3.65) -- (12.1,3.3) -- (13.0,3.55) --
+		(14.0,3.2) -- (15.0,3.5) -- (16,3.25) --
+		(16,3) -- cycle;
+
+		% ===== 8. 透视网格 =====
+		% 垂直线：全部汇聚到消失点 (8,3)
+		\foreach \x in {-30,-28,...,46} {%
+			\draw[cyan!80!white, opacity=0.28, line width=0.4pt]
+			(\x,0) -- (8,\HZ);
+		}
+		% 水平线：越靠近地平线越密
+		\foreach \k in {1,...,32} {%
+			\pgfmathsetmacro{\gy}{\HZ - \HZ*(\k/32)*(\k/32)}%
+			\draw[cyan!80!white, opacity=0.20, line width=0.35pt]
+			(0,\gy) -- (\W,\gy);
+		}
+
+		% ===== 9. 边缘暗角 =====
+		\fill[black, path fading=vignette, opacity=0.75]
+		(0,0) rectangle (\W,\H);
+
+	\end{tikzpicture}
+\end{document}</code></pre>
+      </div>
+    </details>
+<details class="code-drawer">
+      <summary><span class="drawer-title">极光叠影</span><span class="drawer-meta">document.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass[tikz,border=0pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shadings,fadings,calc,decorations.pathmorphing}
+
+% 多种渐隐
+\tikzfading[name=glow,    inner color=transparent!0,   outer color=transparent!100]
+\tikzfading[name=glow2,   inner color=transparent!20,  outer color=transparent!100]
+\tikzfading[name=vignette,inner color=transparent!100, outer color=transparent!0]
+\tikzfading[name=soft,    inner color=transparent!0,   outer color=transparent!100]
+
+\begin{document}
+	\begin{tikzpicture}[line cap=round, line join=round]
+		\def\W{16}
+		\def\H{9}
+		\def\HZ{3.2}   % 地平线
+
+		\clip (0,0) rectangle (\W,\H);
+
+		% ================= 1. 天空多层渐变 =================
+		\shade[top color=black!95!blue!40,
+		bottom color=purple!35!black]
+		(0,\HZ) rectangle (\W,\H);
+
+		% 地平线暖光
+		\shade[top color=transparent, bottom color=orange!35!magenta!60!black]
+		(0,\HZ) rectangle (\W,4.6);
+
+		% ================= 2. 星云团（多层柔和椭圆） =================
+		\begin{scope}
+			\clip (0,\HZ) rectangle (\W,\H);
+			\foreach \cx/\cy/\rx/\ry/\col/\op in {%
+				2.5/7.2/3.2/1.6/purple!60!blue/0.22,
+				13.5/6.8/3.5/1.8/cyan!50!blue/0.20,
+				8/8.2/4.0/1.2/magenta!50!purple/0.18,
+				5/5.5/2.8/1.4/blue!60!cyan/0.20,
+				11.5/5.0/2.6/1.3/magenta!55!red/0.16,
+				8/6.5/5.5/2.0/purple!40!black/0.25%
+			} {%
+				\fill[\col, path fading=soft, opacity=\op]
+				(\cx,\cy) ellipse [x radius=\rx, y radius=\ry];
+			}
+		\end{scope}
+
+		% ================= 3. 精细星空 =================
+		% 远星（小而暗，数量多）
+		\pgfmathsetseed{101}
+		\foreach \i in {1,...,450} {%
+			\pgfmathsetmacro{\sx}{\W*rnd}%
+			\pgfmathsetmacro{\sy}{\HZ + 5.8*rnd}%
+			\pgfmathsetmacro{\sr}{0.15 + 0.35*rnd}%
+			\pgfmathsetmacro{\so}{0.10 + 0.35*rnd}%
+			\fill[white, opacity=\so] (\sx,\sy) circle (\sr pt);
+		}
+		% 中星
+		\pgfmathsetseed{202}
+		\foreach \i in {1,...,180} {%
+			\pgfmathsetmacro{\sx}{\W*rnd}%
+			\pgfmathsetmacro{\sy}{\HZ + 5.8*rnd}%
+			\pgfmathsetmacro{\sr}{0.35 + 0.55*rnd}%
+			\pgfmathsetmacro{\so}{0.35 + 0.5*rnd}%
+			\fill[white, opacity=\so] (\sx,\sy) circle (\sr pt);
+		}
+		% 亮星带光晕
+		\pgfmathsetseed{303}
+		\foreach \i in {1,...,40} {%
+			\pgfmathsetmacro{\sx}{\W*rnd}%
+			\pgfmathsetmacro{\sy}{\HZ + 5.5*rnd}%
+			\pgfmathsetmacro{\sr}{0.7 + 0.9*rnd}%
+			\pgfmathsetmacro{\so}{0.6 + 0.4*rnd}%
+			\pgfmathsetmacro{\cw}{rnd}%
+			\pgfmathsetmacro{\ccol}{\cw&gt;0.5 ? &quot;cyan!70!white&quot; : &quot;magenta!60!white&quot;}%
+			\fill[\ccol, path fading=glow, opacity=\so*0.5]
+			(\sx,\sy) circle (\sr*4 pt);
+			\fill[white, opacity=\so] (\sx,\sy) circle (\sr pt);
+		}
+		% 彩色暗星
+		\pgfmathsetseed{404}
+		\foreach \i in {1,...,90} {%
+			\pgfmathsetmacro{\sx}{\W*rnd}%
+			\pgfmathsetmacro{\sy}{\HZ + 5.5*rnd}%
+			\pgfmathsetmacro{\sr}{0.25 + 0.45*rnd}%
+			\pgfmathsetmacro{\so}{0.25 + 0.5*rnd}%
+			\pgfmathsetmacro{\cw}{rnd}%
+			\pgfmathsetmacro{\ccol}{%
+				\cw&gt;0.66 ? &quot;cyan!70!white&quot; :
+				(\cw&gt;0.33 ? &quot;magenta!60!white&quot; : &quot;orange!60!white&quot;)}%
+			\fill[\ccol, opacity=\so] (\sx,\sy) circle (\sr pt);
+		}
+
+		% ================= 4. 太阳外发光（多层） =================
+		\fill[red!70!orange,  path fading=glow, opacity=0.55] (8,4.9) circle (3.4);
+		\fill[orange!80!yellow,path fading=glow, opacity=0.65] (8,4.9) circle (2.5);
+		\fill[yellow!90!white,path fading=glow, opacity=0.75] (8,4.9) circle (1.9);
+
+		% ================= 5. 太阳本体（带条纹） =================
+		\begin{scope}
+			\clip (8,4.9) circle (1.55);
+			\shade[top color=yellow!98!white, bottom color=red!70!magenta]
+			(6.4,3.3) rectangle (9.6,6.5);
+			% 条纹：从下往上，越靠下越粗
+			\foreach \yy/\hh in {%
+				4.30/0.05, 4.20/0.06, 4.09/0.07, 3.97/0.08,
+				3.84/0.09, 3.70/0.10, 3.55/0.11, 3.39/0.12,
+				3.22/0.13, 3.04/0.14, 2.85/0.15%
+			} {%
+				\fill[black!90!blue] (6.4,\yy) rectangle (9.6,\yy-\hh);
+			}
+			% 太阳表面细节：暗角
+			\shade[inner color=transparent, outer color=black!60, opacity=0.35]
+			(8,4.9) circle (1.55);
+		\end{scope}
+
+		% ================= 6. 镜头光斑 =================
+		\foreach \lx/\ly/\lr/\col/\op in {%
+			5.6/4.2/0.12/cyan!70!white/0.45,
+			6.2/4.5/0.08/magenta!70!white/0.35,
+			10.4/5.4/0.10/orange!80!white/0.40,
+			10.9/5.7/0.06/cyan!70!white/0.30,
+			9.8/5.0/0.05/white/0.35,
+			4.6/3.8/0.15/purple!60!white/0.25%
+		} {%
+			\fill[\col, path fading=glow, opacity=\op] (\lx,\ly) circle (\lr*3);
+			\fill[\col, opacity=\op] (\lx,\ly) circle (\lr);
+		}
+
+		% ================= 7. 地平线光晕 =================
+		\fill[magenta!60!white, path fading=glow, opacity=0.55]
+		(8,\HZ) ellipse [x radius=9, y radius=0.55];
+		\fill[cyan!60!white, path fading=glow, opacity=0.35]
+		(8,\HZ) ellipse [x radius=5, y radius=0.35];
+
+		% ================= 8. 多层山脉（远→近） =================
+		% 远山（偏紫、半透明）
+		\fill[purple!45!black, opacity=0.85]
+		(0,3.15) --
+		(0,3.35) -- (0.7,3.7) -- (1.3,3.45) -- (2.0,3.85) --
+		(2.8,3.5) -- (3.6,3.9) -- (4.3,3.55) -- (5.0,3.8) --
+		(5.8,3.45) -- (6.6,3.85) -- (7.4,3.5) -- (8.1,3.9) --
+		(8.9,3.55) -- (9.7,3.85) -- (10.5,3.5) -- (11.3,3.85) --
+		(12.1,3.55) -- (12.9,3.9) -- (13.7,3.5) -- (14.5,3.8) --
+		(15.3,3.55) -- (16,3.75) --
+		(16,3.15) -- cycle;
+
+		% 中山（更深、更实）
+		\fill[blue!55!black, opacity=0.9]
+		(0,3.05) --
+		(0,3.2) -- (0.9,3.55) -- (1.7,3.25) -- (2.6,3.6) --
+		(3.5,3.3) -- (4.4,3.65) -- (5.3,3.3) -- (6.2,3.6) --
+		(7.1,3.35) -- (8.0,3.7) -- (8.9,3.4) -- (9.8,3.65) --
+		(10.7,3.35) -- (11.6,3.6) -- (12.5,3.3) -- (13.4,3.6) --
+		(14.3,3.35) -- (15.2,3.6) -- (16,3.4) --
+		(16,3.05) -- cycle;
+
+		% 近山（几乎黑）
+		\fill[black!92!blue]
+		(0,2.9) --
+		(0,3.0) -- (1.2,3.4) -- (2.3,3.1) -- (3.4,3.45) --
+		(4.5,3.15) -- (5.6,3.5) -- (6.7,3.2) -- (7.8,3.5) --
+		(8.9,3.25) -- (10.0,3.5) -- (11.1,3.2) -- (12.2,3.45) --
+		(13.3,3.2) -- (14.4,3.45) -- (15.5,3.25) -- (16,3.35) --
+		(16,2.9) -- cycle;
+
+		% 山脚雾气
+		\shade[top color=transparent, bottom color=magenta!25!black]
+		(0,\HZ-0.6) rectangle (\W,\HZ);
+
+		% ================= 9. 透视网格（带发光） =================
+		% 先画一遍发光底
+		\foreach \x in {-40,-37.5,...,56} {%
+			\draw[cyan!70!white, opacity=0.10, line width=2pt]
+			(\x,0) -- (8,\HZ);
+		}
+		\foreach \k in {1,...,40} {%
+			\pgfmathsetmacro{\gy}{\HZ - \HZ*(\k/40)*(\k/40)}%
+			\draw[cyan!70!white, opacity=0.08, line width=2pt]
+			(0,\gy) -- (\W,\gy);
+		}
+		% 再画清晰线
+		\foreach \x in {-40,-37.5,...,56} {%
+			\draw[cyan!85!white, opacity=0.35, line width=0.35pt]
+			(\x,0) -- (8,\HZ);
+		}
+		\foreach \k in {1,...,40} {%
+			\pgfmathsetmacro{\gy}{\HZ - \HZ*(\k/40)*(\k/40)}%
+			\draw[cyan!85!white, opacity=0.28, line width=0.3pt]
+			(0,\gy) -- (\W,\gy);
+		}
+
+		% 网格交点高亮
+		\pgfmathsetseed{505}
+		\foreach \k in {5,10,15,...,40} {%
+			\pgfmathsetmacro{\gy}{\HZ - \HZ*(\k/40)*(\k/40)}%
+			\pgfmathsetmacro{\gx}{8 + (\k/40)*7*(rnd-0.5)*2}%
+			\fill[white, opacity=0.5] (\gx,\gy) circle (0.5pt);
+		}
+
+		% ================= 10. 扫描线 =================
+		\foreach \y in {0,0.08,...,9} {%
+			\draw[black, opacity=0.06, line width=0.4pt]
+			(0,\y) -- (\W,\y);
+		}
+
+		% ================= 11. 胶片颗粒 =================
+		\pgfmathsetseed{606}
+		\foreach \i in {1,...,900} {%
+			\pgfmathsetmacro{\sx}{\W*rnd}%
+			\pgfmathsetmacro{\sy}{\H*rnd}%
+			\pgfmathsetmacro{\so}{0.02 + 0.06*rnd}%
+			\fill[white, opacity=\so] (\sx,\sy) circle (0.15pt);
+		}
+
+		% ================= 12. 暗角 =================
+		\fill[black, path fading=vignette, opacity=0.85]
+		(0,0) rectangle (\W,\H);
+
+	\end{tikzpicture}
+\end{document}</code></pre>
+      </div>
+    </details>
+<details class="code-drawer">
+      <summary><span class="drawer-title">极简流光</span><span class="drawer-meta">document.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass[tikz,border=0pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{shadings,fadings,calc,decorations.pathmorphing}
+
+\tikzfading[name=soft,    inner color=transparent!0,   outer color=transparent!100]
+\tikzfading[name=fade,    inner color=transparent!100, outer color=transparent!0]
+\tikzfading[name=vignette,inner color=transparent!100, outer color=transparent!0]
+
+\begin{document}
+	\begin{tikzpicture}[line cap=round, line join=round]
+		\def\W{9}
+		\def\H{16}
+
+		\clip (0,0) rectangle (\W,\H);
+
+		% ================= 1. 宣纸底色 =================
+		\fill[white!97!yellow] (0,0) rectangle (\W,\H);
+
+		% 纸纹：极淡的横向纤维
+		\pgfmathsetseed{11}
+		\foreach \i in {1,...,260} {%
+			\pgfmathsetmacro{\px}{9*rnd}%
+			\pgfmathsetmacro{\py}{16*rnd}%
+			\pgfmathsetmacro{\pl}{0.3 + 1.2*rnd}%
+			\pgfmathsetmacro{\op}{0.01 + 0.03*rnd}%
+			\draw[gray!40!brown, opacity=\op, line width=0.25pt]
+			(\px,\py) -- (\px+\pl,\py);
+		}
+
+		% 淡淡的做旧水渍
+		\foreach \cx/\cy/\rx/\ry/\op in {%
+			2.0/12.5/2.2/1.6/0.045,
+			7.0/13.8/1.8/1.3/0.035,
+			1.5/4.0/2.4/1.8/0.040,
+			7.5/3.5/2.0/1.5/0.030,
+			4.5/8.0/3.0/2.2/0.025%
+		} {%
+			\fill[brown!40!gray, path fading=soft, opacity=\op]
+			(\cx,\cy) ellipse [x radius=\rx, y radius=\ry];
+		}
+
+		% ================= 2. 远山（淡墨，多座） =================
+		% 最远一层，几乎看不见
+		\fill[gray!55!blue, opacity=0.12]
+		(0,9.6) --
+		(0,9.8) -- (0.9,10.5) -- (1.8,10.0) -- (2.6,10.7) --
+		(3.5,10.2) -- (4.5,10.9) -- (5.5,10.3) -- (6.4,10.8) --
+		(7.2,10.1) -- (8.1,10.6) -- (9,10.0) --
+		(9,9.6) -- cycle;
+
+		% 远山第二层
+		\fill[gray!60!blue, opacity=0.18]
+		(0,9.0) --
+		(0,9.3) -- (1.1,10.0) -- (2.0,9.5) -- (3.0,10.2) --
+		(4.2,9.6) -- (5.2,10.3) -- (6.3,9.7) -- (7.3,10.2) --
+		(8.2,9.6) -- (9,10.0) --
+		(9,9.0) -- cycle;
+
+		% 中山（主峰，偏左）
+		\fill[gray!45!blue, opacity=0.30]
+		(0,8.2) --
+		(0,8.6) -- (0.7,9.2) -- (1.4,8.7) -- (2.2,9.8) --
+		(3.0,9.0) -- (3.6,9.6) -- (4.2,9.1) --
+		(5.0,8.4) -- (6.0,8.0) -- (7.0,7.6) -- (8.0,7.4) --
+		(9,7.3) --
+		(9,8.2) -- cycle;
+
+		% 主峰上方的小尖
+		\fill[gray!35!blue, opacity=0.35]
+		(2.0,9.5) -- (2.2,9.8) -- (2.5,9.4) -- cycle;
+
+		% 中山右边淡墨补充
+		\fill[gray!65!blue, opacity=0.15]
+		(4.5,8.5) --
+		(4.5,8.8) -- (5.3,9.3) -- (6.1,8.9) -- (7.0,9.2) --
+		(7.8,8.8) -- (9,9.1) --
+		(9,8.5) -- cycle;
+
+		% ================= 3. 水面（大面积留白 + 几笔横线） =================
+		% 水岸线
+		\draw[gray!55!black, opacity=0.28, line width=0.5pt]
+		(0,7.3) .. controls (2.5,7.15) and (5.5,7.35) .. (9,7.2);
+
+		% 水面横纹（近实远虚）
+		\foreach \y/\xstart/\xend/\op/\lw in {%
+			7.05/0.8/8.2/0.14/0.35,
+			6.85/1.4/7.6/0.12/0.32,
+			6.65/0.6/8.4/0.11/0.30,
+			6.45/2.0/7.0/0.10/0.28,
+			6.25/1.2/7.8/0.09/0.26,
+			6.05/2.5/6.5/0.08/0.24,
+			5.85/1.6/7.4/0.07/0.22,
+			5.65/2.8/6.2/0.06/0.20,
+			5.45/2.2/6.8/0.05/0.18%
+		} {%
+			\draw[gray!60!black, opacity=\op, line width=\lw pt]
+			(\xstart,\y) -- (\xend,\y);
+		}
+
+		% ================= 4. 近处小舟 =================
+		\begin{scope}[shift={(2.6,6.55)}, rotate=-3]
+			% 船身
+			\draw[black!75!gray, line width=0.7pt, opacity=0.75]
+			(-0.45,0) .. controls (-0.25,-0.16) and (0.25,-0.16) .. (0.45,0);
+			% 桅杆
+			\draw[black!75!gray, line width=0.5pt, opacity=0.7]
+			(0.0,0) -- (0.0,0.38);
+			% 小帆
+			\fill[black!70!gray, opacity=0.55]
+			(0.0,0.36) -- (0.22,0.14) -- (0.0,0.14) -- cycle;
+			% 人影
+			\fill[black!80!gray, opacity=0.7]
+			(-0.18,0.02) circle (0.035);
+			\draw[black!80!gray, line width=0.5pt, opacity=0.65]
+			(-0.18,-0.02) -- (-0.18,0.0);
+		\end{scope}
+
+		% 船的倒影
+		\draw[black!70!gray, opacity=0.18, line width=0.5pt]
+		(2.15,6.45) .. controls (2.6,6.38) and (3.05,6.42) .. (3.05,6.45);
+
+		% ================= 5. 飞鸟 =================
+		% 远处一群
+		\foreach \bx/\by/\s/\op in {%
+			5.8/11.6/1.0/0.45,
+			6.4/11.9/0.85/0.40,
+			6.9/11.5/0.75/0.38,
+			6.1/12.2/0.7/0.35,
+			7.4/11.8/0.6/0.30,
+			5.3/12.0/0.55/0.28%
+		} {%
+			\draw[black!70!gray, line width=0.8pt*\s, opacity=\op]
+			(\bx,\by)
+			.. controls (\bx+0.16*\s,\by+0.10*\s) and (\bx+0.28*\s,\by+0.10*\s)
+			.. (\bx+0.40*\s,\by)
+			.. controls (\bx+0.52*\s,\by+0.10*\s) and (\bx+0.64*\s,\by+0.10*\s)
+			.. (\bx+0.80*\s,\by);
+		}
+
+		% 近处两只，墨色更重
+		\draw[black!80!gray, line width=1.4pt, opacity=0.70]
+		(2.4,12.6)
+		.. controls (2.65,12.85) and (2.85,12.85) .. (3.05,12.6)
+		.. controls (3.25,12.85) and (3.45,12.85) .. (3.70,12.6);
+		\draw[black!80!gray, line width=1.2pt, opacity=0.60]
+		(3.3,13.1)
+		.. controls (3.5,13.3) and (3.68,13.3) .. (3.85,13.1)
+		.. controls (4.02,13.3) and (4.20,13.3) .. (4.40,13.1);
+
+		% ================= 6. 近景浓墨竹枝（右下角） =================
+		% 主枝干
+		\draw[black!82!gray, line width=2.6pt, opacity=0.80]
+		(9,4.2) .. controls (7.8,3.6) and (7.0,2.6) .. (6.6,1.2);
+		\draw[black!82!gray, line width=1.8pt, opacity=0.75]
+		(7.7,3.55) .. controls (7.0,3.3) and (6.5,3.1) .. (6.0,3.2);
+		\draw[black!82!gray, line width=1.3pt, opacity=0.70]
+		(7.2,2.85) .. controls (6.6,2.3) and (6.2,1.9) .. (5.8,2.0);
+		\draw[black!82!gray, line width=0.9pt, opacity=0.60]
+		(6.9,3.15) .. controls (6.5,3.6) and (6.3,3.9) .. (6.5,4.2);
+
+		% 竹叶（细长笔触）
+		\foreach \sx/\sy/\a/\l/\op in {%
+			6.65/3.35/155/0.55/0.70,
+			6.50/3.30/200/0.45/0.65,
+			6.35/3.22/170/0.50/0.60,
+			6.10/3.18/150/0.42/0.58,
+			5.95/3.22/195/0.40/0.55,
+			6.05/2.05/210/0.45/0.62,
+			5.85/1.95/165/0.38/0.55,
+			6.30/2.35/190/0.42/0.58,
+			6.45/4.15/140/0.40/0.52,
+			6.55/4.25/175/0.35/0.48%
+		} {%
+			\draw[black!78!gray, opacity=\op, line width=1.1pt,
+			rotate around={\a:(6.6,2.8)}]
+			(6.6,2.8) -- ++(\l,0);
+		}
+
+		% ================= 7. 朱红印章（左下角） =================
+		\begin{scope}[shift={(1.35,2.1)}]
+			% 印章外框（手绘感：略微不规则）
+			\fill[red!75!black, opacity=0.88]
+			(-0.42,-0.42) .. controls (-0.20,-0.46) and (0.22,-0.44) .. (0.42,-0.40)
+			.. controls (0.46,-0.18) and (0.44,0.20) .. (0.40,0.42)
+			.. controls (0.18,0.46) and (-0.20,0.44) .. (-0.42,0.40)
+			.. controls (-0.46,0.18) and (-0.44,-0.20) .. (-0.42,-0.42)
+			-- cycle;
+			% 印章内白底
+			\fill[white!97!yellow, opacity=0.95]
+			(-0.30,-0.30) .. controls (-0.14,-0.33) and (0.16,-0.31) .. (0.30,-0.28)
+			.. controls (0.33,-0.12) and (0.31,0.14) .. (0.28,0.30)
+			.. controls (0.12,0.33) and (-0.14,0.31) .. (-0.30,0.28)
+			.. controls (-0.33,0.12) and (-0.31,-0.14) .. (-0.30,-0.30)
+			-- cycle;
+			% 内白底上的红字（用简单笔画模拟）
+			% 左竖
+			\draw[red!75!black, line width=1.2pt, opacity=0.85]
+			(-0.16,-0.16) -- (-0.16,0.18);
+			% 横折
+			\draw[red!75!black, line width=1.0pt, opacity=0.85]
+			(-0.16,0.06) -- (0.10,0.06) -- (0.10,-0.10);
+			% 右点
+			\fill[red!75!black, opacity=0.85]
+			(0.16,0.14) circle (0.035);
+			% 下方小横
+			\draw[red!75!black, line width=0.9pt, opacity=0.80]
+			(-0.06,-0.20) -- (0.14,-0.20);
+		\end{scope}
+
+		% ================= 8. 暗角（很轻，模拟旧纸） =================
+		\fill[brown!50!black, path fading=vignette, opacity=0.18]
+		(0,0) rectangle (\W,\H);
+
+	\end{tikzpicture}
+\end{document}</code></pre>
+      </div>
+    </details>
+<details class="code-drawer">
+      <summary><span class="drawer-title">鎏金同心环</span><span class="drawer-meta">bkg4.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass{article}
+\usepackage[margin=0pt,paperwidth=32cm,paperheight=18cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{fadings}
+\pagestyle{empty}
+
+\definecolor{ink}{RGB}{9,11,17}
+\definecolor{inkGlow}{RGB}{26,34,52}
+\definecolor{gold}{RGB}{203,168,102}
+\definecolor{goldDim}{RGB}{142,118,74}
+
+\begin{document}
+\noindent
+\begin{tikzpicture}[remember picture, overlay, x=1cm, y=1cm]
+	  % 将坐标原点移到页面左下角
+	  \path (current page.south west) coordinate (SW);
+	    \begin{scope}[shift={(SW)}]
+
+		        \def\W{32}
+			    \def\H{18}
+			        \def\CX{22.5}
+				    \def\CY{11.0}
+
+				        % 暗角遮罩
+					    \begin{tikzfadingfrompicture}[name=vignette]
+						          \path[use as bounding box] (0,0) rectangle (\W,\H);
+							        \shade[inner color=transparent!100, outer color=transparent!0]
+								            (\W/2,\H/2) circle (26);
+									        \end{tikzfadingfrompicture}
+
+										    % 1. 背景
+										        \fill[ink] (0,0) rectangle (\W,\H);
+											    \shade[inner color=inkGlow, outer color=ink] (\CX,\CY) circle (26);
+
+											        % 2. 点阵
+												    \begin{scope}
+													          \clip (0,0) rectangle (\W,\H);
+														        \foreach \x in {0,1,...,32}
+															        \foreach \y in {0,1,...,18}
+																          \fill[white, opacity=0.07] (\x,\y) circle (0.02);
+																	      \end{scope}
+
+																	          % 3. 同心金环
+																		      \begin{scope}
+																			            \clip (0,0) rectangle (\W,\H);
+																				          \foreach \r/\op in {
+																						          2.0/0.80, 2.9/0.58, 3.9/0.44, 5.0/0.35,
+																							          6.2/0.28, 7.5/0.22, 8.9/0.17, 10.4/0.13,
+																								          12.0/0.10, 13.7/0.075, 15.5/0.055
+																									        }{
+																											        \draw[gold, opacity=\op, line width=0.35pt]
+																												          (\CX,\CY) circle (\r);
+																													        }
+																														    \end{scope}
+
+																														        % 4. 中心光核
+																															    \foreach \r/\op in {2.6/0.020, 1.7/0.035, 1.1/0.055, 0.62/0.09, 0.30/0.16}{
+																																          \fill[gold, opacity=\op] (\CX,\CY) circle (\r);
+																																	      }
+																																	          \fill[gold, opacity=0.95] (\CX,\CY) circle (0.075);
+
+																																		      % 5. 水平基准线
+																																		          \draw[goldDim, opacity=0.20, line width=0.3pt] (0,\CY) -- (\W,\CY);
+
+																																			      % 6. 签名
+																																			          \draw[goldDim, opacity=0.55, line width=0.4pt] (2.0,2.0) -- (5.0,2.0);
+																																				      \fill[goldDim, opacity=0.55] (5.25,2.0) circle (0.05);
+																																				          \node[anchor=west, text=goldDim, opacity=0.55, font=\tiny]
+																																					           at (2.0,1.42) {NOCTURNE \textperiodcentered\ 001};
+
+																																						       % 7. 暗角
+																																						           \fill[black, opacity=0.50, path fading=vignette] (0,0) rectangle (\W,\H);
+
+																																							     \end{scope}
+  \end{tikzpicture}
+  \end{document}</code></pre>
+      </div>
+    </details>
+<details class="code-drawer">
+      <summary><span class="drawer-title">鎏金同心环 · 疏</span><span class="drawer-meta">bkg4.2.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass{article}
+\usepackage[margin=0pt,paperwidth=9cm,paperheight=19.5cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{fadings}
+\pagestyle{empty}
+
+\definecolor{ink}{RGB}{9,11,17}
+\definecolor{inkGlow}{RGB}{26,34,52}
+\definecolor{gold}{RGB}{203,168,102}
+\definecolor{goldDim}{RGB}{142,118,74}
+
+\begin{document}
+\noindent
+\begin{tikzpicture}[remember picture, overlay]
+  \path (current page.south west) coordinate (SW);
+  \begin{scope}[shift={(SW)}, x=1cm, y=1cm]
+
+    \def\W{9}
+    \def\H{19.5}
+    \def\CX{4.5}
+    \def\CY{11.5}
+
+    % 暗角
+    \begin{tikzfadingfrompicture}[name=vignette]
+      \path[use as bounding box] (0,0) rectangle (\W,\H);
+      \shade[inner color=transparent!100, outer color=transparent!0]
+            (\W/2,\H/2) circle (14);
+    \end{tikzfadingfrompicture}
+
+    % 背景
+    \fill[ink] (0,0) rectangle (\W,\H);
+    \shade[inner color=inkGlow, outer color=ink] (\CX,\CY) circle (14);
+
+    % 点阵
+    \begin{scope}
+      \clip (0,0) rectangle (\W,\H);
+      \foreach \x in {0,0.5,...,9}
+        \foreach \y in {0,0.5,...,19.5}
+          \fill[white, opacity=0.07] (\x,\y) circle (0.014);
+    \end{scope}
+
+    % 同心金环
+    \begin{scope}
+      \clip (0,0) rectangle (\W,\H);
+      \foreach \r/\op in {
+        1.0/0.85, 1.5/0.65, 2.1/0.50, 2.8/0.40,
+        3.6/0.32, 4.5/0.26, 5.5/0.20, 6.6/0.15,
+        7.8/0.11, 9.1/0.08, 10.5/0.055, 12.0/0.04
+      }{
+        \draw[gold, opacity=\op, line width=0.3pt]
+          (\CX,\CY) circle (\r);
+      }
+    \end{scope}
+
+    % 光核
+    \foreach \r/\op in {1.8/0.020, 1.2/0.035, 0.75/0.055, 0.42/0.09, 0.20/0.16}{
+      \fill[gold, opacity=\op] (\CX,\CY) circle (\r);
+    }
+    \fill[gold, opacity=0.95] (\CX,\CY) circle (0.05);
+
+    % 基准线
+    \draw[goldDim, opacity=0.18, line width=0.25pt] (0,\CY) -- (\W,\CY);
+
+    % 签名
+    \draw[goldDim, opacity=0.50, line width=0.3pt] (0.9,1.7) -- (2.4,1.7);
+    \fill[goldDim, opacity=0.50] (2.55,1.7) circle (0.028);
+    \node[anchor=west, text=goldDim, opacity=0.50,
+          font=\fontsize{4.5}{4.5}\selectfont]
+         at (0.9,1.32) {NOCTURNE \textperiodcentered\ 001};
+
+    % 暗角
+    \fill[black, opacity=0.55, path fading=vignette] (0,0) rectangle (\W,\H);
+
+  \end{scope}
+\end{tikzpicture}
+\end{document}</code></pre>
+      </div>
+    </details>
+<details class="code-drawer">
+      <summary><span class="drawer-title">朱砂留白</span><span class="drawer-meta">bkg5.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass{article}
+\usepackage[margin=0pt,paperwidth=32cm,paperheight=18cm]{geometry}
+\usepackage{tikz}
+\pagestyle{empty}
+
+\definecolor{paper}{RGB}{242,236,222}
+\definecolor{ink}{RGB}{28,30,36}
+\definecolor{cinnabar}{RGB}{178,58,48}
+
+\begin{document}
+\noindent
+\begin{tikzpicture}[remember picture, overlay]
+	  \path (current page.south west) coordinate (SW);
+	    \begin{scope}[shift={(SW)}, x=1cm, y=1cm]
+
+		        % ---------- 宣纸底 ----------
+		        \fill[paper] (0,0) rectangle (32,18);
+
+			    % 细密纸纹
+			        \begin{scope}
+					      \clip (0,0) rectangle (32,18);
+					            \foreach \x in {0,0.8,...,32}
+						            \foreach \y in {0,0.8,...,18}
+							              \fill[ink, opacity=0.028] (\x,\y) circle (0.022);
+								          \end{scope}
+
+									      % ---------- 远山 ----------
+									          \fill[ink, opacity=0.06]
+										        (0,10.5)
+											      .. controls (2,13.5) and (4.5,15)   .. (7,12)
+											            .. controls (9.5,14.5) and (12,15.5) .. (14.5,12)
+												          .. controls (17,14) and (19.5,15)   .. (22,12)
+													        .. controls (24.5,14) and (27,13.5) .. (29.5,11)
+														      .. controls (30.5,10.2) and (31.5,10.5) .. (32,10)
+														            -- (32,0) -- (0,0) -- cycle;
+
+															        % ---------- 红日 ----------
+																    \fill[cinnabar, opacity=0.52] (25.5,13.2) circle (1.7);
+
+																        % ---------- 第二层山 ----------
+																	    \fill[ink, opacity=0.12]
+																	          (0,9)
+																		        .. controls (2,11.5) and (4,12.5)   .. (6.5,9.5)
+																			      .. controls (9,12) and (11.5,13)    .. (14,10)
+																			            .. controls (16.5,12) and (19,12.5) .. (21.5,10)
+																				          .. controls (24,11.5) and (26.5,11) .. (29,9)
+																					        .. controls (30.5,8.2) and (31.5,8.3) .. (32,8)
+																						      -- (32,0) -- (0,0) -- cycle;
+
+																						          % ---------- 第三层山 ----------
+																							      \fill[ink, opacity=0.22]
+																							            (0,7.5)
+																								          .. controls (2,10) and (4,10.5)     .. (6.5,7.8)
+																									        .. controls (9,10) and (11,10.8)    .. (13.5,8)
+																										      .. controls (16,10) and (18.5,10.5) .. (21,8.2)
+																										            .. controls (23.5,10) and (26,9.5)  .. (28.5,7.5)
+																											          .. controls (30,6.8) and (31.5,7)   .. (32,6.5)
+																												        -- (32,0) -- (0,0) -- cycle;
+
+																													    % ---------- 第四层山 ----------
+																													        \fill[ink, opacity=0.40]
+																														      (0,5.5)
+																														            .. controls (2,8) and (3.5,8.5)     .. (5.5,6.2)
+																															          .. controls (7.5,8.5) and (9.5,9)   .. (11.5,6.5)
+																																        .. controls (13.5,8.5) and (16,9)   .. (18.5,6.5)
+																																	      .. controls (21,8.5) and (23,8)     .. (25.5,6)
+																																	            .. controls (27.5,7.5) and (30,7)   .. (32,5)
+																																		          -- (32,0) -- (0,0) -- cycle;
+
+																																			      % ---------- 近处岩壁 ----------
+																																			          \fill[ink, opacity=0.62]
+																																				        (0,4)
+																																					      .. controls (1.5,6) and (3,6.2)     .. (4.5,4.2)
+																																					            .. controls (6,6) and (8,6.5)       .. (10,4.5)
+																																						          .. controls (12,6) and (14,6.2)     .. (16,4.5)
+																																							        .. controls (18,6) and (20,6)       .. (22,4.2)
+																																								      .. controls (24,5.5) and (26,5.5)   .. (28,4)
+																																								            .. controls (30,5) and (31.5,4.8)   .. (32,4)
+																																									          -- (32,0) -- (0,0) -- cycle;
+
+																																										      % ---------- 云雾 ----------
+																																										          \fill[paper, opacity=0.55] (0,5.6) rectangle (32,6.7);
+																																											      \fill[paper, opacity=0.38] (0,7.9) rectangle (32,8.6);
+
+																																											          % ---------- 水面倒影 ----------
+																																												      \foreach \y/\op in {0.5/0.20, 1.0/0.15, 1.5/0.11, 2.1/0.08, 2.7/0.055, 3.3/0.035}{
+																																													            \draw[ink, opacity=\op, line width=0.5pt]
+																																														            (2,\y) .. controls (8,\y+0.12) and (14,\y-0.12) .. (22,\y)
+																																															                   .. controls (26,\y+0.08) and (29,\y-0.08) .. (30,\y);
+																																																	       }
+
+																																																	           % ---------- 飞鸟 ----------
+																																																		       \foreach \x/\y/\s in {18.5/12.6/0.22, 19.7/12.9/0.18, 20.8/12.5/0.15, 21.8/12.8/0.13}{
+																																																			             \draw[ink, opacity=0.32, line width=0.6pt]
+																																																				             (\x,\y) .. controls (\x+0.14,\y+\s) and (\x+0.24,\y+\s) .. (\x+0.35,\y)
+																																																					                     .. controls (\x+0.46,\y+\s) and (\x+0.56,\y+\s) .. (\x+0.70,\y);
+																																																							         }
+
+																																																								     % ---------- 印章 ----------
+																																																								         \fill[cinnabar, opacity=0.82] (29.3,1.2) rectangle (30.9,2.8);
+																																																									     \draw[paper, opacity=0.85, line width=0.5pt] (29.55,2.55) -- (30.65,2.55);
+																																																									         \draw[paper, opacity=0.85, line width=0.5pt] (29.55,2.05) -- (30.65,2.05);
+																																																										     \draw[paper, opacity=0.85, line width=0.5pt] (29.55,1.55) -- (30.65,1.55);
+																																																										         \draw[paper, opacity=0.85, line width=0.5pt] (30.10,2.55) -- (30.10,1.45);
+
+																																																											   \end{scope}
+											    \end{tikzpicture}
+										    \end{document}</code></pre>
+      </div>
+    </details>
+<details class="code-drawer">
+      <summary><span class="drawer-title">朱砂留白 · 疏</span><span class="drawer-meta">bkg5.2.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass{article}
+\usepackage[margin=0pt,paperwidth=9cm,paperheight=19.5cm]{geometry}
+\usepackage{tikz}
+\pagestyle{empty}
+
+\definecolor{paper}{RGB}{242,236,222}
+\definecolor{ink}{RGB}{28,30,36}
+\definecolor{cinnabar}{RGB}{178,58,48}
+
+\begin{document}
+\noindent
+\begin{tikzpicture}[remember picture, overlay]
+  \path (current page.south west) coordinate (SW);
+  \begin{scope}[shift={(SW)}, x=1cm, y=1cm]
+
+    % 宣纸底
+    \fill[paper] (0,0) rectangle (9,19.5);
+
+    % 纸纹
+    \begin{scope}
+      \clip (0,0) rectangle (9,19.5);
+      \foreach \x in {0,0.55,...,9}
+        \foreach \y in {0,0.55,...,19.5}
+          \fill[ink, opacity=0.028] (\x,\y) circle (0.018);
+    \end{scope}
+
+    % 红日
+    \fill[cinnabar, opacity=0.55] (6.3,16.0) circle (1.3);
+
+    % 远山
+    \fill[ink, opacity=0.06]
+      (0,12.0)
+      .. controls (1,14.5) and (1.8,16) .. (2.8,13.5)
+      .. controls (3.8,15.5) and (4.6,15.8) .. (5.5,13.3)
+      .. controls (6.3,15) and (7.1,15.2) .. (8,13.0)
+      .. controls (8.5,12.2) and (8.7,12.3) .. (9,12)
+      -- (9,0) -- (0,0) -- cycle;
+
+    % 第二层
+    \fill[ink, opacity=0.12]
+      (0,10.5)
+      .. controls (1,13) and (1.8,14) .. (2.8,11.8)
+      .. controls (3.8,13.5) and (4.8,13.8) .. (5.8,11.5)
+      .. controls (6.6,13) and (7.4,12.8) .. (8.2,11.2)
+      .. controls (8.6,10.6) and (8.8,10.7) .. (9,10.4)
+      -- (9,0) -- (0,0) -- cycle;
+
+    % 第三层
+    \fill[ink, opacity=0.22]
+      (0,8.8)
+      .. controls (1,11.3) and (1.8,11.8) .. (2.8,10.0)
+      .. controls (3.8,11.5) and (4.8,11.8) .. (5.8,9.8)
+      .. controls (6.6,11) and (7.4,10.8) .. (8.2,9.4)
+      .. controls (8.6,8.9) and (8.8,9) .. (9,8.7)
+      -- (9,0) -- (0,0) -- cycle;
+
+    % 第四层
+    \fill[ink, opacity=0.40]
+      (0,6.5)
+      .. controls (1,9) and (1.6,9.4) .. (2.4,7.7)
+      .. controls (3.2,9.3) and (4.0,9.6) .. (4.8,7.7)
+      .. controls (5.5,9.0) and (6.3,9.0) .. (7.1,7.4)
+      .. controls (7.7,8.4) and (8.4,8.2) .. (9,6.8)
+      -- (9,0) -- (0,0) -- cycle;
+
+    % 近山
+    \fill[ink, opacity=0.62]
+      (0,4.5)
+      .. controls (0.8,6.8) and (1.4,7.0) .. (2.1,5.6)
+      .. controls (2.8,6.8) and (3.5,7.0) .. (4.2,5.6)
+      .. controls (4.9,6.8) and (5.6,6.8) .. (6.3,5.4)
+      .. controls (6.9,6.3) and (7.6,6.2) .. (8.3,5.2)
+      .. controls (8.6,5.0) and (8.8,5.0) .. (9,5.0)
+      -- (9,0) -- (0,0) -- cycle;
+
+    % 云雾
+    \fill[paper, opacity=0.55] (0,6.8) rectangle (9,7.6);
+    \fill[paper, opacity=0.38] (0,9.5) rectangle (9,10.1);
+
+    % 倒影
+    \foreach \y/\op in {0.6/0.20, 1.2/0.15, 1.9/0.11, 2.6/0.08, 3.3/0.055, 4.0/0.035}{
+      \draw[ink, opacity=\op, line width=0.4pt]
+        (0.6,\y) .. controls (2.5,\y+0.10) and (4.5,\y-0.10) .. (6.5,\y)
+                 .. controls (7.5,\y+0.06) and (8.3,\y-0.06) .. (8.5,\y);
+    }
+
+    % 飞鸟
+    \foreach \x/\y/\s in {3.5/16.5/0.18, 4.3/16.8/0.15, 5.0/16.4/0.13, 5.6/16.7/0.11}{
+      \draw[ink, opacity=0.32, line width=0.5pt]
+        (\x,\y) .. controls (\x+0.11,\y+\s) and (\x+0.20,\y+\s) .. (\x+0.29,\y)
+                .. controls (\x+0.38,\y+\s) and (\x+0.46,\y+\s) .. (\x+0.58,\y);
+    }
+
+    % 印章
+    \fill[cinnabar, opacity=0.82] (6.4,1.2) rectangle (7.6,2.4);
+    \draw[paper, opacity=0.85, line width=0.4pt] (6.4,1.8) -- (7.6,1.8);
+    \draw[paper, opacity=0.85, line width=0.4pt] (7.0,1.2) -- (7.0,2.4);
+
+  \end{scope}
+\end{tikzpicture}
+\end{document}</code></pre>
+      </div>
+    </details>
+<details class="code-drawer">
+      <summary><span class="drawer-title">宣纸远山</span><span class="drawer-meta">bkg6.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass{article}
+\usepackage[margin=0pt,paperwidth=32cm,paperheight=18cm]{geometry}
+\usepackage{tikz}
+\pagestyle{empty}
+
+% ---------- 颜色 ----------
+\definecolor{paper}{RGB}{240, 236, 220}     % 宣纸
+\definecolor{green1}{RGB}{158, 188, 142}    % 远山：淡青绿
+\definecolor{green2}{RGB}{105, 148, 100}    % 中山：中绿
+\definecolor{green3}{RGB}{62, 100, 72}      % 近山：深绿
+\definecolor{green4}{RGB}{32, 62, 48}       % 树：墨绿
+\definecolor{ink}{RGB}{20, 30, 26}          % 墨
+\definecolor{cinnabar}{RGB}{175, 60, 45}    % 朱砂
+
+\begin{document}
+\noindent
+\begin{tikzpicture}[remember picture, overlay]
+  \path (current page.south west) coordinate (SW);
+  \begin{scope}[shift={(SW)}, x=1cm, y=1cm]
+
+    % ==================== 宣纸底 ====================
+    \fill[paper] (0,0) rectangle (32,18);
+
+    % 细密纸纹
+    \begin{scope}
+      \clip (0,0) rectangle (32,18);
+      \foreach \x in {0,0.8,...,32}
+        \foreach \y in {0,0.8,...,18}
+          \fill[ink, opacity=0.022] (\x,\y) circle (0.02);
+    \end{scope}
+
+    % ==================== 远山（最淡绿） ====================
+    \fill[green1, opacity=0.48]
+      (0,4)
+      .. controls (3,12) and (5,14)  .. (8,11)
+      .. controls (11,8) and (13,14) .. (16,14)
+      .. controls (19,14) and (21,8) .. (24,11)
+      .. controls (27,14) and (29,12) .. (32,9)
+      -- (32,4) -- (0,4) -- cycle;
+
+    % ==================== 中山（中绿） ====================
+    \fill[green2, opacity=0.72]
+      (0,4)
+      .. controls (3,10) and (5,11.5) .. (8,9)
+      .. controls (11,7) and (13,11.5) .. (16,11.5)
+      .. controls (19,11.5) and (21,7) .. (24,9)
+      .. controls (27,11.5) and (29,10) .. (32,7.5)
+      -- (32,4) -- (0,4) -- cycle;
+
+    % ==================== 近山（深绿） ====================
+    \fill[green3, opacity=0.92]
+      (0,4)
+      .. controls (3,8) and (5,9)     .. (8,7)
+      .. controls (11,5.5) and (13,9) .. (16,9)
+      .. controls (19,9) and (21,5.5) .. (24,7)
+      .. controls (27,9) and (29,8)   .. (32,6)
+      -- (32,4) -- (0,4) -- cycle;
+
+    % ==================== 山脚云雾 ====================
+    \fill[paper, opacity=0.75] (0,3.5) rectangle (32,4.5);
+    \fill[paper, opacity=0.45] (0,4.8) rectangle (32,5.2);
+    \fill[paper, opacity=0.22] (0,6.5) rectangle (32,6.9);
+
+    % ==================== 水面倒影 ====================
+    \foreach \y/\op in {0.35/0.16, 0.90/0.13, 1.45/0.10, 2.00/0.075, 2.55/0.055, 3.10/0.04}{
+      \draw[green3, opacity=\op, line width=0.4pt]
+        (2,\y) .. controls (8,\y+0.10) and (14,\y-0.10) .. (20,\y)
+               .. controls (24,\y+0.07) and (28,\y-0.07) .. (30,\y);
+    }
+
+    % ==================== 松树 ====================
+    \def\pine#1#2#3#4{
+      \begin{scope}[shift={(#1,#2)}, scale=#3, opacity=#4]
+        % 树干
+        \draw[ink, line width=0.5pt]
+          (0,0) .. controls (0.06,0.6) and (-0.06,1.2) .. (0,1.8);
+        % 枝干与松针
+        \foreach \y/\ex in {1.50/0.50, 1.15/0.60, 0.80/0.55, 0.45/0.45}{
+          \draw[ink, line width=0.3pt] (0,\y) -- (\ex,\y-0.08);
+          \draw[ink, line width=0.3pt] (0,\y) -- (-\ex,\y-0.08);
+          \fill[green4, opacity=0.80] (\ex,\y-0.10) circle (0.055);
+          \fill[green4, opacity=0.80] (-\ex,\y-0.10) circle (0.055);
+        }
+        \fill[green4, opacity=0.80] (0,1.82) circle (0.07);
+      \end{scope}
+    }
+
+    \pine{1.2}{5.5}{1.05}{0.92}
+    \pine{2.6}{6.4}{0.85}{0.88}
+    \pine{4.0}{7.2}{0.68}{0.80}
+
+    % ==================== 飞鸟 ====================
+    \foreach \x/\y/\s in {20.0/15.1/0.20, 21.1/15.4/0.16, 22.1/15.0/0.14, 23.0/15.3/0.12}{
+      \draw[ink, opacity=0.35, line width=0.55pt]
+        (\x,\y) .. controls (\x+0.12,\y+\s) and (\x+0.22,\y+\s) .. (\x+0.32,\y)
+                .. controls (\x+0.42,\y+\s) and (\x+0.52,\y+\s) .. (\x+0.64,\y);
+    }
+
+    % ==================== 朱砂印章 ====================
+    \fill[cinnabar, opacity=0.85] (29.2,1.2) rectangle (30.8,2.8);
+    \draw[paper, opacity=0.90, line width=0.6pt] (29.2,2.0) -- (30.8,2.0);
+    \draw[paper, opacity=0.90, line width=0.6pt] (30.0,1.2) -- (30.0,2.8);
+    \draw[paper, opacity=0.45, line width=0.3pt] (29.35,1.35) rectangle (30.65,2.65);
+
+  \end{scope}
+\end{tikzpicture}
+\end{document}</code></pre>
+      </div>
+    </details>
+<details class="code-drawer">
+      <summary><span class="drawer-title">宣纸远山 · 疏</span><span class="drawer-meta">bkg6.2.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass{article}
+\usepackage[margin=0pt,paperwidth=9cm,paperheight=19.5cm]{geometry}
+\usepackage{tikz}
+\pagestyle{empty}
+
+\definecolor{paper}{RGB}{240,236,220}
+\definecolor{green1}{RGB}{158,188,142}
+\definecolor{green2}{RGB}{105,148,100}
+\definecolor{green3}{RGB}{62,100,72}
+\definecolor{green4}{RGB}{32,62,48}
+\definecolor{ink}{RGB}{20,30,26}
+\definecolor{cinnabar}{RGB}{175,60,45}
+
+\begin{document}
+\noindent
+\begin{tikzpicture}[remember picture, overlay]
+  \path (current page.south west) coordinate (SW);
+  \begin{scope}[shift={(SW)}, x=1cm, y=1cm]
+
+    % 宣纸底
+    \fill[paper] (0,0) rectangle (9,19.5);
+
+    % 纸纹
+    \begin{scope}
+      \clip (0,0) rectangle (9,19.5);
+      \foreach \x in {0,0.55,...,9}
+        \foreach \y in {0,0.55,...,19.5}
+          \fill[ink, opacity=0.022] (\x,\y) circle (0.018);
+    \end{scope}
+
+    % 远山
+    \fill[green1, opacity=0.48]
+      (0,8.5)
+      .. controls (0.8,12.5) and (1.5,15) .. (2.4,12)
+      .. controls (3.4,9.5) and (4.2,15) .. (5.0,14.5)
+      .. controls (6,14) and (6.7,9.5) .. (7.6,11.5)
+      .. controls (8.3,14) and (8.6,12.5) .. (9,10)
+      -- (9,0) -- (0,0) -- cycle;
+
+    % 中山
+    \fill[green2, opacity=0.72]
+      (0,7.0)
+      .. controls (0.8,11) and (1.5,13) .. (2.4,10)
+      .. controls (3.4,8) and (4.2,13) .. (5.0,13)
+      .. controls (6,13) and (6.7,8) .. (7.6,10)
+      .. controls (8.3,12.5) and (8.6,11) .. (9,9)
+      -- (9,0) -- (0,0) -- cycle;
+
+    % 近山
+    \fill[green3, opacity=0.92]
+      (0,5.2)
+      .. controls (0.8,9) and (1.5,10) .. (2.4,8)
+      .. controls (3.4,6.5) and (4.2,10) .. (5.0,10)
+      .. controls (6,10) and (6.7,6.5) .. (7.6,8)
+      .. controls (8.3,10) and (8.6,9) .. (9,7)
+      -- (9,0) -- (0,0) -- cycle;
+
+    % 云雾
+    \fill[paper, opacity=0.75] (0,4.6) rectangle (9,5.7);
+    \fill[paper, opacity=0.42] (0,6.0) rectangle (9,6.5);
+    \fill[paper, opacity=0.20] (0,7.8) rectangle (9,8.3);
+
+    % 倒影
+    \foreach \y/\op in {0.4/0.16, 1.0/0.13, 1.6/0.10, 2.3/0.075, 3.0/0.055, 3.7/0.04}{
+      \draw[green3, opacity=\op, line width=0.35pt]
+        (0.6,\y) .. controls (2.5,\y+0.08) and (4.5,\y-0.08) .. (6.5,\y)
+                 .. controls (7.5,\y+0.05) and (8.3,\y-0.05) .. (8.5,\y);
+    }
+
+    % 松树
+    \def\pine#1#2#3#4{
+      \begin{scope}[shift={(#1,#2)}, scale=#3, opacity=#4]
+        \draw[ink, line width=0.5pt]
+          (0,0) .. controls (0.06,0.6) and (-0.06,1.2) .. (0,1.8);
+        \foreach \y/\ex in {1.50/0.50, 1.15/0.60, 0.80/0.55, 0.45/0.45}{
+          \draw[ink, line width=0.3pt] (0,\y) -- (\ex,\y-0.08);
+          \draw[ink, line width=0.3pt] (0,\y) -- (-\ex,\y-0.08);
+          \fill[green4, opacity=0.80] (\ex,\y-0.10) circle (0.055);
+          \fill[green4, opacity=0.80] (-\ex,\y-0.10) circle (0.055);
+        }
+        \fill[green4, opacity=0.80] (0,1.82) circle (0.07);
+      \end{scope}
+    }
+
+    \pine{1.0}{6.5}{1.05}{0.92}
+    \pine{2.2}{7.2}{0.85}{0.88}
+    \pine{3.4}{7.8}{0.68}{0.80}
+
+    % 飞鸟
+    \foreach \x/\y/\s in {5.8/17.0/0.18, 6.6/17.3/0.15, 7.3/16.9/0.13}{
+      \draw[ink, opacity=0.35, line width=0.5pt]
+        (\x,\y) .. controls (\x+0.10,\y+\s) and (\x+0.19,\y+\s) .. (\x+0.27,\y)
+                .. controls (\x+0.36,\y+\s) and (\x+0.44,\y+\s) .. (\x+0.55,\y);
+    }
+
+    % 印章
+    \fill[cinnabar, opacity=0.85] (6.2,1.2) rectangle (7.4,2.4);
+    \draw[paper, opacity=0.90, line width=0.5pt] (6.2,1.8) -- (7.4,1.8);
+    \draw[paper, opacity=0.90, line width=0.5pt] (6.8,1.2) -- (6.8,2.4);
+    \draw[paper, opacity=0.45, line width=0.25pt] (6.32,1.32) rectangle (7.28,2.28);
+
+  \end{scope}
+\end{tikzpicture}
+\end{document}</code></pre>
+      </div>
+    </details>
+<details class="code-drawer">
+      <summary><span class="drawer-title">青绿山水</span><span class="drawer-meta">bkg7.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass{article}
+\usepackage[margin=0pt,paperwidth=32cm,paperheight=18cm]{geometry}
+\usepackage{tikz}
+\pagestyle{empty}
+
+% ==================== 配色 ====================
+\definecolor{paper}{RGB}{243,238,224}
+\definecolor{skyTop}{RGB}{226,232,230}
+\definecolor{blueFar}{RGB}{152,182,192}
+\definecolor{blueMid}{RGB}{104,146,158}
+\definecolor{greenFar}{RGB}{158,188,156}
+\definecolor{greenMid}{RGB}{106,150,108}
+\definecolor{greenDeep}{RGB}{56,96,70}
+\definecolor{greenDark}{RGB}{26,56,42}
+\definecolor{ink}{RGB}{20,30,26}
+\definecolor{cinnabar}{RGB}{178,58,46}
+
+% ==================== 元素宏 ====================
+\newcommand{\pine}[3]{%
+  \begin{scope}[shift={(#1,#2)}, scale=#3]
+    \draw[ink, line width=0.5pt]
+      (0,0) .. controls (0.08,0.5) and (-0.06,1.0) .. (0.02,1.55);
+    \foreach \y/\w in {1.45/0.28, 1.20/0.40, 0.95/0.50, 0.68/0.46, 0.42/0.38, 0.18/0.28}{
+      \draw[ink!70, line width=0.25pt] (0.01,\y) -- (\w,\y-0.14);
+      \draw[ink!70, line width=0.25pt] (0.01,\y) -- (-\w,\y-0.14);
+      \fill[greenDark, opacity=0.85] (\w,\y-0.18) circle (0.055);
+      \fill[greenDark, opacity=0.85] (-\w,\y-0.18) circle (0.055);
+    }
+    \fill[greenDark, opacity=0.9] (0.02,1.60) circle (0.07);
+  \end{scope}
+}
+
+\newcommand{\broadleaf}[3]{%
+  \begin{scope}[shift={(#1,#2)}, scale=#3]
+    \draw[ink!75, line width=0.4pt]
+      (0,0) .. controls (0.08,0.25) and (-0.05,0.5) .. (0.03,0.70);
+    \foreach \dx/\dy in {-0.28/0.72, -0.15/0.88, 0.02/0.94, 0.18/0.86, 0.30/0.70,
+                          0.12/0.66, -0.20/0.60, -0.02/0.76, 0.22/0.52, -0.30/0.45}{
+      \fill[greenDark, opacity=0.66] (\dx,\dy) circle (0.13);
+    }
+  \end{scope}
+}
+
+\newcommand{\willow}[3]{%
+  \begin{scope}[shift={(#1,#2)}, scale=#3]
+    \draw[ink!75, line width=0.4pt]
+      (0,0) .. controls (0.05,0.3) and (-0.02,0.55) .. (0.05,0.80);
+    \foreach \x in {-0.45,-0.30,-0.15,0,0.15,0.30,0.45}{
+      \draw[greenMid!70, opacity=0.55, line width=0.25pt]
+        (0.05,0.82) .. controls (\x,0.78) and (\x*0.85,0.55) .. (\x*0.70,0.28);
+    }
+    \fill[greenDark, opacity=0.65] (0.05,0.84) circle (0.15);
+  \end{scope}
+}
+
+\newcommand{\pavilion}[3]{%
+  \begin{scope}[shift={(#1,#2)}, scale=#3]
+    \fill[ink, opacity=0.88]
+      (-0.70,0.52) .. controls (-0.45,0.86) and (0.45,0.86) .. (0.70,0.52)
+      .. controls (0.42,0.60) and (-0.42,0.60) .. cycle;
+    \draw[ink, line width=0.5pt]
+      (-0.70,0.52) .. controls (-0.45,0.86) and (0.45,0.86) .. (0.70,0.52);
+    \fill[ink, opacity=0.8] (-0.36,0.12) rectangle (-0.29,0.52);
+    \fill[ink, opacity=0.8] ( 0.29,0.12) rectangle ( 0.36,0.52);
+    \fill[ink, opacity=0.8] (-0.29,0.12) rectangle (-0.12,0.19);
+    \fill[ink, opacity=0.8] ( 0.12,0.12) rectangle ( 0.29,0.19);
+    \fill[ink] (0,0.84) -- (0.05,0.94) -- (-0.05,0.94) -- cycle;
+    \draw[ink, line width=0.35pt] (0,0.94) -- (0,1.06);
+  \end{scope}
+}
+
+\newcommand{\boat}[3]{%
+  \begin{scope}[shift={(#1,#2)}, scale=#3]
+    \fill[ink, opacity=0.72]
+      (-0.45,0) .. controls (-0.20,-0.14) and (0.20,-0.14) .. (0.45,0)
+      .. controls (0.20,0.06) and (-0.20,0.06) .. cycle;
+    \draw[ink, opacity=0.6, line width=0.3pt] (0.02,0.05) -- (0.02,0.62);
+    \fill[ink, opacity=0.32]
+      (0.04,0.58) .. controls (0.28,0.40) and (0.28,0.18) .. (0.04,0.12) -- cycle;
+  \end{scope}
+}
+
+% ==================== 山峦轮廓坐标 ====================
+\def\peakA{(0,10.0) (2,11.5) (4,12.8) (6,11.6) (8,13.0) (10,13.6) (12,12.4) (14,13.4) (16,12.2) (18,13.0) (20,11.8) (22,12.4) (24,11.0) (26,11.4) (28,10.2) (30,10.6) (32,9.8)}
+\def\peakB{(0,8.8) (2,10.2) (4,11.6) (6,10.4) (8,11.8) (10,12.4) (12,11.2) (14,12.2) (16,11.0) (18,11.8) (20,10.6) (22,11.2) (24,9.8) (26,10.2) (28,9.0) (30,9.4) (32,8.6)}
+\def\peakC{(0,7.5) (1.5,9.0) (3,10.4) (4.5,9.2) (6,10.6) (7.5,11.2) (9,10.0) (10.5,10.8) (12,9.6) (13.5,10.4) (15,9.2) (16.5,9.8) (18,8.6) (19.5,9.0) (21,7.8) (23,8.2) (25,7.0) (27,7.4) (29,6.4) (32,6.8)}
+\def\peakD{(0,5.8) (1.5,7.2) (3,8.6) (4.5,7.4) (6,8.8) (7.5,9.4) (9,8.2) (10.5,8.9) (12,7.8) (13.5,8.5) (15,7.3) (16.5,7.9) (18,6.7) (19.5,7.2) (21,6.0) (23,6.5) (25,5.4) (27,5.8) (29,4.8) (32,5.2)}
+\def\peakE{(0,4.0) (1.5,5.5) (3,7.2) (4.5,6.0) (6,7.4) (7.5,8.0) (9,6.8) (10.5,7.4) (12,6.2) (13.5,6.9) (15,5.7) (16.5,6.2) (18,5.0) (19.5,5.4) (21,4.4) (23,4.7) (25,3.8) (27,4.1) (29,3.4) (32,3.7)}
+\def\peakF{(0,2.8) (1.5,3.8) (3,4.9) (4.5,3.9) (6,4.9) (7.5,5.3) (9,4.4) (10.5,4.8) (12,3.9) (14,4.2) (16,3.4) (18,3.6) (20,3.0) (22,3.2) (24,2.9) (32,2.6)}
+
+\begin{document}
+\noindent
+\begin{tikzpicture}[remember picture, overlay]
+  \path (current page.south west) coordinate (SW);
+  \begin{scope}[shift={(SW)}, x=1cm, y=1cm]
+
+    % ==================== 天空 + 纸底 ====================
+    \shade[top color=skyTop, bottom color=paper] (0,0) rectangle (32,18);
+
+    % 纸纹
+    \begin{scope}
+      \clip (0,0) rectangle (32,18);
+      \foreach \x in {0,0.75,...,32}
+        \foreach \y in {0,0.75,...,18}
+          \fill[ink, opacity=0.020] (\x,\y) circle (0.018);
+    \end{scope}
+
+    % ==================== 远山 A（淡石青） ====================
+    \fill[blueFar, opacity=0.28]
+      plot[smooth, tension=0.55] coordinates {\peakA}
+      -- (32,2.6) -- (0,2.6) -- cycle;
+
+    % ==================== 远山 B ====================
+    \fill[blueMid, opacity=0.42]
+      plot[smooth, tension=0.55] coordinates {\peakB}
+      -- (32,2.6) -- (0,2.6) -- cycle;
+
+    % ---------- 云雾带 1 ----------
+    \fill[paper, opacity=0.55] (0,8.4) rectangle (32,9.1);
+    \fill[paper, opacity=0.30] (0,9.4) rectangle (32,9.8);
+
+    % ==================== 中山 C（石绿） ====================
+    \fill[greenFar, opacity=0.60]
+      plot[smooth, tension=0.55] coordinates {\peakC}
+      -- (32,2.6) -- (0,2.6) -- cycle;
+
+    % 中山 C 山脊
+    \foreach \x/\y in {3/10.4, 6/10.6, 7.5/11.2, 10.5/10.8, 13.5/10.4, 16.5/9.8}{
+      \draw[greenDark, opacity=0.22, line width=0.4pt]
+        (\x,\y) .. controls (\x-0.15,\y-0.6) and (\x+0.20,\y-1.1) .. (\x-0.02,\y-1.8);
+    }
+
+    % ==================== 中山 D ====================
+    \fill[greenMid, opacity=0.78]
+      plot[smooth, tension=0.55] coordinates {\peakD}
+      -- (32,2.6) -- (0,2.6) -- cycle;
+
+    % 中山 D 山脊
+    \foreach \x/\y in {3/8.6, 6/8.8, 7.5/9.4, 10.5/8.9, 13.5/8.5, 16.5/7.9, 19.5/7.2}{
+      \draw[greenDark, opacity=0.28, line width=0.45pt]
+        (\x,\y) .. controls (\x-0.18,\y-0.5) and (\x+0.22,\y-1.0) .. (\x,\y-1.7);
+    }
+
+    % 中山 D 皴法
+    \begin{scope}
+      \clip plot[smooth, tension=0.55] coordinates {\peakD}
+            -- (32,2.6) -- (0,2.6) -- cycle;
+      \foreach \x/\y in {
+        1.5/7.0, 2.4/7.6, 3.3/7.4, 4.2/6.8, 5.2/7.8, 6.1/7.6,
+        7.0/8.4, 8.0/7.4, 8.9/7.6, 9.8/7.8, 10.8/7.6, 11.7/6.8,
+        12.6/7.4, 13.5/7.4, 14.5/6.4, 15.5/6.9, 16.5/6.7, 17.5/5.9,
+        18.5/6.1, 19.5/6.0, 20.5/5.1, 22/5.4, 24/4.6
+      }{
+        \draw[greenDark, opacity=0.20, line width=0.3pt]
+          (\x,\y) .. controls (\x+0.14,\y-0.35) and (\x-0.08,\y-0.65) .. (\x+0.06,\y-1.0);
+      }
+    \end{scope}
+
+    % ---------- 云雾带 2 ----------
+    \fill[paper, opacity=0.62] (0,5.4) rectangle (32,6.0);
+    \fill[paper, opacity=0.40] (0,6.2) rectangle (32,6.6);
+    \fill[paper, opacity=0.20] (0,6.9) rectangle (32,7.2);
+
+    % ==================== 近山 E ====================
+    \fill[greenDeep, opacity=0.90]
+      plot[smooth, tension=0.55] coordinates {\peakE}
+      -- (32,2.6) -- (0,2.6) -- cycle;
+
+    % 近山 E 山脊
+    \foreach \x/\y in {3/7.2, 6/7.4, 7.5/8.0, 10.5/7.4, 13.5/6.9, 16.5/6.2, 19.5/5.4}{
+      \draw[greenDark, opacity=0.42, line width=0.55pt]
+        (\x,\y) .. controls (\x-0.20,\y-0.45) and (\x+0.25,\y-0.95) .. (\x,\y-1.5);
+    }
+
+    % 近山 E 皴法
+    \begin{scope}
+      \clip plot[smooth, tension=0.55] coordinates {\peakE}
+            -- (32,2.6) -- (0,2.6) -- cycle;
+      \foreach \x/\y in {
+        1.2/4.8, 2.0/5.6, 2.8/6.2, 3.6/5.8, 4.4/5.2, 5.2/6.2, 6.0/6.4,
+        6.8/6.8, 7.6/6.4, 8.4/5.9, 9.2/6.1, 10.0/6.3, 10.8/6.0, 11.6/5.3,
+        12.4/5.7, 13.2/5.6, 14.0/4.9, 14.8/5.2, 15.6/4.7, 16.4/4.7,
+        17.2/4.1, 18.0/4.2, 18.8/3.7, 19.6/3.8, 20.4/3.3
+      }{
+        \draw[greenDark, opacity=0.28, line width=0.3pt]
+          (\x,\y) .. controls (\x+0.15,\y-0.30) and (\x-0.10,\y-0.60) .. (\x+0.05,\y-0.95);
+      }
+    \end{scope}
+
+    % ==================== 近岸 F（墨绿） ====================
+    \fill[greenDark, opacity=0.94]
+      plot[smooth, tension=0.55] coordinates {\peakF}
+      -- (32,2.6) -- (0,2.6) -- cycle;
+
+    % 苔点
+    \foreach \x/\y in {
+      0.8/3.4, 1.5/4.2, 2.3/3.8, 3.1/4.6, 3.9/3.5,
+      4.6/4.4, 5.3/5.0, 6.1/4.2, 6.9/5.2, 7.6/4.6,
+      8.3/5.4, 9.1/4.4, 9.8/5.2, 10.6/4.6, 11.3/5.4,
+      12.1/4.3, 12.8/5.0, 13.6/4.2, 14.4/4.8, 15.1/3.8,
+      16.0/4.4, 16.8/3.6, 17.6/4.0, 18.4/3.2, 19.2/3.6,
+      20.0/3.0, 20.8/3.4, 21.6/2.9
+    }{
+      \fill[greenDark!60!black, opacity=0.30] (\x,\y) circle (0.04);
+    }
+
+    % ==================== 瀑布 ====================
+    \begin{scope}
+      \clip plot[smooth, tension=0.55] coordinates {\peakD}
+            -- (32,2.6) -- (0,2.6) -- cycle;
+      \fill[paper, opacity=0.80]
+        (11.55,9.0) .. controls (11.75,8.2) and (11.45,7.2) .. (11.65,6.2)
+        .. controls (11.85,5.2) and (11.55,4.4) .. (11.75,3.6)
+        -- (12.35,3.6) .. controls (12.25,4.4) and (12.55,5.2) .. (12.35,6.2)
+        .. controls (12.15,7.2) and (12.45,8.2) .. (12.25,9.0) -- cycle;
+      \foreach \y in {3.8,4.4,5.0,5.6,6.2,6.8,7.4,8.0,8.6}{
+        \draw[paper, opacity=0.95, line width=0.4pt]
+          (11.70,\y) .. controls (11.95,\y+0.06) and (12.05,\y-0.06) .. (12.30,\y);
+      }
+    \end{scope}
+
+    % ==================== 水面 ====================
+    \fill[blueFar, opacity=0.20] (0,0) rectangle (32,2.6);
+    \fill[paper, opacity=0.35] (0,2.4) rectangle (32,2.75);
+
+    % 倒影
+    \foreach \y/\op in {0.30/0.28, 0.70/0.24, 1.10/0.20, 1.50/0.16, 1.90/0.12, 2.25/0.09}{
+      \draw[greenDeep, opacity=\op, line width=0.6pt]
+        (0.5,\y) .. controls (5,\y+0.08) and (10,\y-0.08) .. (16,\y)
+                 .. controls (20,\y+0.06) and (24,\y-0.06) .. (28,\y);
+    }
+
+    % 水纹
+    \foreach \x/\y/\w in {3/1.2/2.0, 7/0.6/2.5, 12/1.8/1.8, 16/0.9/2.2, 21/1.5/1.6, 25/0.5/2.0}{
+      \draw[blueMid, opacity=0.28, line width=0.4pt] (\x,\y) -- (\x+\w,\y);
+    }
+
+    % ==================== 松林（左下） ====================
+    \pine{1.00}{3.05}{1.10}
+    \pine{2.20}{3.45}{0.95}
+    \pine{3.40}{3.85}{0.82}
+    \pine{4.40}{4.20}{0.70}
+    \pine{5.30}{4.55}{0.58}
+
+    % ==================== 杂树 ====================
+    \broadleaf{6.6}{4.4}{0.90}
+    \broadleaf{7.7}{4.9}{0.75}
+    \broadleaf{8.7}{5.2}{0.62}
+
+    % ==================== 垂柳（水岸） ====================
+    \willow{13.6}{3.3}{0.95}
+    \willow{14.6}{3.6}{0.80}
+
+    % ==================== 亭子 ====================
+    \pavilion{16.5}{3.2}{1.00}
+
+    % ==================== 小船 ====================
+    \boat{22.0}{1.4}{1.00}
+    \boat{25.5}{0.9}{0.70}
+
+    % ==================== 飞鸟 ====================
+    \foreach \x/\y/\s in {
+      18.5/15.5/0.22, 19.7/15.8/0.18, 20.8/15.4/0.16,
+      21.8/15.7/0.14, 22.8/15.3/0.12, 23.6/15.6/0.10
+    }{
+      \draw[ink, opacity=0.38, line width=0.55pt]
+        (\x,\y) .. controls (\x+0.12,\y+\s) and (\x+0.22,\y+\s) .. (\x+0.32,\y)
+                .. controls (\x+0.42,\y+\s) and (\x+0.52,\y+\s) .. (\x+0.64,\y);
+    }
+    \foreach \x/\y/\s in {14.5/16.4/0.18, 15.5/16.7/0.15, 16.4/16.3/0.13}{
+      \draw[ink, opacity=0.28, line width=0.45pt]
+        (\x,\y) .. controls (\x+0.10,\y+\s) and (\x+0.18,\y+\s) .. (\x+0.26,\y)
+                .. controls (\x+0.34,\y+\s) and (\x+0.42,\y+\s) .. (\x+0.52,\y);
+    }
+
+    % ==================== 朱砂印章 ====================
+    \fill[cinnabar, opacity=0.88] (29.20,1.10) rectangle (30.90,2.80);
+    \draw[paper, opacity=0.90, line width=0.6pt] (29.20,1.95) -- (30.90,1.95);
+    \draw[paper, opacity=0.90, line width=0.6pt] (30.05,1.10) -- (30.05,2.80);
+    \draw[paper, opacity=0.45, line width=0.3pt] (29.38,1.28) rectangle (30.72,2.62);
+
+    % ==================== 竖排题款 ====================
+    \foreach \i/\ch in {
+      0/Q, 1/I, 2/N, 3/G, 4/L, 5/U, 6/S, 7/H, 8/A, 9/N,
+      10/S, 11/H, 12/U, 13/I
+    }{
+      \node[anchor=center, text=ink, opacity=0.45,
+            font=\fontsize{7}{7}\selectfont]
+        at (29.95, 7.45 - \i*0.34) {\ch};
+    }
+
+  \end{scope}
+\end{tikzpicture}
+\end{document}</code></pre>
+      </div>
+    </details>
+<details class="code-drawer">
+      <summary><span class="drawer-title">青绿山水 · 疏</span><span class="drawer-meta">bkg7.2.tex</span></summary>
+      <div class="code-panel">
+        <div class="code-head"><span>LaTeX · TikZ</span><button class="code-copy" type="button">复制</button></div>
+        <pre><code>\documentclass{article}
+\usepackage[margin=0pt,paperwidth=9cm,paperheight=19.5cm]{geometry}
+\usepackage{tikz}
+\pagestyle{empty}
+
+\definecolor{paper}{RGB}{243,238,224}
+\definecolor{skyTop}{RGB}{226,232,230}
+\definecolor{blueFar}{RGB}{152,182,192}
+\definecolor{blueMid}{RGB}{104,146,158}
+\definecolor{greenFar}{RGB}{158,188,156}
+\definecolor{greenMid}{RGB}{106,150,108}
+\definecolor{greenDeep}{RGB}{56,96,70}
+\definecolor{greenDark}{RGB}{26,56,42}
+\definecolor{ink}{RGB}{20,30,26}
+\definecolor{cinnabar}{RGB}{178,58,46}
+
+% ========== 元素宏 ==========
+\newcommand{\pine}[3]{%
+  \begin{scope}[shift={(#1,#2)}, scale=#3]
+    \draw[ink, line width=0.45pt]
+      (0,0) .. controls (0.07,0.5) and (-0.05,1.0) .. (0.02,1.55);
+    \foreach \y/\w in {1.45/0.28, 1.20/0.40, 0.95/0.50, 0.68/0.46, 0.42/0.38, 0.18/0.28}{
+      \draw[ink!70, line width=0.22pt] (0.01,\y) -- (\w,\y-0.14);
+      \draw[ink!70, line width=0.22pt] (0.01,\y) -- (-\w,\y-0.14);
+      \fill[greenDark, opacity=0.85] (\w,\y-0.18) circle (0.05);
+      \fill[greenDark, opacity=0.85] (-\w,\y-0.18) circle (0.05);
+    }
+    \fill[greenDark, opacity=0.9] (0.02,1.60) circle (0.065);
+  \end{scope}
+}
+
+\newcommand{\broadleaf}[3]{%
+  \begin{scope}[shift={(#1,#2)}, scale=#3]
+    \draw[ink!75, line width=0.35pt]
+      (0,0) .. controls (0.07,0.25) and (-0.04,0.5) .. (0.03,0.70);
+    \foreach \dx/\dy in {-0.28/0.72, -0.15/0.88, 0.02/0.94, 0.18/0.86, 0.30/0.70,
+                          0.12/0.66, -0.20/0.60, -0.02/0.76, 0.22/0.52, -0.30/0.45}{
+      \fill[greenDark, opacity=0.66] (\dx,\dy) circle (0.12);
+    }
+  \end{scope}
+}
+
+\newcommand{\willow}[3]{%
+  \begin{scope}[shift={(#1,#2)}, scale=#3]
+    \draw[ink!75, line width=0.35pt]
+      (0,0) .. controls (0.05,0.3) and (-0.02,0.55) .. (0.05,0.80);
+    \foreach \x in {-0.45,-0.30,-0.15,0,0.15,0.30,0.45}{
+      \draw[greenMid!70, opacity=0.55, line width=0.22pt]
+        (0.05,0.82) .. controls (\x,0.78) and (\x*0.85,0.55) .. (\x*0.70,0.28);
+    }
+    \fill[greenDark, opacity=0.65] (0.05,0.84) circle (0.14);
+  \end{scope}
+}
+
+\newcommand{\pavilion}[3]{%
+  \begin{scope}[shift={(#1,#2)}, scale=#3]
+    \fill[ink, opacity=0.88]
+      (-0.70,0.52) .. controls (-0.45,0.86) and (0.45,0.86) .. (0.70,0.52)
+      .. controls (0.42,0.60) and (-0.42,0.60) .. cycle;
+    \draw[ink, line width=0.45pt]
+      (-0.70,0.52) .. controls (-0.45,0.86) and (0.45,0.86) .. (0.70,0.52);
+    \fill[ink, opacity=0.8] (-0.36,0.12) rectangle (-0.29,0.52);
+    \fill[ink, opacity=0.8] ( 0.29,0.12) rectangle ( 0.36,0.52);
+    \fill[ink, opacity=0.8] (-0.29,0.12) rectangle (-0.12,0.19);
+    \fill[ink, opacity=0.8] ( 0.12,0.12) rectangle ( 0.29,0.19);
+    \fill[ink] (0,0.84) -- (0.05,0.94) -- (-0.05,0.94) -- cycle;
+    \draw[ink, line width=0.3pt] (0,0.94) -- (0,1.06);
+  \end{scope}
+}
+
+\newcommand{\boat}[3]{%
+  \begin{scope}[shift={(#1,#2)}, scale=#3]
+    \fill[ink, opacity=0.72]
+      (-0.45,0) .. controls (-0.20,-0.14) and (0.20,-0.14) .. (0.45,0)
+      .. controls (0.20,0.06) and (-0.20,0.06) .. cycle;
+    \draw[ink, opacity=0.6, line width=0.25pt] (0.02,0.05) -- (0.02,0.62);
+    \fill[ink, opacity=0.32]
+      (0.04,0.58) .. controls (0.28,0.40) and (0.28,0.18) .. (0.04,0.12) -- cycle;
+  \end{scope}
+}
+
+% ========== 竖构图山峰坐标 ==========
+\def\peakA{(0,12.0) (1.2,15.5) (2.4,17.0) (3.6,16.5) (4.8,17.0) (6.0,15.5) (7.2,15.0) (8.4,13.5) (9,13.0)}
+\def\peakB{(0,11.0) (1.2,14.0) (2.4,15.5) (3.6,15.0) (4.8,15.5) (6.0,14.0) (7.2,13.5) (8.4,12.5) (9,12.0)}
+\def\peakC{(0, 9.5) (1.2,12.5) (2.4,14.0) (3.6,13.5) (4.8,14.0) (6.0,12.5) (7.2,12.0) (8.4,11.0) (9,10.5)}
+\def\peakD{(0, 8.0) (1.2,10.5) (2.4,12.0) (3.6,11.5) (4.8,12.0) (6.0,10.5) (7.2,10.0) (8.4, 9.0) (9, 8.5)}
+\def\peakE{(0, 6.5) (1.2, 8.5) (2.4,10.0) (3.6, 9.5) (4.8,10.0) (6.0, 8.5) (7.2, 8.0) (8.4, 7.0) (9, 6.5)}
+\def\peakF{(0, 5.0) (1.2, 7.0) (2.4, 8.5) (3.6, 8.0) (4.8, 8.5) (6.0, 7.0) (7.2, 6.5) (8.4, 5.5) (9, 5.0)}
+
+\begin{document}
+\noindent
+\begin{tikzpicture}[remember picture, overlay]
+  \path (current page.south west) coordinate (SW);
+  \begin{scope}[shift={(SW)}, x=1cm, y=1cm]
+
+    % ========== 天空 + 纸底 ==========
+    \shade[top color=skyTop, bottom color=paper] (0,0) rectangle (9,19.5);
+
+    % 纸纹
+    \begin{scope}
+      \clip (0,0) rectangle (9,19.5);
+      \foreach \x in {0,0.55,...,9}
+        \foreach \y in {0,0.55,...,19.5}
+          \fill[ink, opacity=0.020] (\x,\y) circle (0.016);
+    \end{scope}
+
+    % ========== 远山 A ==========
+    \fill[blueFar, opacity=0.28]
+      plot[smooth, tension=0.55] coordinates {\peakA}
+      -- (9,0) -- (0,0) -- cycle;
+
+    % ========== 远山 B ==========
+    \fill[blueMid, opacity=0.42]
+      plot[smooth, tension=0.55] coordinates {\peakB}
+      -- (9,0) -- (0,0) -- cycle;
+
+    % 云雾 1
+    \fill[paper, opacity=0.55] (0,9.8) rectangle (9,10.6);
+    \fill[paper, opacity=0.30] (0,10.9) rectangle (9,11.3);
+
+    % ========== 中山 C ==========
+    \fill[greenFar, opacity=0.60]
+      plot[smooth, tension=0.55] coordinates {\peakC}
+      -- (9,0) -- (0,0) -- cycle;
+
+    \foreach \x/\y in {1.2/12.5, 2.4/14, 3.6/13.5, 4.8/14, 6.0/12.5, 7.2/12}{
+      \draw[greenDark, opacity=0.22, line width=0.35pt]
+        (\x,\y) .. controls (\x-0.12,\y-0.6) and (\x+0.16,\y-1.1) .. (\x,\y-1.8);
+    }
+
+    % ========== 中山 D ==========
+    \fill[greenMid, opacity=0.78]
+      plot[smooth, tension=0.55] coordinates {\peakD}
+      -- (9,0) -- (0,0) -- cycle;
+
+    \foreach \x/\y in {1.2/10.5, 2.4/12, 3.6/11.5, 4.8/12, 6.0/10.5, 7.2/10}{
+      \draw[greenDark, opacity=0.28, line width=0.4pt]
+        (\x,\y) .. controls (\x-0.14,\y-0.5) and (\x+0.18,\y-1.0) .. (\x,\y-1.7);
+    }
+
+    % 中山 D 皴法
+    \begin{scope}
+      \clip plot[smooth, tension=0.55] coordinates {\peakD}
+            -- (9,0) -- (0,0) -- cycle;
+      \foreach \x/\y in {
+        0.7/9.0, 1.3/9.8, 1.9/9.5, 2.5/10.5, 3.1/10.0, 3.7/10.5,
+        4.3/10.8, 4.9/10.5, 5.5/9.5, 6.1/9.8, 6.7/9.2, 7.3/9.0,
+        7.9/8.5, 8.5/8.0
+      }{
+        \draw[greenDark, opacity=0.20, line width=0.25pt]
+          (\x,\y) .. controls (\x+0.12,\y-0.30) and (\x-0.08,\y-0.60) .. (\x+0.05,\y-0.95);
+      }
+    \end{scope}
+
+    % 云雾 2
+    \fill[paper, opacity=0.62] (0,6.3) rectangle (9,7.0);
+    \fill[paper, opacity=0.40] (0,7.2) rectangle (9,7.6);
+    \fill[paper, opacity=0.20] (0,7.9) rectangle (9,8.3);
+
+    % ========== 近山 E ==========
+    \fill[greenDeep, opacity=0.90]
+      plot[smooth, tension=0.55] coordinates {\peakE}
+      -- (9,0) -- (0,0) -- cycle;
+
+    \foreach \x/\y in {1.2/8.5, 2.4/10, 3.6/9.5, 4.8/10, 6.0/8.5, 7.2/8}{
+      \draw[greenDark, opacity=0.42, line width=0.5pt]
+        (\x,\y) .. controls (\x-0.16,\y-0.45) and (\x+0.20,\y-0.9) .. (\x,\y-1.5);
+    }
+
+    % 近山 E 皴法
+    \begin{scope}
+      \clip plot[smooth, tension=0.55] coordinates {\peakE}
+            -- (9,0) -- (0,0) -- cycle;
+      \foreach \x/\y in {
+        0.6/7.0, 1.2/7.8, 1.8/7.5, 2.4/8.3, 3.0/8.0, 3.6/8.3, 4.2/8.5,
+        4.8/8.3, 5.4/7.5, 6.0/7.8, 6.6/7.2, 7.2/7.0, 7.8/6.5
+      }{
+        \draw[greenDark, opacity=0.28, line width=0.25pt]
+          (\x,\y) .. controls (\x+0.14,\y-0.28) and (\x-0.08,\y-0.55) .. (\x+0.05,\y-0.85);
+      }
+    \end{scope}
+
+    % ========== 近岸 F ==========
+    \fill[greenDark, opacity=0.94]
+      plot[smooth, tension=0.55] coordinates {\peakF}
+      -- (9,0) -- (0,0) -- cycle;
+
+    % 苔点
+    \foreach \x/\y in {
+      0.4/5.5, 0.8/6.2, 1.2/5.8, 1.6/6.5, 2.0/6.0,
+      2.4/7.0, 2.8/6.5, 3.2/7.0, 3.6/6.8, 4.0/7.2,
+      4.4/6.8, 4.8/7.0, 5.2/6.5, 5.6/6.8, 6.0/6.2,
+      6.4/6.5, 6.8/5.8, 7.2/6.2, 7.6/5.5, 8.0/5.8, 8.4/5.2
+    }{
+      \fill[greenDark!60!black, opacity=0.30] (\x,\y) circle (0.03);
+    }
+
+    % ========== 瀑布 ==========
+    \fill[paper, opacity=0.78]
+      (4.35,9.0) .. controls (4.5,7.5) and (4.3,5.5) .. (4.45,4.0)
+      .. controls (4.6,3.2) and (4.4,2.8) .. (4.55,2.4)
+      -- (4.95,2.4) .. controls (4.85,2.8) and (5.05,3.2) .. (4.9,4.0)
+      .. controls (4.75,5.5) and (4.95,7.5) .. (4.8,9.0) -- cycle;
+    \foreach \y in {2.6,3.2,3.8,4.4,5.0,5.6,6.2,6.8,7.4,8.0,8.6}{
+      \draw[paper, opacity=0.95, line width=0.3pt]
+        (4.42,\y) .. controls (4.62,\y+0.05) and (4.72,\y-0.05) .. (4.92,\y);
+    }
+
+    % ========== 水面 ==========
+    \fill[blueFar, opacity=0.20] (0,0) rectangle (9,3.5);
+    \fill[paper, opacity=0.35] (0,3.3) rectangle (9,3.6);
+
+    % 倒影
+    \foreach \y/\op in {0.4/0.28, 0.9/0.24, 1.4/0.20, 1.9/0.16, 2.4/0.12, 2.9/0.09}{
+      \draw[greenDeep, opacity=\op, line width=0.45pt]
+        (0.3,\y) .. controls (2,\y+0.07) and (4,\y-0.07) .. (6,\y)
+                 .. controls (7,\y+0.05) and (8,\y-0.05) .. (8.6,\y);
+    }
+
+    % 水纹
+    \foreach \x/\y/\w in {1.2/1.2/1.6, 3.0/0.6/1.4, 5.5/1.7/1.2, 7.0/0.9/1.4}{
+      \draw[blueMid, opacity=0.28, line width=0.25pt] (\x,\y) -- (\x+\w,\y);
+    }
+
+    % ========== 松林 ==========
+    \pine{0.9}{3.8}{0.95}
+    \pine{1.7}{4.1}{0.80}
+    \pine{2.4}{4.4}{0.66}
+    \pine{3.0}{4.7}{0.52}
+
+    % ========== 杂树 ==========
+    \broadleaf{3.8}{4.6}{0.78}
+    \broadleaf{4.4}{4.8}{0.60}
+
+    % ========== 垂柳 ==========
+    \willow{6.6}{4.2}{0.82}
+
+    % ========== 亭子 ==========
+    \pavilion{8.0}{3.9}{0.78}
+
+    % ========== 小船 ==========
+    \boat{6.0}{2.3}{0.95}
+    \boat{2.4}{2.0}{0.60}
+
+    % ========== 飞鸟 ==========
+    \foreach \x/\y/\s in {4.3/17.5/0.18, 5.1/17.8/0.15, 5.8/17.4/0.13, 6.4/17.7/0.11}{
+      \draw[ink, opacity=0.35, line width=0.45pt]
+        (\x,\y) .. controls (\x+0.11,\y+\s) and (\x+0.20,\y+\s) .. (\x+0.29,\y)
+                .. controls (\x+0.38,\y+\s) and (\x+0.46,\y+\s) .. (\x+0.58,\y);
+    }
+
+    % ========== 印章 ==========
+    \fill[cinnabar, opacity=0.88] (6.4,0.7) rectangle (7.6,1.9);
+    \draw[paper, opacity=0.90, line width=0.45pt] (6.4,1.3) -- (7.6,1.3);
+    \draw[paper, opacity=0.90, line width=0.45pt] (7.0,0.7) -- (7.0,1.9);
+    \draw[paper, opacity=0.45, line width=0.22pt] (6.52,0.82) rectangle (7.48,1.78);
+
+    % ========== 竖排题款 ==========
+    \foreach \i/\ch in {0/N, 1/O, 2/C, 3/T, 4/U, 5/R, 6/N, 7/E}{
+      \node[anchor=center, text=ink, opacity=0.42,
+            font=\fontsize{5}{5}\selectfont]
+        at (8.45, 15.5 - \i*0.35) {\ch};
+    }
+
+  \end{scope}
+\end{tikzpicture}
+\end{document}</code></pre>
+      </div>
+    </details>
+    </article>
+    <div class="post-source">
+  <div>原始文稿（13 份）</div>
+  <div>· README.md &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/README.md</span></div>
+<div>· bkg1/document.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/bkg1/document.tex</span></div>
+<div>· bkg2.1/document.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/bkg2.1/document.tex</span></div>
+<div>· bkg2.2/document.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/bkg2.2/document.tex</span></div>
+<div>· bkg3/document.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/bkg3/document.tex</span></div>
+<div>· bkg4/bkg4.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/bkg4/bkg4.tex</span></div>
+<div>· bkg4.2/bkg4.2.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/bkg4.2/bkg4.2.tex</span></div>
+<div>· bkg5/bkg5.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/bkg5/bkg5.tex</span></div>
+<div>· bkg5.2/bkg5.2.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/bkg5.2/bkg5.2.tex</span></div>
+<div>· bkg6/bkg6.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/bkg6/bkg6.tex</span></div>
+<div>· bkg6.2/bkg6.2.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/bkg6.2/bkg6.2.tex</span></div>
+<div>· bkg7/bkg7.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/bkg7/bkg7.tex</span></div>
+<div>· bkg7.2/bkg7.2.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/background/bkg7.2/bkg7.2.tex</span></div>
+</div>
+    <div class="post-nav"><a href="/content/june-maths-homework-paper/index.html">← 上一篇 高一数学六月作业卷</a><a href="/content/strong-army-posters/index.html">下一篇 → 强军主题海报</a></div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div>由 <code>PERSONAL_PROJECTS/tex</code> 与 <code>PERSONAL_PROJECTS/qd</code> 的原始文稿转换生成 · 公式由 KaTeX 渲染</div>
+</footer>
+<button class="to-top" type="button" aria-label="返回顶部">↑</button>
+<script src="/style/vendor/katex/katex.min.js"></script>
+<script src="/style/blog.js"></script>
+</body>
+</html>

@@ -1,2 +1,215 @@
-<body>
-hhhhh</body>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>个人项目博文 · 全部文章</title>
+<meta name="description" content="LaTeX 与 Quarkdown 文稿的网页版，三种版式风格。"/>
+<meta name="generator" content="PERSONAL_PROJECTS → WEB_ROOT 静态博客生成器"/>
+<link rel="stylesheet" href="/style/base.css"/>
+<link rel="stylesheet" href="/style/casual.css"/>
+<link rel="stylesheet" href="/style/vendor/katex/katex.min.css"/>
+</head>
+<body data-style="casual">
+<nav class="site-nav">
+  <a class="brand" href="/index.html">PERSONAL&nbsp;PROJECTS</a>
+  <div class="nav-right">
+    <a class="nav-link" href="/index.html">全部博文</a>
+    <a class="nav-link" href="/index.html?style=math">数理风格</a>
+    <a class="nav-link" href="/index.html?style=gallery">图鉴风格</a>
+  </div>
+</nav>
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <p class="kicker">PERSONAL PROJECTS · BLOG</p>
+      <h1>个人项目博文</h1>
+      <p class="lede">这里收录 <code>PERSONAL_PROJECTS/tex</code>（LaTeX）与 <code>PERSONAL_PROJECTS/qd</code>（Quarkdown）里的全部文稿，按内容自动归入三种版式风格。共 14 篇：数理风格 10 篇 · 休闲随笔风格 1 篇 · 图鉴风格 3 篇。</p>
+    </section>
+
+    <section>
+      <h2 class="section-title">风格说明</h2>
+      <div class="style-cards">
+        <article class="style-card style-card-math">
+          <h3>数理风格<code>math.css</code></h3>
+          <p>冷色纸面 + 极淡方格底纹，衬线正文，编号公式卡与定理式提示框。</p>
+          <p class="muted small">判断规则：正文出现行内或行间 LaTeX 数学公式。</p>
+          <p class="small"><a href="index.html?style=math">只看这一类 →</a></p>
+        </article>
+        <article class="style-card style-card-casual">
+          <h3>休闲随笔风格<code>casual.css</code></h3>
+          <p>暖纸底色 + 手写感标题 + 首字下沉 + 便签提示框，适合叙事与散文。</p>
+          <p class="muted small">判断规则：不含数学公式的叙事、小说、随笔。</p>
+          <p class="small"><a href="index.html?style=casual">只看这一类 →</a></p>
+        </article>
+        <article class="style-card style-card-gallery">
+          <h3>图鉴风格<code>gallery.css</code></h3>
+          <p>深色展台 + 大图展墙 + 代码展板，可点击放大，适合作品集与生成艺术。</p>
+          <p class="muted small">判断规则：以图像、海报或绘图代码为主体，原理性叙述较少。</p>
+          <p class="small"><a href="index.html?style=gallery">只看这一类 →</a></p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">全部博文 <span class="filter-count"></span></h2>
+      <div class="filter-bar" data-initial="all">
+        <button type="button" data-filter="all" aria-pressed="true">全部</button>
+        <button type="button" data-filter="math" aria-pressed="false">数理风格</button>
+        <button type="button" data-filter="casual" aria-pressed="false">休闲随笔风格</button>
+        <button type="button" data-filter="gallery" aria-pressed="false">图鉴风格</button>
+      </div>
+      <ul class="card-list">
+<li class="card" data-style="casual">
+  <a class="card-main" href="content/cicada-song/index.html">
+    <p class="card-title">蝉鸣</p>
+    <p class="card-sub">蝉，生于土，鸣于夏，死于秋。数年蛰伏，不过一季高歌——明执意化人，令安于蝉身，一翅留于儿床，其若虚无。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-06-13</div>
+    <div class="chip style-casual">休闲随笔风格</div>
+  </div>
+</li>
+<li class="card" data-style="math">
+  <a class="card-main" href="content/normal-distribution-area-is-one/index.html">
+    <p class="card-title">正态分布曲线下的面积为什么是 1</p>
+    <p class="card-sub">从标准正态分布出发，讨论 S² 的二重积分与极坐标变换，并给出适合高中生的面积微元提示。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-06-15</div>
+    <div class="chip style-math">数理风格</div>
+  </div>
+</li>
+<li class="card" data-style="math">
+  <a class="card-main" href="content/shift-of-the-extremum-point/index.html">
+    <p class="card-title">一道极值点偏移问题</p>
+    <p class="card-sub">已知 g(x)=−1−x+ln x+t 有两个零点 x₁、x₂，证明 x₁+x₂&gt;t：一次完整的构造函数 + 消元 + 单调性推理。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-06-15</div>
+    <div class="chip style-math">数理风格</div>
+  </div>
+</li>
+<li class="card" data-style="math">
+  <a class="card-main" href="content/optical-properties-of-the-ellipse/index.html">
+    <p class="card-title">椭圆的光学性质</p>
+    <p class="card-sub">证明椭圆焦点发出的光线经反射后必经另一焦点：证法一求导得法向量，证法二用梯度与等值线的垂直关系。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-06-15</div>
+    <div class="chip style-math">数理风格</div>
+  </div>
+</li>
+<li class="card" data-style="math">
+  <a class="card-main" href="content/charged-particles-in-combined-fields/index.html">
+    <p class="card-title">复合场中带电粒子的运动</p>
+    <p class="card-sub">匀强磁场加恒定电场中带电粒子的轨迹：由牛顿第二定律解出速度分量的圆与漂移，再积分得到 x、y、z 的完整参数方程。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-06-17</div>
+    <div class="chip style-math">数理风格</div>
+  </div>
+</li>
+<li class="card" data-style="math">
+  <a class="card-main" href="content/distance-function-and-equipotential-lines/index.html">
+    <p class="card-title">代数法寻找费马点（一）：距离函数与等势线</p>
+    <p class="card-sub">把费马点问题写成二元函数 f(x,y)=|PA|+|PB|+|PC|，借用物理里的等势线直觉，寻找极小值点。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-06-19</div>
+    <div class="chip style-math">数理风格</div>
+  </div>
+</li>
+<li class="card" data-style="math">
+  <a class="card-main" href="content/fermat-point/index.html">
+    <p class="card-title">费马点（二）：梯度、泰勒展开与定义域边界</p>
+    <p class="card-sub">用梯度为零得到三个单位向量之和为零，从而确定费马点；再用二元泰勒展开证明它是极小值点，并讨论内角大于 2π/3 时顶点取最小值的边界情形。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-07-12</div>
+    <div class="chip style-math">数理风格</div>
+  </div>
+</li>
+<li class="card" data-style="math">
+  <a class="card-main" href="content/thoughts-on-the-distance-function/index.html">
+    <p class="card-title">有关距离函数的思考</p>
+    <p class="card-sub">把椭圆方程看作函数 z=x²/a²+y²/b² 的等值线，用全微分与梯度重新导出法向量；再从椭圆定义出发，得到与光学性质一致的结论。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-06-15</div>
+    <div class="chip style-math">数理风格</div>
+  </div>
+</li>
+<li class="card" data-style="math">
+  <a class="card-main" href="content/eight-province-joint-exam-finale/index.html">
+    <p class="card-title">八省联考压轴题的另一种写法</p>
+    <p class="card-sub">围绕 h(x)=√(x+45)−√(x+5) 与迭代数列 x_{n+1}=g(x_n)，构造三条夹逼直线完成放缩，证明 [Σxᵢ]=4n。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-06-21（推断）</div>
+    <div class="chip style-math">数理风格</div>
+  </div>
+</li>
+<li class="card" data-style="gallery">
+  <a class="card-main" href="content/28-tone-temperament-line-groups/index.html">
+    <p class="card-title">28 音律线组的 LaTeX 排版</p>
+    <p class="card-sub">按给定的相对间距生成四组线（每组七条），用 TikZ 精确控制线宽、虚实与左右标注；含两版不同的标注方案。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-06-22</div>
+    <div class="chip style-gallery">图鉴风格</div>
+  </div>
+</li>
+<li class="card" data-style="math">
+  <a class="card-main" href="content/exam-paper-typesetting-templates/index.html">
+    <p class="card-title">高中数学试卷排版模板</p>
+    <p class="card-sub">从题干到选项再到答题卡的完整试卷模板：自定义 \choices 选项宏、页脚、标题双横线与题目分区。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-06-14</div>
+    <div class="chip style-math">数理风格</div>
+  </div>
+</li>
+<li class="card" data-style="math">
+  <a class="card-main" href="content/june-maths-homework-paper/index.html">
+    <p class="card-title">高一数学六月作业卷</p>
+    <p class="card-sub">清苑一中高一数学组六月供题：单选、多选、填空、解答共 19 题，含三角函数图象与性质的一批典型题。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-06-15</div>
+    <div class="chip style-math">数理风格</div>
+  </div>
+</li>
+<li class="card" data-style="gallery">
+  <a class="card-main" href="content/deepseek-wallpapers/index.html">
+    <p class="card-title">DeepSeek 制作的壁纸</p>
+    <p class="card-sub">十二张用纯 TikZ 代码画出来的桌面与手机壁纸：深空星野、金环暗夜、宣纸远山……每张都附完整源码。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-09-12</div>
+    <div class="chip style-gallery">图鉴风格</div>
+  </div>
+</li>
+<li class="card" data-style="gallery">
+  <a class="card-main" href="content/strong-army-posters/index.html">
+    <p class="card-title">强军主题海报</p>
+    <p class="card-sub">军训小组作业：以深红与鎏金为主色的 A3 横版海报，六幅插图矩阵 + 放射光芒 + 四角装饰，全部由 TikZ 绘制。</p>
+  </a>
+  <div class="card-meta">
+    <div class="card-date">2026-10-14（推断）</div>
+    <div class="chip style-gallery">图鉴风格</div>
+  </div>
+</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div>由 <code>PERSONAL_PROJECTS/tex</code> 与 <code>PERSONAL_PROJECTS/qd</code> 的原始文稿转换生成 · 公式由 KaTeX 渲染</div>
+</footer>
+<button class="to-top" type="button" aria-label="返回顶部">↑</button>
+<script src="/style/vendor/katex/katex.min.js"></script>
+<script src="/style/blog.js"></script>
+</body>
+</html>

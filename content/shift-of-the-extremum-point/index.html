@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>一道极值点偏移问题 · 个人项目博客</title>
+<meta name="description" content="已知 g(x)=−1−x+ln x+t 有两个零点 x₁、x₂，证明 x₁+x₂&gt;t：一次完整的构造函数 + 消元 + 单调性推理。"/>
+<meta name="generator" content="PERSONAL_PROJECTS → WEB_ROOT 静态博客生成器"/>
+<link rel="stylesheet" href="/style/base.css"/>
+<link rel="stylesheet" href="/style/math.css"/>
+<link rel="stylesheet" href="/style/vendor/katex/katex.min.css"/>
+</head>
+<body data-style="math">
+<nav class="site-nav">
+  <a class="brand" href="/index.html">PERSONAL&nbsp;PROJECTS</a>
+  <div class="nav-right">
+    <a class="nav-link" href="/index.html">全部博文</a>
+    <a class="nav-link" href="/index.html?style=casual">休闲随笔风格</a>
+    <a class="nav-link" href="/index.html?style=gallery">图鉴风格</a>
+  </div>
+</nav>
+
+<main class="post">
+  <header class="post-head wrap">
+    <p class="kicker">Shift of the extremum point</p>
+    <h1>一道极值点偏移问题</h1>
+    <p class="subtitle">已知 g(x)=−1−x+ln x+t 有两个零点 x₁、x₂，证明 x₁+x₂&gt;t：一次完整的构造函数 + 消元 + 单调性推理。</p>
+    <div class="post-meta">
+    <span class="chip style-math">数理风格</span>
+    <time datetime="2026-06-15">2026-06-15</time>
+    <span>#导数</span><span>#极值点偏移</span><span>#不等式证明</span>
+  </div>
+  </header>
+  <div class="wrap">
+    
+    <article class="post-body">
+<ul>
+<li>guoshaoyu</li>
+</ul>
+<h1 id="一道极值点偏移问题">一道极值点偏移问题</h1>
+<p><span class="math-inline">g(x) = -1 - x + \ln{x} + t</span></p>
+<p><span class="math-inline">g(x_1) = g(x_2) = 0</span></p>
+<p><strong>证明</strong>：<span class="math-inline">x_1 + x_2 &gt; t</span></p>
+<p><strong>证</strong>：</p>
+<figure class="post-figure" style="width:80%"><img src="/content/shift-of-the-extremum-point/assets/image/fig.png" alt=" " style="width:80%" loading="lazy"/></figure>
+<p>图：<span class="math-inline">y = x - \ln{x} + 1</span> 与 <span class="math-inline">y = t</span></p>
+<p>由 <span class="math-inline">g(x) = 0</span> 得：</p>
+<span class="math-block">-1 - x + \ln{x} + t = 0</span>
+<span class="math-block">\Leftrightarrow x + 1 - \ln{x} = t</span>
+<p>如图1所示。</p>
+<p>易得 <span class="math-inline">t &gt; 2</span>，不妨设 <span class="math-inline">0 &lt; x_1 &lt; 1 &lt; x_2</span>。</p>
+<span class="math-block">\begin{aligned}
+&amp; x_1 + x_2 &gt; t \\
+\Leftrightarrow &amp; x_1 + x_2 &gt; x_1 + 1 - \ln{x_1} \\
+\Leftrightarrow &amp; x_2 + \ln{x_1} &gt; 1
+\end{aligned}</span>
+<p>设 <span class="math-inline">x_1 = x_1(t),\; x_2 = x_2(t)</span>，<span class="math-inline">h(t) = x_2 + \ln{x_1}</span>，则只需证 <span class="math-inline">h(t) &gt; 1</span>。</p>
+<span class="math-block" data-ref="eq:a1">\begin{aligned}
+&amp; g(x_1) = -1 - x_1 + \ln{x_1} + t = 0 \\
+&amp; g(x_2) = -1 - x_2 + \ln{x_2} + t = 0
+\end{aligned}</span>
+<p>即</p>
+<span class="math-block" data-ref="eq:a2">\begin{aligned}
+&amp; t = 1 + x_1 - \ln{x_1} \\
+&amp; t = 1 + x_2 - \ln{x_2}
+\end{aligned}</span>
+<p>两侧对 <span class="math-inline">t</span> 求导：</p>
+<span class="math-block" data-ref="eq:a3">\begin{aligned}
+&amp; 1 = \left(1 - \frac{1}{x_1}\right) x_1'(t) \\
+&amp; 1 = \left(1 - \frac{1}{x_2}\right) x_2'(t)
+\end{aligned}</span>
+<span class="math-block" data-ref="eq:a4">\begin{aligned}
+&amp; x_1'(t) = \frac{1}{1 - \frac{1}{x_1}} = \frac{x_1}{x_1 - 1} \\
+&amp; x_2'(t) = \frac{1}{1 - \frac{1}{x_2}} = \frac{x_2}{x_2 - 1}
+\end{aligned}</span>
+<p>由 <span class="math-inline">h(t) = x_2 + \ln{x_1}</span>，对 <span class="math-inline">t</span> 求导：</p>
+<span class="math-block" data-ref="eq:a5">\begin{aligned}
+h'(t) &amp;= x_2'(t) + \frac{x_1'(t)}{x_1} \\
+&amp;= \frac{x_2}{x_2 - 1} + \frac{\frac{x_1}{x_1 - 1}}{x_1} \\
+&amp;= \frac{x_2}{x_2 - 1} + \frac{1}{x_1 - 1} \\
+&amp;= \frac{x_1 x_2 - 1}{(x_1 - 1)(x_2 - 1)}
+\end{aligned}</span>
+<p>已得 <span class="math-inline">x_1 &lt; 1 &lt; x_2</span>，下证 <span class="math-inline">x_1 x_2 &lt; 1</span>。</p>
+<p>由</p>
+<span class="math-block">\begin{cases}
+t = 1 + x_1 - \ln{x_1} \\
+t = 1 + x_2 - \ln{x_2}
+\end{cases}</span>
+<p>上式减下式得：</p>
+<p><span class="math-inline">x_2 - x_1 = \ln{x_2} - \ln{x_1} = \ln{\frac{x_2}{x_1}}</span></p>
+<p>设 <span class="math-inline">p = \frac{x_2}{x_1} &gt; 1</span>，</p>
+<span class="math-block">\begin{cases}
+x_2 - x_1 = \ln{p} \\
+p = \frac{x_2}{x_1}
+\end{cases}</span>
+<p>解得：</p>
+<span class="math-block">\begin{cases}
+x_1 = \frac{p}{p-1} \ln{p} \\
+x_2 = \frac{1}{p-1} \ln{p}
+\end{cases}</span>
+<span class="math-block" data-ref="eq:a6">\begin{aligned}
+x_1 x_2 &amp;= \frac{p}{(p-1)^2} \ln^2{p} \\
+&amp;= \left( \frac{\sqrt{p}}{p-1} \ln{p} \right)^2
+\end{aligned}</span>
+<p>下证 <span class="math-inline">\frac{\sqrt{p}}{p-1} \ln{p} &lt; 1</span>。</p>
+<span class="math-block" data-ref="eq:a7">\begin{aligned}
+&amp; \frac{\sqrt{p}}{p-1} \ln{p} &lt; 1 \\
+\Leftrightarrow &amp; \ln{p} &lt; \frac{p-1}{\sqrt{p}} \\
+&amp; \text{设 } q = \sqrt{p},\; q &gt; 1 \\
+\Leftrightarrow &amp; 2\ln{q} &lt; \frac{q^2 - 1}{q} \\
+\Leftrightarrow &amp; 2\ln{q} - \frac{q^2 - 1}{q} &lt; 0
+\end{aligned}</span>
+<p>设 <span class="math-inline">m(q) = 2\ln{q} - \frac{q^2 - 1}{q}</span>，</p>
+<span class="math-block">\begin{aligned}
+m'(q) &amp;= 2 \cdot \frac{1}{q} - 1 - \frac{1}{q^2} \\
+&amp;= \frac{2q - q^2 - 1}{q^2} \\
+&amp;= -\frac{(q-1)^2}{q^2} &lt; 0
+\end{aligned}</span>
+<span class="math-block">\begin{gathered}
+\therefore m(q) \text{ 在 } (1, +\infty) \text{ 上单调递减} \\
+\because q \to 1,\; m(q) \to 0 \\
+\therefore q &gt; 1,\; m(q) &lt; 0 \\
+\therefore \frac{\sqrt{p}}{p-1} \ln{p} &lt; 1 \\
+\text{由 } (6) \text{ 得 } x_1 x_2 &lt; 1
+\end{gathered}</span>
+<span class="math-block">\begin{aligned}
+&amp; \text{由 } (5) \text{ 得 } h'(t) = \frac{x_1 x_2 - 1}{(x_1-1)(x_2-1)} \\
+&amp; \because x_1 &lt; 1,\; x_2 &gt; 1,\; x_1 x_2 &lt; 1 \\
+&amp; \therefore h'(t) &gt; 0 \\
+&amp; h(t) \text{ 在 } (2, +\infty) \text{ 上单调递增} \\
+&amp; \text{当 } t \to 2 \text{ 时：} x_1 \to 1,\; x_2 \to 1,\; \ln{x_1} \to 0 \\
+&amp; h(t) = x_2 + \ln{x_1} \to 1 \\
+&amp; \therefore t &gt; 2 \text{ 时 } h(t) &gt; 1
+\end{aligned}</span>
+<p><strong>即证</strong></p>
+<h2 id="extra-1">附：LaTeX 双栏版 ji zhi dian pian yi.tex</h2>
+<p> g(x)=-1-x+ {x}+t</p>
+<p> g <span class="math-inline">x_1</span>=g<span class="math-inline">x_2</span>=0</p>
+<p>证</p>
+<p> x_1+x_2&gt;t</p>
+<p>证:</p>
+<figure class="post-figure" style="width:320px"><figcaption>y=x- ln x</figcaption></figure>
+<p>&amp;amp;g<span class="math-inline">x</span>=0<br/>
+&amp;amp; -1-x+ {x}+t=0<br/>
+&amp;amp; x+1- {x}=t</p>
+<p>如图1</p>
+<p>易得<span class="math-inline">t&gt;2</span>, 不妨设<span class="math-inline">0&lt;x_1&lt;1&lt;x_2</span></p>
+<p>\ &amp; x_1+x_2&gt;t<br/>
+ &amp; x_1+x_2&gt;x_1+1- {x_1}<br/>
+ &amp; x_2+ {x_1}&gt;{}1</p>
+<p>设</p>
+<p> x_1=x_1 ( t ),x_2=x_2 ( t )</p>
+<p> h<span class="math-inline">t</span>=x_2+ {x_1}</p>
+<p>则只需证</p>
+<p> h<span class="math-inline">t</span>&amp;gt;1</p>
+<p>\ &amp;amp; g<span class="math-inline">x_1</span>=-1-x_1+ {x_1}+t=0<br/>
+ \ &amp;amp; g<span class="math-inline">x_2</span>=-1-x_2+ {x_2}+t=0</p>
+<p>即</p>
+<p>\ &amp; t=1+x_1- {x_1}<br/>
+\ &amp; t=1+x_2- {x_2}</p>
+<p>两侧对<span class="math-inline">t</span>求导</p>
+<p>\ &amp;amp; 1= <span class="math-inline">1- {1}{x_1}</span>x_1'<span class="math-inline">t</span><br/>
+\ &amp;amp; 1= <span class="math-inline">1- {1}{x_2}</span>x_2'<span class="math-inline">t</span></p>
+<p>\ &amp;amp; x_1'<span class="math-inline">t</span>= {1}{1- {1}{x_1} }= {x_1}{x_1-1}<br/>
+\ &amp;amp; x_2'<span class="math-inline">t</span>= {1}{1- {1}{x_2} }= {x_2}{x_2-1}</p>
+<p> h<span class="math-inline">t</span>=x_2+ {x_1}</p>
+<p>对<span class="math-inline">t</span>求导</p>
+<p>h'<span class="math-inline">t</span>=&amp;amp; x_2'<span class="math-inline">t</span>+ {x_1'<span class="math-inline">t</span>}{x_1} <br/>
+=&amp;amp; {x_2}{x_2-1}+ { {x_1}{x_1-1}}{x_1} <br/>
+=&amp;amp; {x_2}{x_2-1}+ {1}{x_1-1}<br/>
+=&amp;amp; {x_1x_2-1}{<span class="math-inline">x_1-1 x_2-1</span>}</p>
+<p>已得<span class="math-inline">x_1&lt;1{}, _2&gt;1</span>,下证明 <span class="math-inline">x_1x_2{ }&lt;{ }1</span></p>
+<p>t=1+x_1- {x_1}<br/>
+t=1+x_2- {x_2}</p>
+<p>上式减下式得</p>
+<p> x_2-x_1 = {x_2}- {x_1}= { {x_2}{x_1}}</p>
+<p>设<span class="math-inline">p= {x_2}{x_1}</span>, <span class="math-inline">p&gt;1</span></p>
+<p>x_2-x_1 = {p} <br/>
+p= {x_2}{x_1}</p>
+<p>得</p>
+<p>x_1= {p}{p-1} {p}<br/>
+x_2= {1}{p-1} {p}</p>
+<p>x_1x_2=&amp;amp; {p}{<span class="math-inline">p-1</span>^2} ^2{p}<br/>
+=&amp;amp; <span class="math-inline">{ {p}}{p-1} {p}</span>^2</p>
+<p>下证<span class="math-inline">{ {p}}{p-1} {p} &lt; 1</span></p>
+<p>&amp; { {p}}{p-1} {p} &lt; 1<br/>
+&amp; {p}&lt; {p-1}{ {p}}<br/>
+&amp; {设} q= {p}, q&gt;1<br/>
+&amp; 2 {q} &lt; {q^2-1}{q}<br/>
+&amp; 2 {q}- {q^2-1}{q}&lt;0</p>
+<p>设<span class="math-inline">m</span>q<span class="math-inline">= 2 {q}- {q^2-1}{q}</span></p>
+<p>	m' <span class="math-inline">q</span>&amp;amp;=2 {1}{q}-1- {1}{q^2}<br/>
+	&amp;amp;= {2q-q^2-1}{q^2}<br/>
+	&amp;amp;=- {<span class="math-inline">q-1</span>^2}{q^2} { }&amp;lt;0</p>
+<p> m<span class="math-inline">q</span> {在} <span class="math-inline">2,+</span>{ } <br/>
+ q 2,m<span class="math-inline">q</span> 0<br/>
+ q&amp;gt;0,{ }m<span class="math-inline">q</span>&amp;lt;0<br/>
+ { {p}}{p-1} {p} &amp;lt; 1<br/>
+ {由} <span class="math-inline">(a6)</span>,{ }x_1x_2&amp;lt;1</p>
+<p>&amp;amp; {由}<span class="math-inline">(a5)</span>,{ }h'<span class="math-inline">t</span>= {x_1x_2-1}{<span class="math-inline">x_1-1 x_2-1</span>}<br/>
+&amp;amp; x_1&amp;lt;1,{ }x_2&amp;gt;1,{ }x_1x_2&amp;lt;1<br/>
+&amp;amp; h'<span class="math-inline">t</span>&amp;gt;0<br/>
+&amp;amp;h<span class="math-inline">t</span> {在} <span class="math-inline">2,+</span> <br/>
+&amp;amp; {当}t 2<br/>
+&amp;amp;{ }x_1 1,{ }x_1 1,{ } {x_1} 0<br/>
+&amp;amp;h<span class="math-inline">t</span>=x_2+ {x_1} 1<br/>
+&amp;amp; t&amp;gt;2,h<span class="math-inline">t</span>&amp;gt;1<br/>
+&amp;amp; {即证}</p>
+    </article>
+    <div class="post-source">
+  <div>原始文稿（2 份）</div>
+  <div>· Quarkdown 主文档 main.qd &nbsp;<span class="muted">PERSONAL_PROJECTS/qd/2026-6-15=shift-of-the-extremum-point/main.qd</span></div>
+<div>· LaTeX 双栏版 ji zhi dian pian yi.tex &nbsp;<span class="muted">PERSONAL_PROJECTS/tex/ji zhi dian pian yi/ji zhi dian pian yi.tex</span></div>
+</div>
+    <div class="post-nav"><a href="/content/normal-distribution-area-is-one/index.html">← 上一篇 正态分布曲线下的面积为什么是 1</a><a href="/content/optical-properties-of-the-ellipse/index.html">下一篇 → 椭圆的光学性质</a></div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div>由 <code>PERSONAL_PROJECTS/tex</code> 与 <code>PERSONAL_PROJECTS/qd</code> 的原始文稿转换生成 · 公式由 KaTeX 渲染</div>
+</footer>
+<button class="to-top" type="button" aria-label="返回顶部">↑</button>
+<script src="/style/vendor/katex/katex.min.js"></script>
+<script src="/style/blog.js"></script>
+</body>
+</html>

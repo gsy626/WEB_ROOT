@@ -1,0 +1,6 @@
+# 构建中间产物（可由 .tools/render-tex.ps1 重新生成）
+.tools/render-out/
+.tools/node_modules/
+.tools/package-lock.json
+.tools/*.bak
+.tools/backup-*.qd
