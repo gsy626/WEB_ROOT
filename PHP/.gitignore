@@ -1,0 +1,16 @@
+# 运行时产生的文件，不要提交
+
+data/blog.sqlite
+data/blog.sqlite-wal
+data/blog.sqlite-shm
+data/cache/*
+data/sessions/*
+!data/cache/.gitkeep
+!data/sessions/.gitkeep
+
+# 网页提交的博客（自愿提交时可以去掉这一行）
+# data/posts/*
+!data/posts/.gitkeep
+
+# 随站点附带的 PHP 扩展是本机二进制（根 .gitignore 已忽略 *.so），
+# 换机器时按 README 第 8 节重新解包即可。

@@ -1,0 +1,236 @@
+/* ==========================================================================
+   math.css —— 「数理」内容的独立样式表
+   只在数理分类的页面（以及首页里的数理卡片）加载。
+   与 leisure.css 互不依赖。
+   风格：冷色、克制、偏学术；不使用网格线背景。
+   ========================================================================== */
+
+.theme-math {
+  --m-accent: #2f49c8;
+  --m-accent-2: #5a7bff;
+  --m-accent-soft: #eef2ff;
+  --m-ink: #1b2333;
+  --m-ink-soft: #55607a;
+  --m-ink-faint: #8892aa;
+  --m-line: #dde3f0;
+  --m-line-soft: #eef1f8;
+  --m-surface: #ffffff;
+  --m-surface-2: #f8faff;
+
+  --accent: var(--m-accent);
+  --accent-ink: var(--m-accent);
+  --accent-soft: var(--m-accent-soft);
+  --ink: var(--m-ink);
+  --ink-soft: var(--m-ink-soft);
+  --ink-faint: var(--m-ink-faint);
+  --line: var(--m-line);
+  --line-soft: var(--m-line-soft);
+
+  font-family: var(--font-sans);
+}
+
+/* 数理页面的整体底色：淡淡的冷色光晕，非网格线 */
+body.theme-math {
+  background-color: #f2f5fb;
+  background-image:
+    radial-gradient(1100px 460px at 12% -6%, rgba(90, 123, 255, .14), transparent 62%),
+    radial-gradient(900px 420px at 96% 4%, rgba(47, 73, 200, .10), transparent 60%);
+  background-repeat: no-repeat;
+}
+
+body.theme-math .site-header { border-bottom-color: #dbe2f1; }
+body.theme-math .brand-mark { background: linear-gradient(140deg, #4a6cf7, #2f49c8); }
+body.theme-math .hero {
+  background: linear-gradient(135deg, #24318f 0%, #3a54c9 46%, #5b7bff 100%);
+}
+
+.theme-math .badge-math { background: #e6ecff; color: #26399f; }
+
+/* --------------------------------------------------------------- 正文排版 */
+
+.theme-math .post-body {
+  color: var(--m-ink);
+  font-size: 16.5px;
+  line-height: 1.78;
+}
+
+.theme-math .post-body > p { margin: 0 0 1.05em; }
+
+.theme-math .post-body h1,
+.theme-math .post-body h2,
+.theme-math .post-body h3,
+.theme-math .post-body h4 {
+  color: #16203a;
+  letter-spacing: -.005em;
+}
+
+.theme-math .post-body h1 {
+  font-size: 25px;
+  padding-bottom: .3em;
+  border-bottom: 2px solid var(--m-accent-soft);
+}
+
+.theme-math .post-body h2 {
+  font-size: 21.5px;
+  padding-left: 12px;
+  border-left: 4px solid var(--m-accent-2);
+  margin: 1.7em 0 .7em;
+}
+
+.theme-math .post-body h3 {
+  font-size: 18.5px;
+  color: var(--m-accent);
+}
+
+.theme-math .post-body h3::before {
+  content: "§ ";
+  color: var(--m-accent-2);
+  opacity: .7;
+  font-weight: 400;
+}
+
+.theme-math .post-body h4 {
+  font-size: 16.5px;
+  color: #33406a;
+}
+
+.theme-math .post-body h5,
+.theme-math .post-body h6 { color: var(--m-ink-faint); }
+
+.theme-math .post-body ul { list-style: none; padding-left: 1.2em; }
+.theme-math .post-body ul > li::before {
+  content: "▸";
+  color: var(--m-accent-2);
+  display: inline-block;
+  width: 1.1em;
+  margin-left: -1.1em;
+}
+
+.theme-math .post-body code {
+  background: #f1f4fc;
+  border-color: #e0e6f5;
+  color: #33406a;
+}
+
+.theme-math .post-body strong { color: #16203a; }
+
+.theme-math .post-body a { border-bottom: 1px solid rgba(47, 73, 200, .3); }
+.theme-math .post-body a:hover { text-decoration: none; border-bottom-color: var(--m-accent); }
+
+/* ------------------------------------------------------------------ 公式 */
+
+.theme-math .qd-math-block {
+  padding: 2px 0;
+}
+
+.theme-math .qd-math-block .katex { font-size: 1.09em; }
+.theme-math .qd-math-inline .katex { font-size: 1.03em; }
+
+/* 行间公式：左侧细条 + 极淡底色，像论文里的编号公式 */
+.theme-math .post-body > .qd-math-block {
+  background: linear-gradient(90deg, var(--m-surface-2), rgba(248, 250, 255, 0) 78%);
+  border-left: 3px solid var(--m-accent-2);
+  border-radius: 0 8px 8px 0;
+  padding: 6px 14px;
+  margin: 1.15em 0;
+}
+
+/* .eq 公式卡片 */
+.theme-math .qd-eq {
+  background: var(--m-surface-2);
+  border: 1px solid var(--m-line);
+  border-left: 3px solid var(--m-accent);
+  padding: 12px 18px;
+}
+
+.theme-math .qd-eq-label {
+  color: var(--m-accent);
+  font-size: 13px;
+  letter-spacing: .04em;
+  text-transform: none;
+  margin-bottom: 2px;
+}
+
+.theme-math .qd-eq-labeled .qd-eq-body { padding-top: 2px;border-top: 1px dashed var(--m-line); }
+
+/* ------------------------------------------------------------------ 提示框 */
+
+.theme-math .qd-box {
+  border-radius: 10px;
+  padding: 14px 18px;
+  background: var(--m-surface-2);
+  border: 1px solid var(--m-line);
+  border-left-width: 4px;
+  box-shadow: 0 1px 2px rgba(27, 35, 51, .03);
+}
+
+.theme-math .qd-box-title {
+  font-size: 14px;
+  color: #26325a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.theme-math .qd-box-title::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--m-accent-2);
+  flex: 0 0 auto;
+}
+
+.theme-math .qd-box-tip { border-left-color: #2f8f6b; background: #f4fbf8; }
+.theme-math .qd-box-tip .qd-box-title::before { background: #2f8f6b; }
+.theme-math .qd-box-note { border-left-color: #4a6cf7; background: #f6f8ff; }
+.theme-math .qd-box-note .qd-box-title::before { background: #4a6cf7; }
+.theme-math .qd-box-warning { border-left-color: #d08a1a; background: #fffaf1; }
+.theme-math .qd-box-warning .qd-box-title::before { background: #d08a1a; }
+.theme-math .qd-box-important { border-left-color: #c0392b; background: #fdf5f4; }
+.theme-math .qd-box-important .qd-box-title::before { background: #c0392b; }
+
+/* ------------------------------------------------------------------ 图片 */
+
+.theme-math .qd-figure img {
+  border: 1px solid var(--m-line);
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(27, 35, 51, .07);
+  background: #fff;
+}
+
+/* ------------------------------------------------------------------ 目录 */
+
+.theme-math .qd-toc {
+  background: var(--m-surface-2);
+  border: 1px solid var(--m-line);
+  border-radius: 10px;
+}
+.theme-math .qd-toc-title { color: var(--m-accent); }
+.theme-math .qd-toc a { color: var(--m-ink-soft); }
+.theme-math .qd-toc a:hover { color: var(--m-accent); }
+
+/* ------------------------------------------ 首页卡片 / 分类块里的数理风格 */
+
+.card.theme-math { border-top: 3px solid #4a6cf7; }
+.card.theme-math .card-title { color: #1b2333; }
+.card.theme-math:hover { border-color: #c3cffb; }
+
+.cat-block.theme-math {
+  background: linear-gradient(180deg, #f7f9ff, #ffffff 40%);
+  border-color: #dbe3f8;
+}
+.cat-block.theme-math .cat-head h2 { color: #26399f; }
+
+.about-card.theme-math {
+  background: linear-gradient(180deg, #f7f9ff, #ffffff 45%);
+  border-color: #dbe3f8;
+}
+.about-card.theme-math h2 { color: #26399f; }
+
+.radio.theme-math { border-color: #cdd8f5; }
+.radio.theme-math:has(input:checked) { background: #eef3ff; border-color: #4a6cf7; }
+
+@media (max-width: 720px) {
+  .theme-math .post-body { font-size: 16px; }
+  .theme-math .qd-math-block .katex { font-size: 1.02em; }
+}

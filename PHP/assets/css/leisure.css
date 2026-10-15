@@ -1,0 +1,256 @@
+/* ==========================================================================
+   leisure.css —— 「休闲」内容的独立样式表
+   只在休闲分类的页面（以及首页里的休闲卡片）加载。
+   与 math.css 互不依赖。
+   风格：暖色纸张、衬线正文、行距舒展；不使用网格线背景。
+   ========================================================================== */
+
+.theme-leisure {
+  --l-accent: #b4712a;
+  --l-accent-2: #d99a4e;
+  --l-accent-soft: #fbf1e3;
+  --l-ink: #33291f;
+  --l-ink-soft: #6b5b4a;
+  --l-ink-faint: #97866f;
+  --l-line: #e8dcc9;
+  --l-line-soft: #f2e9db;
+  --l-surface: #fffdf8;
+  --l-surface-2: #fdf7ec;
+
+  --accent: var(--l-accent);
+  --accent-ink: #8c5518;
+  --accent-soft: var(--l-accent-soft);
+  --ink: var(--l-ink);
+  --ink-soft: var(--l-ink-soft);
+  --ink-faint: var(--l-ink-faint);
+  --line: var(--l-line);
+  --line-soft: var(--l-line-soft);
+
+  font-family: var(--font-serif);
+}
+
+/* 休闲页面的整体底色：暖色纸张光晕，非网格线 */
+body.theme-leisure {
+  background-color: #f9f3e8;
+  background-image:
+    radial-gradient(1000px 480px at 8% -8%, rgba(217, 154, 78, .20), transparent 60%),
+    radial-gradient(880px 420px at 98% 2%, rgba(180, 113, 42, .12), transparent 58%);
+  background-repeat: no-repeat;
+  color: var(--l-ink);
+}
+
+body.theme-leisure .site-header {
+  background: rgba(255, 253, 248, .9);
+  border-bottom-color: var(--l-line);
+}
+body.theme-leisure .brand-mark { background: linear-gradient(140deg, #d99a4e, #a96524); }
+body.theme-leisure .brand-name { font-family: var(--font-serif); }
+
+body.theme-leisure .hero {
+  background: linear-gradient(135deg, #96591c 0%, #c07f34 48%, #e0a95f 100%);
+}
+body.theme-leisure .hero-title { font-family: var(--font-serif); letter-spacing: .01em; }
+
+body.theme-leisure .panel,
+body.theme-leisure .post,
+body.theme-leisure .comments {
+  background: var(--l-surface);
+  border-color: var(--l-line);
+}
+body.theme-leisure .site-footer { background: var(--l-surface); border-top-color: var(--l-line); }
+
+.theme-leisure .badge-leisure { background: #f7e6cf; color: #8c5518; }
+
+/* --------------------------------------------------------------- 正文排版 */
+
+.theme-leisure .post-body {
+  color: var(--l-ink);
+  font-family: var(--font-serif);
+  font-size: 17.5px;
+  line-height: 2.0;
+  letter-spacing: .012em;
+}
+
+.theme-leisure .post-body > p { margin: 0 0 1.25em; text-align: justify; }
+
+/* 首段首字下沉，像纸书 */
+.theme-leisure .post-body > p:first-of-type::first-letter {
+  float: left;
+  font-size: 3.1em;
+  line-height: .92;
+  padding: .06em .12em 0 0;
+  color: var(--l-accent);
+  font-weight: 700;
+}
+
+.theme-leisure .post-body h1,
+.theme-leisure .post-body h2,
+.theme-leisure .post-body h3,
+.theme-leisure .post-body h4 {
+  font-family: var(--font-serif);
+  color: #2c2318;
+  letter-spacing: .02em;
+}
+
+.theme-leisure .post-body h1 { font-size: 27px; text-align: center; }
+.theme-leisure .post-body h2 {
+  font-size: 21px;
+  margin: 2.1em 0 .9em;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.theme-leisure .post-body h2::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(90deg, var(--l-accent-2), transparent);
+  opacity: .55;
+}
+.theme-leisure .post-body h3 { font-size: 18.5px; color: #6b4a1f; }
+.theme-leisure .post-body h4,
+.theme-leisure .post-body h5 { color: var(--l-ink-soft); font-weight: 600; }
+
+.theme-leisure .post-body ul { padding-left: 1.3em; }
+.theme-leisure .post-body li::marker { color: var(--l-accent-2); }
+
+.theme-leisure .post-body strong { color: #2c2318; }
+.theme-leisure .post-body em { color: var(--l-accent); }
+
+.theme-leisure .post-body code {
+  font-family: var(--font-mono);
+  background: #f5ece0;
+  border-color: #eadfcc;
+  color: #7a4a12;
+}
+
+.theme-leisure .post-body a { color: #8c5518; border-bottom: 1px solid rgba(180, 113, 42, .35); }
+.theme-leisure .post-body a:hover { text-decoration: none; border-bottom-color: var(--l-accent); }
+
+.theme-leisure .post-body {
+  word-break: break-word;
+}
+
+/* 居中标题块（.center） */
+.theme-leisure .qd-center { margin: 1.6em 0; }
+.theme-leisure .qd-center h1 {
+  font-size: 32px;
+  letter-spacing: .22em;
+  text-indent: .22em;
+  margin-bottom: .3em;
+}
+.theme-leisure .qd-center h5 { color: var(--l-ink-faint); letter-spacing: .1em; }
+
+/* ------------------------------------------------------------------ 分页 */
+
+.theme-leisure .qd-pagebreak {
+  height: auto;
+  background: none;
+  text-align: center;
+  margin: 2.6em 0;
+  line-height: 1;
+}
+.theme-leisure .qd-pagebreak::before {
+  content: "❦";
+  color: var(--l-accent-2);
+  font-size: 18px;
+  opacity: .8;
+}
+
+/* ------------------------------------------------------------------ 图片 */
+
+.theme-leisure .qd-figure {
+  margin: 2em auto;
+}
+.theme-leisure .qd-figure img {
+  border: 6px solid #fff;
+  border-radius: 3px;
+  box-shadow: 0 8px 26px rgba(90, 62, 28, .18), 0 1px 0 rgba(90, 62, 28, .10);
+}
+.theme-leisure .qd-figure figcaption {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--l-ink-faint);
+}
+
+/* ------------------------------------------------------------------ 提示框 */
+
+.theme-leisure .qd-box {
+  background: var(--l-surface-2);
+  border: 1px solid var(--l-line);
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: inset 3px 0 0 var(--l-accent-2);
+}
+.theme-leisure .qd-box-title {
+  font-family: var(--font-serif);
+  color: #7a4a12;
+  letter-spacing: .04em;
+}
+.theme-leisure .qd-box-tip { box-shadow: inset 3px 0 0 #7fa86a; }
+.theme-leisure .qd-box-note { box-shadow: inset 3px 0 0 #c9a227; }
+.theme-leisure .qd-box-warning { box-shadow: inset 3px 0 0 #cf7a2c; }
+.theme-leisure .qd-box-important { box-shadow: inset 3px 0 0 #b4533f; }
+
+/* ------------------------------------------------------------------ 公式 */
+
+/* 休闲分类里公式极少，遇到时保持与正文一致的暖色调 */
+.theme-leisure .qd-math-block { color: var(--l-ink); }
+.theme-leisure .qd-math-inline .katex { font-size: 1.02em; }
+
+.theme-leisure .qd-eq {
+  background: var(--l-surface-2);
+  border: 1px solid var(--l-line);
+  border-radius: 8px;
+  padding: 10px 16px;
+}
+.theme-leisure .qd-eq-label { color: #7a4a12; }
+
+/* ------------------------------------------------------------------ 目录 */
+
+.theme-leisure .qd-toc {
+  background: var(--l-surface-2);
+  border: 1px dashed var(--l-line);
+  border-radius: 8px;
+  font-family: var(--font-serif);
+}
+.theme-leisure .qd-toc-title { color: #7a4a12; letter-spacing: .1em; }
+.theme-leisure .qd-toc a { color: var(--l-ink-soft); }
+
+/* -------------------------------- 长篇（.doctype paged）更像一本书 */
+
+.theme-leisure .post[data-doctype="paged"] .post-body {
+  letter-spacing: .02em;
+}
+.theme-leisure .post[data-doctype="paged"] .post-body > p {
+  text-indent: 2em;
+  margin-bottom: 1.05em;
+}
+.theme-leisure .post[data-doctype="paged"] .post-body > p:first-of-type { text-indent: 0; }
+
+/* ------------------------------------------ 首页卡片 / 分类块里的休闲风格 */
+
+.card.theme-leisure { border-top: 3px solid #d99a4e; }
+.card.theme-leisure .card-title { font-family: var(--font-serif); color: #33291f; }
+.card.theme-leisure:hover { border-color: #eccfa4; }
+
+.cat-block.theme-leisure {
+  background: linear-gradient(180deg, #fdf7ec, #ffffff 42%);
+  border-color: #ecdfc9;
+}
+.cat-block.theme-leisure .cat-head h2 { font-family: var(--font-serif); color: #8c5518; }
+
+.about-card.theme-leisure {
+  background: linear-gradient(180deg, #fdf7ec, #ffffff 45%);
+  border-color: #ecdfc9;
+}
+.about-card.theme-leisure h2 { font-family: var(--font-serif); color: #8c5518; }
+
+.radio.theme-leisure { border-color: #e6d5bb; }
+.radio.theme-leisure:has(input:checked) { background: #fdf3e5; border-color: #d99a4e; }
+
+@media (max-width: 720px) {
+  .theme-leisure .post-body { font-size: 16.5px; line-height: 1.92; }
+  .theme-leisure .post-body > p:first-of-type::first-letter { font-size: 2.6em; }
+  .theme-leisure .qd-center h1 { font-size: 26px; }
+}
