@@ -1,0 +1,8 @@
+# 运行时文件
+data/player.lock
+data/player.db-wal
+data/player.db-shm
+data/player.db.tmp-*
+data/player.db.corrupt-*
+data/error.log
+.tmp/
