@@ -3,7 +3,10 @@
 以 [GreatUSTC](https://github.com/feixukeji/GreatUSTC) 的合成玩法为框架制作的北理工主题小游戏：
 拖动图片、松手落下，两个相同的图片合成更高一级，最高一级是 `xiao_hui.jpg` 校徽。
 
-**当前为本地开发版**：不部署到远程服务器，游戏、PHP 接口和 `player.db` 都在本机运行。
+> **服务器部署**：<http://123.57.3.39/create_bit/>
+> nginx 接口桥接：`/PHP/create_bit-api.php`
+>
+> 服务器上由桥接接口提供排行榜；本地开发时仍可直接用 `api.php`。
 
 ![首页预览](docs/preview-home.png)
 
