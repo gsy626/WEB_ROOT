@@ -1,0 +1,25 @@
+# 合成清苑一中 · 静态资源与本地排行榜
+#
+# 保护数据库和后端源码（Apache 可选；本地 PHP 内置服务器不需要）。
+
+<IfModule mod_authz_core.c>
+  <FilesMatch "\.(db|sqlite|sqlite3|lock|log|ini)$">
+    Require all denied
+  </FilesMatch>
+  <IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(?:data|server)/ - [F,L]
+  </IfModule>
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 7 days"
+  ExpiresByType image/png "access plus 7 days"
+  ExpiresByType text/css "access plus 1 day"
+  ExpiresByType application/javascript "access plus 1 day"
+</IfModule>
