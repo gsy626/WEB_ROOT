@@ -2,6 +2,11 @@
 #
 # 保护数据库和后端源码（Apache 可选；本地 PHP 内置服务器不需要）。
 
+# 口令入口优先使用 index.php；index.html 仅作为旧链接的跳转兜底。
+<IfModule mod_dir.c>
+  DirectoryIndex index.php index.html
+</IfModule>
+
 <IfModule mod_authz_core.c>
   <FilesMatch "\.(db|sqlite|sqlite3|lock|log|ini)$">
     Require all denied

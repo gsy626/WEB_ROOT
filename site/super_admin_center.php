@@ -6,8 +6,17 @@ if( ! in_array($tab,['users','articles'],true) )
 {
     $tab = 'users';
 }
-include __DIR__ . "/nav.php";
 ?>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>管理员中心</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<?php include __DIR__ . "/nav.php"; ?>
 <h1>管理员中心</h1>
 <br>
 <?php
@@ -131,5 +140,5 @@ foreach( $articles_table as $each_article )
     </form>
 <?php } ?>
 <?php endif; ?>
-
-
+</body>
+</html>

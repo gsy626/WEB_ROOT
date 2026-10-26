@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 					else
 					{
 						$hash = password_hash($password,PASSWORD_DEFAULT);
-						if(!db_execute($db,"INSERT INTO users (name,password,level) VALUES (:name,:password,:level)",[':name' => $name , ':password' => $hash , ':level' => 1 ] ) )
+						if(!db_execute($db,"INSERT INTO users (name,password,level) VALUES (:name,:password,:level)",[':name' => $name , ':password' => $hash , ':level' => 2 ] ) )
 						{
 							die("error:database not connected");
 						}
@@ -70,6 +70,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>登录 / 注册</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
 <form method="post" action="" >
 <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token']) ?>">
 name:<input type="text" name="name">
@@ -88,3 +97,5 @@ password:<input type="password" name="password">
 <span><?= htmlspecialchars($msg) ?></span>
 </form>
 <a href="index.php">直接浏览</a>
+</body>
+</html>

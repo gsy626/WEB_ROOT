@@ -9,6 +9,10 @@
 
 ## 页面预览
 
+访问口令页：
+
+![口令页预览](docs/preview-gate.png)
+
 首页：
 
 ![首页预览](docs/preview-home.png)
@@ -74,6 +78,26 @@ php -S 0.0.0.0:8099 -t .
 
 再用本机局域网 IP 访问，例如 `http://10.194.196.103:8099/`。
 
+### 访问口令
+
+首次打开会先显示口令页，输入正确口令后才会输出游戏页面。
+
+- 默认口令：`qyyz1953`
+- 修改位置：[index.php](index.php) 顶部的 `QYYZ_GATE_PASSCODE`
+- 口令 Cookie 默认 30 天有效；修改口令后旧 Cookie 会自动失效
+- 口令页必须由 PHP 执行；纯静态托管无法使用，也可能把 PHP 源码暴露出去
+
+部署提示：`index.html` 只负责跳转到 `index.php`，本身不含游戏代码。
+如果服务器上还留着旧版 `index.html`，而目录默认首页又优先 `index.html`，
+访问 `/create_qyyz/` 会直接打开旧游戏而不是口令页。遇到这种情况：
+
+- 删除服务器上的旧 `index.html`，或上传新的跳转版 `index.html`
+- Apache：`.htaccess` 已设置 `DirectoryIndex index.php index.html`
+- nginx：在站点配置里设置 `index index.php index.html;`
+
+这个口令只保护入口页面，不保护 `game.js`、图片和排行榜 API 等静态资源。
+需要连静态资源一起保护时，请使用 nginx Basic Auth 或服务端统一鉴权。
+
 ### SQLite
 
 本项目优先使用 SQLite。当前 PHP 启用了 `pdo_sqlite` 时，`data/player.db`
@@ -90,8 +114,9 @@ php server/init-db.php
 
 ## 功能
 
-- 纯 HTML / CSS / JavaScript 游戏，无构建步骤。
+- PHP 口令入口 + 纯 HTML / CSS / JavaScript 游戏，无构建步骤。
 - 17 级图片合成，使用清苑一中主题的蓝 + 绿配色和校徽图标。
+- 首次进入需要输入口令，口令写在 `index.php` 中，可用 Cookie 保持 30 天。
 - 登录 / 注册后参与排行榜；未登录也能正常玩，只是不上榜。
 - 排行榜显示排名、昵称、最高分、最高等级、达到日期、游玩局数。
 - 结算时自动提交；未登录时可以先玩，结算后登录补交。
@@ -104,7 +129,8 @@ php server/init-db.php
 
 ```text
 create_qyyz/
-├── index.html              游戏页面（含登录 / 排行榜弹窗）
+├── index.html              旧链接跳转（只跳转到 index.php）
+├── index.php               口令入口 + 游戏页面（含登录 / 排行榜弹窗）
 ├── style.css               清苑一中蓝绿主题
 ├── game-config.js          17 个等级、图片路径、标题配置
 ├── game.js                 合成游戏引擎（基于 GreatUSTC）
@@ -115,7 +141,7 @@ create_qyyz/
 │   ├── levels/             17 张 512×512 关卡图片
 │   └── logo.png            校徽页眉 / favicon 图标
 ├── data/
-│   ├── player.db           排行榜数据库（SQLite 或 JSON）
+│   ├── player.db           排行榜数据库（运行时数据，线上建议外置）
 │   ├── player.lock         文件锁
 │   ├── .htaccess           Apache 下拒绝访问
 │   └── index.html          目录占位
@@ -146,7 +172,9 @@ create_qyyz/
 这是休闲小游戏级别的防作弊：服务端无法完全证明客户端分数真实，但能挡住重复提交、
 超短时间和明显异常的大分数。
 
-## 数据库 `data/player.db`
+## 数据库（默认 `data/player.db`）
+
+默认路径是 `data/player.db`，也可以通过 `QYYZ_DATA_DIR` 指向部署目录之外。
 
 ### 格式
 
@@ -163,6 +191,66 @@ create_qyyz/
 | `runs` | 每局的一次性排行会话，防重复提交 |
 | `attempts` | 登录 / 注册限流记录 |
 | `meta` | 下一个玩家 ID、创建时间、schema 版本 |
+
+### 部署时为什么数据库会被清空（重要）
+
+`data/player.db` 是运行时数据，但它现在仍被 Git 跟踪，而且位于代码目录里。
+更新代码时以下操作都会覆盖或删除它：
+
+- `git pull` / `git reset --hard`：用仓库里的 `player.db` 覆盖线上库
+- `git clean -fdx` / `rsync --delete` / 整目录发布：直接删除或替换
+- 重新 clone / 新 release 目录：新目录里只有仓库版的空库
+
+因此排行榜数据不能放在会被部署覆盖的目录里。推荐把它移到部署目录之外，
+例如 `/var/www/guosyzamz.top/shared/create_qyyz/data`：
+
+```bash
+mkdir -p /var/www/guosyzamz.top/shared/create_qyyz/data
+
+# SQLite 用 .backup，避免复制到 WAL 中的未落盘数据
+sqlite3 /var/www/guosyzamz.top/content/create_qyyz/data/player.db \
+  ".backup '/var/www/guosyzamz.top/shared/create_qyyz/data/player.db'"
+
+# 如果是 JSON 格式，直接 cp 即可
+# cp /var/www/.../content/create_qyyz/data/player.db /var/www/.../shared/create_qyyz/data/
+
+chown -R www-data:www-data /var/www/guosyzamz.top/shared/create_qyyz
+chmod 700 /var/www/guosyzamz.top/shared/create_qyyz/data
+chmod 600 /var/www/guosyzamz.top/shared/create_qyyz/data/player.db
+```
+
+在 nginx 的 `index.php` 和 `api.php` 两个 PHP location 里加：
+
+```nginx
+fastcgi_param QYYZ_DATA_DIR /var/www/guosyzamz.top/shared/create_qyyz/data;
+```
+
+重载并验证：
+
+```bash
+nginx -t && systemctl reload nginx
+curl -s "https://www.guosyzamz.top/content/create_qyyz/api.php?action=ping"
+curl -s "https://www.guosyzamz.top/content/create_qyyz/api.php?action=leaderboard"
+ls -la /var/www/guosyzamz.top/shared/create_qyyz/data/
+```
+
+确认线上已经使用外部目录后，再停止跟踪仓库里的运行库：
+
+```bash
+cd /home/guosh/GIT/WEB_ROOT
+git rm --cached create_qyyz/data/player.db
+git commit -m "Stop tracking runtime leaderboard database"
+git push
+```
+
+`create_qyyz/.gitignore` 已经加入 `data/player.db`；但在执行 `git rm --cached`
+之前，Git 仍会跟踪它，忽略规则不会生效。
+
+> 首次拉取“取消跟踪”的提交时，服务器上的旧 `data/player.db` 会被删除。
+> 务必先完成上面的迁移，并确认外部库可读写，再推送这个提交。
+
+如果暂时不能外置，至少保证部署脚本不删除、不覆盖 `data/player.db`，
+并且每次发布前先备份。
 
 ### 备份 / 重置
 
@@ -181,6 +269,8 @@ JSON 格式直接复制 `data/player.db`。
 rm -f data/player.db data/player.db-wal data/player.db-shm data/player.lock
 php server/init-db.php
 ```
+
+如果设置了 `QYYZ_DATA_DIR`，请把上面命令里的 `data/player.db` 换成实际路径。
 
 ## API
 
@@ -242,17 +332,29 @@ levels: [
 
 ## 常见问题
 
+**打开页面只看到口令输入框？**
+
+- 这是正常的入口口令页。默认口令为 `qyyz1953`，也可以在 `index.php` 顶部修改。
+- 确认服务器启用了 PHP；纯静态托管不会执行 `index.php`。
+
 **排行榜显示“服务未启用 / 加载失败”？**
 
-- 确认是通过 PHP 内置服务器打开，而不是直接双击 `index.html`（`file://` 下没有接口）。
+- 确认是通过 PHP 内置服务器打开，而不是直接双击 `index.php`（`file://` 下没有接口）。
 - 打开 `api.php?action=ping` 应返回 JSON。
-- 静态托管（GitHub Pages、纯静态 nginx）无法执行 PHP，不能用排行榜。
+- 静态托管（GitHub Pages、纯静态 nginx）无法执行 PHP，不能用口令页和排行榜。
 
 **登录后成绩没有上榜？**
 
 - 每局至少 10 秒才能提交；太短的局会被拒绝。
 - 检查结算面板是否显示「已上榜 · 第 N 名」。
 - 如果提示「本局排行会话已失效」，重新开一局即可。
+
+**为什么每次更新后排行榜数据清空？**
+
+`data/player.db` 被 Git 跟踪，又位于部署目录里，`git pull`、`git reset --hard`、
+`git clean -fdx` 或整目录发布都会覆盖/删除它。请按
+「[部署时为什么数据库会被清空](#部署时为什么数据库会被清空重要)」把数据目录移到
+`QYYZ_DATA_DIR` 指向的部署目录之外。
 
 **为什么 `player.db` 是 JSON 而不是 SQLite？**
 
@@ -262,6 +364,7 @@ levels: [
 ## 说明
 
 - 本项目是非官方同人小游戏，与清苑区第一中学无隶属关系。
+- 口令是简单的页面级访问控制，不构成对静态资源的版权或访问保护。
 - 图片来自原版 `create_qyyz` 素材，版权归原作者 / 学校所有，仅作非商业的本地娱乐。
 - 游戏框架来自 [feixukeji/GreatUSTC](https://github.com/feixukeji/GreatUSTC)，
   并通过 `create_bit/` 的工程结构移植，遵循 AGPL-3.0。

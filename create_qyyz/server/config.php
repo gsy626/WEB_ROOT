@@ -14,7 +14,23 @@ if (!defined('QYYZ_ROOT')) {
 define('QYYZ_APP_VERSION', '1.0.0');
 define('QYYZ_SCHEMA_VERSION', 1);
 
-define('QYYZ_DATA_DIR', QYYZ_ROOT . DIRECTORY_SEPARATOR . 'data');
+// 运行数据目录。默认放在项目 data/ 下；线上建议指向部署目录之外，
+// 例如在 nginx 的 PHP location 里加：
+//   fastcgi_param QYYZ_DATA_DIR /var/www/guosyzamz.top/shared/create_qyyz/data;
+// 也可以在 PHP-FPM 的 env[QYYZ_DATA_DIR] 里设置。
+$qyyzDataDir = getenv('QYYZ_DATA_DIR');
+if (!is_string($qyyzDataDir) || trim($qyyzDataDir) === '') {
+    $qyyzDataDir = isset($_SERVER['QYYZ_DATA_DIR']) ? (string) $_SERVER['QYYZ_DATA_DIR'] : '';
+}
+if (trim($qyyzDataDir) === '') {
+    $qyyzDataDir = QYYZ_ROOT . DIRECTORY_SEPARATOR . 'data';
+}
+$qyyzDataDir = rtrim($qyyzDataDir, "/\\");
+if ($qyyzDataDir === '') {
+    $qyyzDataDir = QYYZ_ROOT . DIRECTORY_SEPARATOR . 'data';
+}
+
+define('QYYZ_DATA_DIR', $qyyzDataDir);
 define('QYYZ_DB_FILE', QYYZ_DATA_DIR . DIRECTORY_SEPARATOR . 'player.db');
 define('QYYZ_LOCK_FILE', QYYZ_DATA_DIR . DIRECTORY_SEPARATOR . 'player.lock');
 

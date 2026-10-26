@@ -88,6 +88,34 @@ a:focus-visible {
   padding: 4px 0 0;
 }
 
+/* ---------------------------------------------------------------- 口令页 */
+
+.gate-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+}
+
+.gate-wrap {
+  width: 100%;
+  max-width: 360px;
+}
+
+.gate-logo {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  display: block;
+  filter: drop-shadow(0 2px 6px rgba(18, 48, 127, 0.18));
+}
+
+.gate-page .confirm-copy {
+  margin-bottom: 18px;
+}
+
 /* ---------------------------------------------------------------- 顶栏 */
 
 .topbar {

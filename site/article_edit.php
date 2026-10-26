@@ -89,15 +89,25 @@ if($_SERVER['REQUEST_METHOD']=='POST')
    
 }
 ?>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>写文章</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
 <?php include __DIR__ . "/nav.php"; ?>
 <form action="" method="post">
 <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token'] ?? '')?>">
+<h3>支持markdown和latex公式</h3>
 <h4>标题</h4>
 <input type="text" name="title" value="<?php echo htmlspecialchars($article['title']) ?>">
 <span><?php echo htmlspecialchars($titleErr) ?></span>
 <br>
 <h4>内容</h4>
-<textarea rows="10" cols="40" name="content"><?php echo htmlspecialchars($article['content']) ?></textarea>
+<textarea rows="20" cols="60" name="content"><?php echo htmlspecialchars($article['content']) ?></textarea>
 <span><?php echo htmlspecialchars($contentErr) ?></span>
 <br>
 <input type="submit" name="submit" value="发布文章">
@@ -105,4 +115,5 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 <span><?php echo htmlspecialchars($msg) ?></span>
 
 </form>
-
+</body>
+</html>

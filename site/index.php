@@ -12,6 +12,7 @@ $user = current_user();
 ?>
 <html lang="zh-CN">
 	<head>
+	<link rel="stylesheet" href="style.css">
 	<script>
 	window.MathJax = {
 		tex: {

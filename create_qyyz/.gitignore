@@ -1,4 +1,6 @@
-# 运行时文件
+# 运行时数据（建议线上放到部署目录之外，见 README）
+data/player.db
+data/player.db-journal
 data/player.lock
 data/player.db-wal
 data/player.db-shm
