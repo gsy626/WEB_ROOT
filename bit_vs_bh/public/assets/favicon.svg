@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="京工双雄">
+  <defs>
+    <clipPath id="round">
+      <rect width="64" height="64" rx="14"/>
+    </clipPath>
+    <linearGradient id="bit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#79d9ff"/>
+      <stop offset="1" stop-color="#1177a5"/>
+    </linearGradient>
+    <linearGradient id="buaa" x1="1" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#ff9a8c"/>
+      <stop offset="1" stop-color="#a93434"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#round)">
+    <rect width="64" height="64" fill="#0a1120"/>
+    <path d="M0 0h64L0 64Z" fill="url(#bit)"/>
+    <path d="M64 0v64H0Z" fill="url(#buaa)"/>
+    <path d="M0 0l64 64" stroke="#080d17" stroke-width="3" opacity=".65"/>
+    <circle cx="32" cy="32" r="8" fill="#0a1120" opacity=".55"/>
+    <circle cx="32" cy="32" r="4.5" fill="#ffe4a8"/>
+    <circle cx="32" cy="32" r="10" fill="none" stroke="#ffe4a8" stroke-width="1" opacity=".55"/>
+  </g>
+</svg>
